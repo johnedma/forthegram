@@ -4,3 +4,18 @@
 *:after {
    box-sizing: border-box;
 }
+
+body {
+    padding: 3rem;
+ }
+
+ .navbar.is-fixed-top{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: .5em;
+}
+
+body.has-navbar-fixed-top {
+    padding-top: 4.25rem;
+}
