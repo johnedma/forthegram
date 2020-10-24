@@ -18,7 +18,9 @@ class User(db.Model):
     posts = db.relationship("Post", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
-    # follows = db.relationship("Follow", back_populates="user")
+    # figure out how to implement the following 4 lines w/out errors
+    # follows = db.relationship("Follow", back_populates="user/follower/followed")
+    # direct_messages = db.relationship("DirectMessage", back_populates="user/sender/recipient")
 
     def to_dict(self):
         return {
@@ -110,24 +112,50 @@ class Like(db.Model):
             "created_at": this.created_at,
         }
 
-# class Follow(db.Model):
-#     __tablename__ = 'follows'
 
-#     id = db.Column(db.Integer, primary_key=True)
-#     follower_id = db.Column(
-#         db.Integer, db.ForeignKey("users.id"), nullable=False
-#         )
-#     followed_id = db.Column(
-#         db.Integer, db.ForeignKey("users.id"), nullable=False
-#         )
-#     created_at = db.Column(db.DateTime, nullable=False)
+class Follow(db.Model):
+    __tablename__ = 'follows'
 
-#     user = db.relationship("User", back_populates="follows")
+    id = db.Column(db.Integer, primary_key=True)
+    follower_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False
+        )
+    followed_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
 
-#     def to_dict(self):
-#         return {
-#             "id": self.id,
-#             "follower_id": self.follower_id,
-#             "followed_id": self.followed_id,
-#             "created_at": this.created_at,
-#         }
+    # figure out how to insert back_populates="follows" into next 2 lines
+    follower = db.relationship("User", foreign_keys=[follower_id])
+    followed = db.relationship("User", foreign_keys=[followed_id])
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "follower_id": self.follower_id,
+            "followed_id": self.followed_id,
+            "created_at": this.created_at,
+        }
+
+
+class DirectMessage(db.Model):
+    __tablename__ = 'direct_messages'
+
+    id = db.Column(db.Integer, primary_key=True)
+    sender_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False
+        )
+    recipient_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
+
+    # figure out how to insert back_populates="direct_messages" into following 2 lines
+    sender = db.relationship("User", foreign_keys=[sender_id])
+    recipient = db.relationship("User", foreign_keys=[recipient_id])
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "sender_id": self.sender_id,
+            "recipient_id": self.recipient_id,
+            "created_at": this.created_at,
+            "updated_at": this.updated_at
+        }
