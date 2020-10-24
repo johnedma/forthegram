@@ -3,7 +3,7 @@
 1. Main:
     - GET / - All posts from accounts user follows
 
-2. Blueprint: 'users',url_prefix = "/api/users"
+2. Blueprint: 'users', url_prefix = "/api/users"
     - GET /:id - Get all user info
     - POST / - Create new user
     - PUT /:id - Edit user info
