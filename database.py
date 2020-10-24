@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from datetime import date, datetime, timedelta
 from faker import Faker
 from random import randint, seed
+from werkzeug.security import generate_password_hash, check_password_hash
 
 seed(1)
 fake = Faker()
@@ -10,7 +11,8 @@ load_dotenv()
 from starter_app import app, db
 from starter_app.models import User
 
-n = 9
+## number of users, including demo_user
+n = 10
 
 with app.app_context():
     db.drop_all()
@@ -19,11 +21,11 @@ with app.app_context():
       user_name="demo_user",
       first_name="Demo",
       last_name="User",
-      DOB=date(2000, 10, 31),
+      DOB=date(1980, 10, 31),
       created_at=datetime.now(),
       updated_at=datetime.now()
       ))
-    for _ in range(n):
+    for _ in range(n - 1):
         DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
         created_at = fake.date_time_between(start_date=DOB)
         db.session.add(User(
