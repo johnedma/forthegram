@@ -1,9 +1,16 @@
 from dotenv import load_dotenv
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+from faker import Faker
+from random import randint, seed
+
+seed(1)
+fake = Faker()
 load_dotenv()
 
 from starter_app import app, db
 from starter_app.models import User
+
+n = 9
 
 with app.app_context():
     db.drop_all()
@@ -12,8 +19,19 @@ with app.app_context():
       user_name="demo_user",
       first_name="Demo",
       last_name="User",
-      DOB=date(2020, 10, 31),
+      DOB=date(2000, 10, 31),
       created_at=datetime.now(),
       updated_at=datetime.now()
       ))
+    for _ in range(n):
+        DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
+        created_at = fake.date_time_between(start_date=DOB)
+        db.session.add(User(
+            user_name=fake.simple_profile()["username"],
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            DOB=DOB,
+            created_at=created_at,
+            updated_at=fake.date_time_between(start_date=created_at)
+        ))
     db.session.commit()
