@@ -9,7 +9,7 @@ fake = Faker()
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Post, Comment, Like
+from starter_app.models import User, Post, Comment
 
 with app.app_context():
     db.drop_all()
@@ -81,41 +81,42 @@ with app.app_context():
         ))
 
     # avg number of likes per post
-    n_like_per_post = 3
-    n_like = n_post * n_like_per_post
+    # n_like_per_post = 3
+    # n_like = n_post * n_like_per_post
 
-    for _ in range(n_like):
-        like_t = []
-        user_id = randrange(n_user)
-        post_id = randrange(n_post)
-        t_user = user_t[user_id]
-        t_post = post_t[post_id]
-        latest_t = t_user if t_user < t_post else t_post
-        created_at = fake.date_time_between(start_date=latest_t)
-        like_t.append(created_at)
-        db.session.add(Like(
-            user_id=user_id + 1,
-            post_id=post_id + 1,
-            created_at=created_at,
-        ))
+    # for _ in range(n_like):
+    #     like_t = []
+    #     user_id = randrange(n_user)
+    #     post_id = randrange(n_post)
+    #     t_user = user_t[user_id]
+    #     t_post = post_t[post_id]
+    #     latest_t = t_user if t_user < t_post else t_post
+    #     created_at = fake.date_time_between(start_date=latest_t)
+    #     like_t.append(created_at)
+    #     db.session.add(Like(
+    #         user_id=user_id + 1,
+    #         post_id=post_id + 1,
+    #         created_at=created_at,
+    #     ))
 
     # avg number of follows per user
-    n_follow_per_user = 3
-    n_follow = n_user * n_follow_per_user
+    # Following was copied from "Likes", w/intent to change it for "Folows".
+    # n_follow_per_user = 3
+    # n_follow = n_user * n_follow_per_user
 
-    for _ in range(n_follow):
-        like_t = []
-        user_id = randrange(n_user)
-        post_id = randrange(n_post)
-        t_user = user_t[user_id]
-        t_post = post_t[post_id]
-        latest_t = t_user if t_user < t_post else t_post
-        created_at = fake.date_time_between(start_date=latest_t)
-        like_t.append(created_at)
-        db.session.add(Like(
-            user_id=user_id + 1,
-            post_id=post_id + 1,
-            created_at=created_at,
-        ))
+    # for _ in range(n_follow):
+    #     like_t = []
+    #     user_id = randrange(n_user)
+    #     post_id = randrange(n_post)
+    #     t_user = user_t[user_id]
+    #     t_post = post_t[post_id]
+    #     latest_t = t_user if t_user < t_post else t_post
+    #     created_at = fake.date_time_between(start_date=latest_t)
+    #     like_t.append(created_at)
+    #     db.session.add(Follow(
+    #         user_id=user_id + 1,
+    #         post_id=post_id + 1,
+    #         created_at=created_at,
+    #     ))
 
     db.session.commit()

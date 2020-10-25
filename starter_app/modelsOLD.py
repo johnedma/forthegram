@@ -1,32 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-# from sqlalchemy.schema import Column, ForeignKey, Table
 
 db = SQLAlchemy()
-
-# pony_handlers = Table(
-#     "pony_handlers",
-#     Base.metadata,
-#     Column("pony_id", ForeignKey("ponies.id"), primary_key=True),
-#     Column("handler_id", ForeignKey("handlers.id"), primary_key=True))
-
-likes = db.Table(
-    'likes',
-    db.Column("user_id", db.ForeignKey("users.id"), primary_key=True),
-    db.Column("post_id", db.ForeignKey("posts.id"), primary_key=True),
-    # created_at = db.Column(db.DateTime, nullable=False)
-)
-
-    # user = db.relationship("User", back_populates="likes")
-    # post = db.relationship("Post", back_populates="likes")
-
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "user_id": self.user_id,
-    #         "post_id": self.post_id,
-    #         "created_at": self.created_at,
-    #     }
 
 
 class User(db.Model):
@@ -54,7 +29,7 @@ class User(db.Model):
 
     posts = db.relationship("Post", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
-    # likes = db.relationship("Like", back_populates="user")
+    likes = db.relationship("Like", back_populates="user")
     # figure out how to implement the following 4 lines w/out errors
     # follows = db.relationship(
     #   "Follow", back_populates="user/follower/followed")
@@ -87,7 +62,7 @@ class Post(db.Model):
 
     user = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post")
-    # likes = db.relationship("Like", back_populates="post")
+    likes = db.relationship("Like", back_populates="post")
 
     def to_dict(self):
         return {
@@ -124,6 +99,32 @@ class Comment(db.Model):
         }
 
 
+# convert "Like" from a model to a join table
+class Like(db.Model):
+    __tablename__ = 'likes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False
+        )
+    post_id = db.Column(
+        db.Integer, db.ForeignKey("posts.id"), nullable=False
+        )
+    created_at = db.Column(db.DateTime, nullable=False)
+
+    user = db.relationship("User", back_populates="likes")
+    post = db.relationship("Post", back_populates="likes")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "post_id": self.post_id,
+            "created_at": self.created_at,
+        }
+
+
+# convert Follow from a model to a join table
 class Follow(db.Model):
     __tablename__ = 'follows'
 
@@ -151,6 +152,7 @@ class Follow(db.Model):
         }
 
 
+# figure out how best to deal w/double 2 FK's which each point at User
 class DirectMessage(db.Model):
     __tablename__ = 'direct_messages'
 
