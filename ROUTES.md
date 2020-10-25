@@ -1,36 +1,34 @@
-(all routes begin with "api" & are using blueprints)
+# API Endpoints
 
-url_prefix = "/":
-all of my followed's posts
+1. Main:
+    - GET / - All posts from accounts user follows
 
-Blueprints: url_prefix = "/api/user"
+2. Blueprint: 'users', url_prefix = "/api/users"
+    - GET /:id - Get all user info
+    - POST / - Create new user
+    - PUT /:id - Edit user info
+    - DELETE /:id - Delete user
 
-GET /:id    (get user and posts etc)
-POST /      (create new user)
-PUT /:id    edit user info
-DELETE /:id (delete account)
+3. Blueprint: 'posts', url_prefix = "/api/posts"
+    - GET /:id - Get one post
+    - POST / - Create a new post
+    - PUT /:id - Edit a post
+    - DELETE /:id - Delete a post
 
-Blueprints: url_prefix = "/api/posts"
+4. Blueprint: 'comments', url_prefix = "/api/comments"
+    - GET /:id - Get all comments for post at id
+    - POST /:id - Comment on a post at id
+    - DELETE /:id/:id2 - Delete comment(id2) from post at id
 
-GET /:id    get a particular post etc
-POST /      create new post
-PUT  /:id   edit post (e.g., caption)
-DELETE /:id delete post
+5. Blueprint: 'likes', url_prefix = "/api/likes"
+    - GET /:id - Get all likes for post at id
+    - POST /:id - Like a post at id
+    - DELETE /:id - Unlike post at id
 
-url_prefix "/api/comments"
-GET /:id    get all comments for a particular post
-POST /:id   post a comment for a particular post
-DELETE /:id delete a comment for  particular post
+8. Blueprint: 'following', url_prefix = "api/following"
+    - GET / - All accounts the user is following
+    - POST / - Follow someone
+    - DELETE / - unfollow someone
 
-url_prefix "/api/likes"
-GET /:id    get all likes for a particular post
-POST /:id   like a particular post
-DELETE /:id un-like a particular post
-
-prefix: /:id/followers
-GET     / listing of followers
-
-prefix: /:id/followeds
-GET     /   listing of people that user is following
-POST    /   follow someone
-DELETE  /   un-follow someone
+9. Blueprint: 'followers', url_prefix = "api/followers"
+    - GET /:id - Get all followers for user
