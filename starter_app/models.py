@@ -1,12 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
-from flask_login import UserMixin
 
 db = SQLAlchemy()
 
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -43,8 +41,8 @@ class User(db.Model, UserMixin):
             "first_name": self.first_name,
             "last_name": self.last_name,
             "DOB": self.DOB,
-            "created_at": this.created_at,
-            "updated_at": this.updated_at
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }
 
 
@@ -70,8 +68,8 @@ class Post(db.Model):
             "user_id": self.user_id,
             "photo_url": self.photo_url,
             "caption": self.caption,
-            "created_at": this.created_at,
-            "updated_at": this.updated_at
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }
 
 
@@ -98,8 +96,8 @@ class Comment(db.Model):
             "user_id": self.user_id,
             "post_id": self.post_id,
             "content": self.content,
-            "created_at": this.created_at,
-            "updated_at": this.updated_at
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }
 
 
@@ -123,7 +121,7 @@ class Like(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "post_id": self.post_id,
-            "created_at": this.created_at,
+            "created_at": self.created_at,
         }
 
 
@@ -146,7 +144,7 @@ class Follow(db.Model):
             "id": self.id,
             "follower_id": self.follower_id,
             "followed_id": self.followed_id,
-            "created_at": this.created_at,
+            "created_at": self.created_at,
         }
 
 
@@ -170,6 +168,6 @@ class DirectMessage(db.Model):
             "id": self.id,
             "sender_id": self.sender_id,
             "recipient_id": self.recipient_id,
-            "created_at": this.created_at,
-            "updated_at": this.updated_at
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }
