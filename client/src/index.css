@@ -1,12 +1,19 @@
-/* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Pacifico&display=swap');
+
 *,
 *:before,
 *:after {
    box-sizing: border-box;
 }
 
+h1{
+
+    font-family: 'Pacifico', cursive;
+}
+
 body {
     padding: 3rem;
+    font-family: 'Oswald', sans-serif;
  }
 
  .navbar.is-fixed-top{
