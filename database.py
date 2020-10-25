@@ -22,6 +22,7 @@ with app.app_context():
       first_name="Demo",
       last_name="User",
       DOB=date(1980, 10, 31),
+      password="password",
       created_at=datetime.now(),
       updated_at=datetime.now()
       ))
@@ -33,6 +34,7 @@ with app.app_context():
             first_name=fake.first_name(),
             last_name=fake.last_name(),
             DOB=DOB,
+            password="password",
             created_at=created_at,
             updated_at=fake.date_time_between(start_date=created_at)
         ))
