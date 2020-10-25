@@ -9,7 +9,7 @@ fake = Faker()
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Post, Comment
+from starter_app.models import User, Post, Comment, Like
 
 with app.app_context():
     db.drop_all()
@@ -79,5 +79,26 @@ with app.app_context():
             updated_at=created_at,
             content=fake.paragraph(nb_sentences=2, variable_nb_sentences=True)
         ))
+
+
+    #avg number of likes per post
+    n_like_per_post = 2
+    n_like = n_post * n_like_per_post
+
+    for _ in range(n_like):
+        like_t = []
+        user_id = randrange(n_user)
+        post_id = randrange(n_post)
+        t_user = user_t[user_id]
+        t_post = post_t[post_id]
+        latest_t = t_user if t_user < t_post else t_post
+        created_at = fake.date_time_between(start_date=latest_t)
+        like_t.append(created_at)
+        db.session.add(Like(
+            user_id=user_id + 1,
+            post_id=post_id + 1,
+            created_at=created_at,
+        ))
+
 
     db.session.commit()
