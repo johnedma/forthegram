@@ -9,22 +9,22 @@ fake = Faker()
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Post
+from starter_app.models import User, Post, Comment
 
 with app.app_context():
     db.drop_all()
     db.create_all()
 
     # number of users, including demo_user
-    n_user = 5
+    n_user = 2
     demo = {
       "user_name": "demo_user",
       "first_name": "Demo",
       "last_name": "User",
-      "DOB": date(1980, 10, 31),
+      "DOB": datetime(1980, 10, 31),
       "password": "password",
-      "created_at": date(2000, 1, 15),
-      "updated_at": date(2005, 2, 25)
+      "created_at": datetime(2000, 1, 15),
+      "updated_at": datetime(2005, 2, 25)
       }
     db.session.add(User(**demo))
     user_t = [demo["created_at"]]
@@ -43,11 +43,11 @@ with app.app_context():
         ))
 
     #avg number of posts per user
-    n_post_per_user = 5
+    n_post_per_user = 2
     n_post = n_user * n_post_per_user
 
+    post_t = []
     for _ in range(n_post):
-        post_t = []
         user_id = randrange(n_user)
         created_at = fake.date_time_between(start_date=user_t[user_id])
         post_t.append(created_at)
@@ -58,4 +58,26 @@ with app.app_context():
             updated_at=created_at,
             caption=fake.paragraph(nb_sentences=2, variable_nb_sentences=True)
         ))
+
+#avg number of comments per post
+    n_comment_per_post = 2
+    n_comment = n_post * n_comment_per_post
+
+    for _ in range(n_comment):
+        comment_t = []
+        user_id = randrange(n_user)
+        post_id = randrange(n_post)
+        t_user = user_t[user_id]
+        t_post = post_t[post_id]
+        latest_t = t_user if t_user < t_post else t_post
+        created_at = fake.date_time_between(start_date=latest_t)
+        comment_t.append(created_at)
+        db.session.add(Comment(
+            user_id=user_id + 1,
+            post_id=post_id + 1,
+            created_at=created_at,
+            updated_at=created_at,
+            content=fake.paragraph(nb_sentences=2, variable_nb_sentences=True)
+        ))
+
     db.session.commit()
