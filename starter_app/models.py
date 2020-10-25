@@ -1,32 +1,33 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-# from sqlalchemy.schema import Column, ForeignKey, Table
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.schema import Table, Column, ForeignKey, Table
 
 db = SQLAlchemy()
 
-# pony_handlers = Table(
-#     "pony_handlers",
-#     Base.metadata,
-#     Column("pony_id", ForeignKey("ponies.id"), primary_key=True),
-#     Column("handler_id", ForeignKey("handlers.id"), primary_key=True))
-
 likes = db.Table(
     'likes',
-    db.Column("user_id", db.ForeignKey("users.id"), primary_key=True),
-    db.Column("post_id", db.ForeignKey("posts.id"), primary_key=True),
-    # created_at = db.Column(db.DateTime, nullable=False)
+    db.Model.metadata,
+    db.Column(
+        "user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True
+        ),
+    db.Column(
+        "post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True
+        ),
+    # created_at=db.Column(db.DateTime, nullable=False)
 )
 
-    # user = db.relationship("User", back_populates="likes")
-    # post = db.relationship("Post", back_populates="likes")
-
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "user_id": self.user_id,
-    #         "post_id": self.post_id,
-    #         "created_at": self.created_at,
-    #     }
+follows = db.Table(
+    "follows",
+    db.Model.metadata,
+    db.Column(
+        "follower_id", db.Integer, db.ForeignKey("users.id"), primary_key=True
+        ),
+    db.Column(
+        "followed_id", db.Integer, db.ForeignKey("users.id"), primary_key=True
+        ),
+    # created_at=db.Column(db.DateTime, nullable=False)
+)
 
 
 class User(db.Model):
@@ -52,14 +53,9 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    posts = db.relationship("Post", back_populates="user")
+    posts = db.relationship("Post", secondary="likes", back_populates="user")
+    # users = db.relationship("User", secondary="follows", back_populates="user")
     comments = db.relationship("Comment", back_populates="user")
-    # likes = db.relationship("Like", back_populates="user")
-    # figure out how to implement the following 4 lines w/out errors
-    # follows = db.relationship(
-    #   "Follow", back_populates="user/follower/followed")
-    # direct_messages = db.relationship(
-    #   "DirectMessage", back_populates="user/sender/recipient")
 
     def to_dict(self):
         return {
@@ -85,9 +81,8 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    user = db.relationship("User", back_populates="posts")
+    user = db.relationship("User", secondary="likes", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post")
-    # likes = db.relationship("Like", back_populates="post")
 
     def to_dict(self):
         return {
@@ -121,33 +116,6 @@ class Comment(db.Model):
             "content": self.content,
             "created_at": self.created_at,
             "updated_at": self.updated_at
-        }
-
-
-class Follow(db.Model):
-    __tablename__ = 'follows'
-
-    id = db.Column(db.Integer, primary_key=True)
-    follower_id = db.Column(
-        db.Integer, db.ForeignKey("users.id"), nullable=False
-        )
-    followed_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.id"),
-        nullable=False
-        )
-    created_at = db.Column(db.DateTime, nullable=False)
-
-    # figure out how to insert back_populates="follows" into next 2 lines
-    follower = db.relationship("User", foreign_keys=[follower_id])
-    followed = db.relationship("User", foreign_keys=[followed_id])
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "follower_id": self.follower_id,
-            "followed_id": self.followed_id,
-            "created_at": self.created_at,
         }
 
 

@@ -9,14 +9,14 @@ fake = Faker()
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Post, Comment
+from starter_app.models import User, Post, Comment, likes
 
 with app.app_context():
     db.drop_all()
     db.create_all()
 
     # number of users, including demo_user
-    n_user = 3
+    n_user = 2
     demo = {
       "user_name": "demo_user",
       "first_name": "Demo",
@@ -42,8 +42,11 @@ with app.app_context():
             updated_at=fake.date_time_between(start_date=created_at)
         ))
 
+    db.session.commit()
+with app.app_context():
+
     # avg number of posts per user
-    n_post_per_user = 3
+    n_post_per_user = 2
     n_post = n_user * n_post_per_user
 
     post_t = []
@@ -59,8 +62,11 @@ with app.app_context():
             caption=fake.paragraph(nb_sentences=2, variable_nb_sentences=True)
         ))
 
+    db.session.commit()
+with app.app_context():
+
 # avg number of comments per post
-    n_comment_per_post = 3
+    n_comment_per_post = 2
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
