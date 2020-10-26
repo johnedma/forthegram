@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
+import Footer from './components/Footer';
 
 
 // pass authenticated context to app
@@ -161,6 +162,7 @@ function App() {
                     <Home currentUser={currentUser} />
                 </Route>
             </Switch>
+            <Footer />
         </BrowserRouter>
     );
 }
