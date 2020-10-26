@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 
 from starter_app.models import db, User
 from starter_app.api.user_routes import user_routes
-# from starter_app.api.posts import posts
+from starter_app.api.posts import posts
 
 from starter_app.config import Config
 
@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
-# app.register_blueprint(posts, url_prefix='api/posts')
+app.register_blueprint(posts, url_prefix='api/posts')
 db.init_app(app)
 Migrate(app, db)
 
