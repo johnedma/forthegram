@@ -9,14 +9,13 @@ fake = Faker()
 load_dotenv()
 
 from starter_app import app, db
-from starter_app.models import User, Post, Comment, likes
+from starter_app.models import User, Post, Comment, Like, Follow
 
 with app.app_context():
     db.drop_all()
     db.create_all()
     # number of users, including demo_user
-    n_user = 2
-    follow_prob = 1.0
+    n_user = 5
     users = [{
       "user_name": "demo_user",
       "first_name": "Demo",
@@ -26,10 +25,12 @@ with app.app_context():
       "created_at": datetime(2000, 1, 15),
       "updated_at": datetime(2005, 2, 25),
       }]
+    user_t = [users[0]["created_at"]]
     user_objs = [User(**users[0])]
     for _ in range(1, n_user):
         DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
         created_at = fake.date_time_between(start_date=DOB)
+        user_t.append(created_at)
         next_user = {
             "user_name": fake.simple_profile()["username"],
             "first_name": fake.first_name(),
@@ -44,14 +45,14 @@ with app.app_context():
     print("len(users) = ", len(users))
     for user1 in users:
         user_obj = User(**user1)
-        followers = []
-        for user2 in users:
-            if user1 != user2 and random() < follow_prob:
-                print("user1 = ", user1)
-                print("user2 = ", user2)
-                followers.append(User(**user2))
-        print("followers = ", followers)
-        print("len(followers) = ", len(followers))
+        #followers = []
+        #for user2 in users:
+            # if user1 != user2 and random() < follow_prob:
+            #     print("user1 = ", user1)
+            #     print("user2 = ", user2)
+            #     followers.append(User(**user2))
+        # print("followers = ", followers)
+        # print("len(followers) = ", len(followers))
         # user_obj.followers = followers
         # db.session.add(User(
         #     # followers=followers,
@@ -153,27 +154,21 @@ with app.app_context():
     #         created_at=created_at,
     #     ))
 
-    # avg number of follows per user
-    # Following was copied from "Likes", w/intent to change it for "Folows".
-    # n_follow_per_user = 3
-    # n_follow = n_user * n_follow_per_user
-
-    # for _ in range(n_follow):
-    #     like_t = []
-    #     user_id = randrange(n_user)
-    #     post_id = randrange(n_post)
-    #     t_user = user_t[user_id]
-    #     t_post = post_t[post_id]
-    #     latest_t = t_user if t_user < t_post else t_post
-    #     created_at = fake.date_time_between(start_date=latest_t)
-    #     like_t.append(created_at)
-    #     db.session.add(Follow(
-    #         user_id=user_id + 1,
-    #         post_id=post_id + 1,
-    #         created_at=created_at,
-    #     ))
-
-
-# with app.app_context():
-#     db.session.add(tables(follower_id=1, followed=2))
-# db.session.commit()
+with app.app_context():
+    # avg prob of one user following another:
+    follow_prob = 0.5
+    follow_t = []
+    for follower_id in range(n_user):
+        t_follower = user_t[follower_id]
+        for followed_id in range(n_user):
+            t_followed = user_t[followed_id]
+            if random() < follow_prob and not follower_id == followed_id:
+                later_t = t_followed if t_followed > t_follower else t_follower
+                created_at = fake.date_time_between(start_date=later_t)
+                follow_t.append(created_at)
+                db.session.add(Follow(
+                    follower_id=follower_id + 1,
+                    followed_id=followed_id + 1,
+                    created_at=created_at,
+                ))
+    db.session.commit()

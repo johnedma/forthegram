@@ -138,6 +138,7 @@ class Follow(db.Model):
         nullable=False
         )
     created_at = db.Column(db.DateTime, nullable=False)
+    db.UniqueConstraint(follower_id, followed_id)
 
     # figure out how to insert back_populates="follows" into next 2 lines
     follower = db.relationship("User", foreign_keys=[follower_id])
