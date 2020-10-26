@@ -8,8 +8,8 @@ seed(1)
 fake = Faker()
 load_dotenv()
 
-from starter_app import app, db
-from starter_app.models import User, Post, Comment, Like, Follow
+from petstagram import app, db
+from petstagram.models import User, Post, Comment, Like, Follow
 
 with app.app_context():
     db.drop_all()
