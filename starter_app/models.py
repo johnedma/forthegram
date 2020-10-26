@@ -31,6 +31,7 @@ class User(db.Model):
     comments = db.relationship("Comment", back_populates="user")
     likes = db.relationship("Like", back_populates="user")
     # figure out how to implement the following 4 lines w/out errors
+    # follows = db.relationship("Follow", back_populates="user")
     # follows = db.relationship(
     #   "Follow", back_populates="user/follower/followed")
     # direct_messages = db.relationship(
@@ -63,6 +64,7 @@ class Post(db.Model):
     user = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post")
     likes = db.relationship("Like", back_populates="post")
+    # insert relationship to user via likes or comments?
 
     def to_dict(self):
         return {
@@ -99,7 +101,6 @@ class Comment(db.Model):
         }
 
 
-# convert "Like" from a model to a join table
 class Like(db.Model):
     __tablename__ = 'likes'
 
@@ -125,7 +126,6 @@ class Like(db.Model):
         }
 
 
-# convert Follow from a model to a join table
 class Follow(db.Model):
     __tablename__ = 'follows'
 
@@ -134,9 +134,7 @@ class Follow(db.Model):
         db.Integer, db.ForeignKey("users.id"), nullable=False
         )
     followed_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.id"),
-        nullable=False
+        db.Integer, db.ForeignKey("users.id"), nullable=False
         )
     created_at = db.Column(db.DateTime, nullable=False)
     db.UniqueConstraint(follower_id, followed_id)
@@ -154,7 +152,7 @@ class Follow(db.Model):
         }
 
 
-# figure out how best to deal w/double 2 FK's which each point at User
+# The following needs to be configured.
 class DirectMessage(db.Model):
     __tablename__ = 'direct_messages'
 
