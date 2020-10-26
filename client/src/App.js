@@ -158,7 +158,7 @@ function App() {
                     <Profile currentUser={currentUser} />
                 </Route>
                 <Route path="/">
-                    <Home />
+                    <Home currentUser={currentUser} />
                 </Route>
             </Switch>
         </BrowserRouter>
