@@ -14,7 +14,7 @@ likes = db.Table(
     db.Column(
         "post_id", db.Integer, db.ForeignKey("posts.id"), primary_key=True
         ),
-    # created_at=db.Column(db.DateTime, nullable=False)
+    db.Column("created_at", db.DateTime, nullable=False)
 )
 
 follows = db.Table(
@@ -26,7 +26,9 @@ follows = db.Table(
     db.Column(
         "followed_id", db.Integer, db.ForeignKey("users.id"), primary_key=True
         ),
-    # created_at=db.Column(db.DateTime, nullable=False)
+    db.Column("created_at", db.DateTime, nullable=False)
+    # follower=db.relationship("User", foreign_keys=[follower_id]),
+    # followed=db.relationship("User", foreign_keys=[followed_id]),
 )
 
 
@@ -53,9 +55,16 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    posts = db.relationship("Post", secondary="likes", back_populates="user")
-    # users = db.relationship("User", secondary="follows", back_populates="user")
+    posts = db.relationship("Post", secondary="likes", back_populates="users")
+    # users = db.relationship("User", secondary="follows", back_populates="users")
     comments = db.relationship("Comment", back_populates="user")
+    # following is for a self-referential many-to-many relationship
+    followers = db.relationship("User",
+        secondary="follows",
+        primaryjoin=id == follows.c.followed_id,
+        secondaryjoin=id == follows.c.follower_id,
+        backref="followeds"
+        )
 
     def to_dict(self):
         return {
@@ -81,7 +90,7 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-    user = db.relationship("User", secondary="likes", back_populates="posts")
+    users = db.relationship("User", secondary="likes", back_populates="posts")
     comments = db.relationship("Comment", back_populates="post")
 
     def to_dict(self):
