@@ -3,8 +3,10 @@ import { Redirect } from 'react-router-dom';
 
 
 const SignUp = () => {
-    const [email, setEmail] = useState('demo@example.com');
-    const [password, setPassword] = useState('password');
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [fullname, setFullname] = useState('');
+    const [password, setPassword] = useState('');
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
 
@@ -14,6 +16,8 @@ const SignUp = () => {
 
     const updateEmail = e => setEmail(e.target.value);
     const updatePassword = e => setPassword(e.target.value);
+    const updateFullname = e => setFullname(e.target.value)
+    const updateUsername = e => setUsername(e.target.value)
 
 
     return (
@@ -42,6 +46,16 @@ const SignUp = () => {
                                 placeholder="Email"
                                 value={email}
                                 onChange={updateEmail} />
+                            <input
+                                type="text"
+                                placeholder="Full Name"
+                                value={fullname}
+                                onChange={updateFullname} />
+                            <input
+                                type="text "
+                                placeholder="Username"
+                                value={username}
+                                onChange={updateUsername} />
                             <input
                                 type="password"
                                 placeholder="Password"

@@ -103,4 +103,7 @@ form input{
     background-color:  #fafafa;
     /* width: 100%; */
     border: 1px solid #dbdbdb;
+    padding: 9px 0 7px 8px;
+    color: #262626;
+    border-radius: 3px;
 }

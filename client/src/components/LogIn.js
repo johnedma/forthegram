@@ -20,7 +20,13 @@ const LogIn = () => {
         <div className="authContain">
             <div className="authForm">
                 <div className="authFormDiv">
-                    <h1 style={{ margin: `22px auto 12px`, fontSize: `3em` }}>Petstagram</h1>
+                    <h1 style={{
+                        margin: `22px auto 12px`,
+                        fontSize: `3em`,
+                        height: `51px`,
+                        marginBlockStart: `1em`,
+                        marginBlockEnd: `1em`
+                    }}>Petstagram</h1>
                     <div className="authFormInnerWrap">
                         <form onSubmit={handleSubmit}>
                             <input
