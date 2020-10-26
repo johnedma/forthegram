@@ -135,24 +135,24 @@ with app.app_context():
         ))
     db.session.commit()
 
-    # avg number of likes per post
-    # n_like_per_post = 3
-    # n_like = n_post * n_like_per_post
-
-    # for _ in range(n_like):
-    #     like_t = []
-    #     user_id = randrange(n_user)
-    #     post_id = randrange(n_post)
-    #     t_user = user_t[user_id]
-    #     t_post = post_t[post_id]
-    #     latest_t = t_user if t_user < t_post else t_post
-    #     created_at = fake.date_time_between(start_date=latest_t)
-    #     like_t.append(created_at)
-    #     db.session.add(Like(
-    #         user_id=user_id + 1,
-    #         post_id=post_id + 1,
-    #         created_at=created_at,
-    #     ))
+with app.app_context():
+    # prob of any user liking a post:
+    like_prob = 0.3
+    like_t = []
+    for user_id in range(n_user):
+        t_user = user_t[user_id]
+        for post_id in range(n_post):
+            t_post = post_t[post_id]
+            if random() < like_prob:
+                later_t = t_post if t_post > t_user else t_user
+                created_at = fake.date_time_between(start_date=later_t)
+                like_t.append(created_at)
+                db.session.add(Like(
+                    user_id=user_id + 1,
+                    post_id=post_id + 1,
+                    created_at=created_at,
+                ))
+    db.session.commit()
 
 with app.app_context():
     # avg prob of one user following another:

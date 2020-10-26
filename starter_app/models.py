@@ -111,6 +111,7 @@ class Like(db.Model):
         db.Integer, db.ForeignKey("posts.id"), nullable=False
         )
     created_at = db.Column(db.DateTime, nullable=False)
+    db.UniqueConstraint(user_id, post_id)
 
     user = db.relationship("User", back_populates="likes")
     post = db.relationship("Post", back_populates="likes")
