@@ -12,8 +12,10 @@ h1{
 }
 
 body {
-    padding: 3rem;
+    /* padding: 3rem; */
     font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    background-color: #fafafa;
  }
 
  .navbar.is-fixed-top{
@@ -25,4 +27,16 @@ body {
 
 body.has-navbar-fixed-top {
     padding-top: 4.25rem;
+}
+
+.center-cropped {
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+.level, .level-left, .level-right{
+    display: flex;
+    align-items: baseline;
 }
