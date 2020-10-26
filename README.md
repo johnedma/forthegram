@@ -11,7 +11,7 @@
 - Bonus: hashtags
 
 ## Database
-- https://drawsql.app/appacademy-2/diagrams/instagram2#
+- https://drawsql.app/appacademy-2/diagrams/instagram3#
 
 ## Pages & Routes
 - TBD
