@@ -6,14 +6,30 @@ const Navbar = () =>
         <div className="navbar-brand" style={{ alignItems: `center` }}>
             <NavLink to="/" activeClassName="active"><h1 style={{ alignItems: `center`, fontSize: `24px` }}>Petstagram</h1></NavLink>
         </div>
-        <div className="navbar-menu is-active">
-            <div className="navbar-end">
+        {/* <div className="navbar-menu is-active"> */}
+        <div className="navbar-end" style={{
+            display: `flex`,
+            alignSelf: `center`,
+            alignItems: `center`
+        }}>
 
-                {/* <div className="navbar-item">
+            <div className="navbar-item">
+                <a class="button has-background-link has-text-white" href="/login" style={{
+                    height: `2rem`,
+                    paddingLeft: `.5em`,
+                    paddingRight: `.5em`
 
-                </div> */}
+                }}>
+                    <span>Log In</span>
+                </a>
+            </div>
+            <div className="navbar-item" >
+                <a href="/signup">
+                    <span >Sign Up</span>
+                </a>
             </div>
         </div>
+        {/* </div> */}
     </nav>
 
 export default Navbar;

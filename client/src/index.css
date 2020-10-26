@@ -13,7 +13,7 @@ h1{
 
 body {
     /* padding: 3rem; */
-    font-family: 'Oswald', sans-serif;
+    /* font-family: 'Oswald', sans-serif; */
     font-size: 14px;
     background-color: #fafafa;
  }
@@ -22,7 +22,9 @@ body {
     display: inline-flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: .5em;
+    /* padding: .5em; */
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 body.has-navbar-fixed-top {
@@ -39,4 +41,8 @@ body.has-navbar-fixed-top {
 .level, .level-left, .level-right{
     display: flex;
     align-items: baseline;
+}
+
+.navbar-item{
+    font-weight: 600;
 }
