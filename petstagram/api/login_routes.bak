@@ -1,0 +1,23 @@
+from flask import Blueprint, request, jsonify
+from petstagram.models import User
+
+login_routes = Blueprint('login', __name__)
+
+
+@login_routes.route('/', methods=['POST'])
+def login():
+    print("Top of login route.")
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+
+    if not username or not password:
+        return {"errors": ["Missing required parameters"]}, 400
+
+    access_token = User.authenticate(username, password)
+    if access_token:
+        return {"access_token": access_token}, 200
+
+    return {"errors": ["Invalid username or password"]}, 401
