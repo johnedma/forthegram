@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
-import UsersLists from './components/UsersList';
+import UsersList from './components/UsersList';
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
@@ -146,13 +146,13 @@ function App() {
         setCurrentUserId
     };
 
-    const logoutUser = async ()=> {
+    const logoutUser = async () => {
         const response = await fetchWithCSRF('/logout', {
             method: 'POST',
             credentials: 'include'
         });
-        if(response.ok) setCurrentUserId(null);
-}
+        if (response.ok) setCurrentUserId(null);
+    }
 
     return (
 
@@ -170,8 +170,8 @@ function App() {
                 <Switch>
                     <Route path="/users">
                         <>
-                        <h1>currentUserId = {currentUserId}</h1>
-                        <UserList />
+                            <h1>currentUserId = {currentUserId}</h1>
+                            <UsersList />
                         </>
                     </Route>
                     <Route path="/login" component={LoginForm} />
