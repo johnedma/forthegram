@@ -2,13 +2,11 @@ import os
 from flask import Flask, render_template, request, session
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
-# from flask_login import login_user, is_active
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 
 
 from petstagram.models import db, User
 from petstagram.api.user_routes import user_routes
-
 from petstagram.config import Config
 
 app = Flask(__name__)
@@ -24,7 +22,8 @@ CORS(app)
 
 @app.after_request
 def inject_csrf_token(response):
-    response.set_cookie('csrf_token',
+    response.set_cookie(
+        'csrf_token',
         generate_csrf(),
         secure=True if os.environ.get('FLASK_ENV') else False,
         samesite='Strict' if os.environ.get('FLASK_ENV') else None,
@@ -57,6 +56,6 @@ def login():
     print(user)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id}
+        return {"current_user": current_user.to_dict(), "is_active": current_user.is_active}
 
     return {"errors": ["Invalid username or password"]}, 401
