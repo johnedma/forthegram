@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-// import UserList from './components/UsersList';
+import UserList from './components/UsersList';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Post from './components/Post';
@@ -8,7 +8,11 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
+import Footer from './components/Footer';
 
+
+import LoginForm from './components/LoginForm';
+import AuthContext from './auth';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
@@ -28,27 +32,32 @@ const currentUser = {
                 {
                     user: '2pac',
                     comment: 'I make mistakes but learn from everyone. And when it’s said and done, I bet this brother be a better one. If I upset you, don’t stress. Never forget that God isn’t finished with me yet. - Ghetto Gospel feat Elton John'
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: 'johnjohn',
                     comment: "trilla"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "pk",
                     comment: "birdhouses are trill too"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "tynaaaaaa",
                     comment: "t in Tyna stands for trill, duh"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "adawg",
                     comment: "......."
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 }
             ],
             hashtag: null
@@ -135,33 +144,61 @@ const currentUser = {
 // will be restructured as individual pages are further structured
 
 function App() {
+    const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
+    const authContextValue = {
+        fetchWithCSRF,
+    };
 
     return (
-        <BrowserRouter>
-            <Navbar />
-            <Switch>
-                {/* <Route path="/users">
-                    <UserList />
-                </Route> */}
+        <>
+            <BrowserRouter>
+                <Navbar />
+                <Switch>
+                    <Route path="/users">
+                        <UserList />
+                    </Route>
 
-                <Route path="/login">
-                    <LogIn />
-                </Route>
-                <Route path="/signup">
-                    <SignUp />
-                </Route>
+                    <Route path="/login">
+                        <LogIn />
+                    </Route>
+                    <Route path="/signup">
+                        <SignUp />
+                    </Route>
 
-                <Route path="/post">
-                    <Post currentUser={currentUser} />
-                </Route>
-                <Route path="/profile">
-                    <Profile currentUser={currentUser} />
-                </Route>
-                <Route path="/">
-                    <Home currentUser={currentUser} />
-                </Route>
-            </Switch>
-        </BrowserRouter>
+                    <Route path="/post">
+                        <Post currentUser={currentUser} />
+                    </Route>
+                    <Route path="/profile">
+                        <Profile currentUser={currentUser} />
+                    </Route>
+                    <Route path="/">
+                        <Home currentUser={currentUser} />
+                    </Route>
+                </Switch>
+                <Footer />
+            </BrowserRouter>
+            <AuthContext.Provider value={authContextValue}>
+                <BrowserRouter>
+                    <Navbar />
+                    <nav>
+                        <ul>
+                            <li><NavLink to="/" activeclass="active">Home</NavLink></li>
+                            <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                            <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                        </ul>
+                    </nav>
+                    <Switch>
+                        <Route path="/users">
+                            <UserList />
+                        </Route>
+                        <Route path="/login" component={LoginForm} />
+                        <Route path="/">
+                            <h1>My Home Page</h1>
+                        </Route>
+                    </Switch>
+                </BrowserRouter>
+            </AuthContext.Provider>
+        </>
     );
 }
 
