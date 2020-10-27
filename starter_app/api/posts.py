@@ -1,5 +1,6 @@
-from flask import Blueprint, send_file, redirect
+from flask import Blueprint, send_file, redirect, request
 from starter_app.aws import list_files, download_file, upload_file
+import os
 
 
 posts = Blueprint('posts', __name__)
@@ -8,7 +9,7 @@ UPLOAD_FOLDER = 'uploads'
 BUCKET = "petstagram"
 
 
-@posts.route('/:id', methods=['GET', 'PUT', 'DELETE'])
+@posts.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def download():
     pass
 

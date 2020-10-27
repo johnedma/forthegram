@@ -1,4 +1,6 @@
 import React from 'react';
+import Photo from './photo'
+
 
 
 function User(props) {
@@ -7,6 +9,7 @@ function User(props) {
             <strong>Username:</strong> {props.user.user_name}<br />
             <strong>Name:</strong> {props.user.first_name} {props.user.last_name}<br />
             <strong>Member since:</strong> {props.user.created_at}<br />
+
         </>
     );
 }

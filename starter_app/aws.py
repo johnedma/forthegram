@@ -1,3 +1,6 @@
+import boto3
+
+
 def upload_file(file_name, bucket):
     """
     Function to upload a file to an S3 bucket
