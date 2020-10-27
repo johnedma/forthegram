@@ -25,6 +25,7 @@ def download(id):
         return get_post
 
 
+
 @posts.route('/', methods=['POST'])
 def upload():
     if request.method == "POST":
