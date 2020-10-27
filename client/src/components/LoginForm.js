@@ -24,6 +24,7 @@ function LoginForm(props) {
             });
 
             const responseData = await response.json();
+            console.log(responseData);
             if (!response.ok) setErrors(responseData.errors);
         }
         loginUser();
