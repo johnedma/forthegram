@@ -1,11 +1,14 @@
 import React, {useState, useContext} from 'react';
+import { useHistory } from 'react-router-dom'
 import AuthContext from '../auth'
 
 function LoginForm(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const {fetchWithCSRF} = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    let history = useHistory();
+
     const submitForm = (e) => {
         e.preventDefault();
 
@@ -24,8 +27,12 @@ function LoginForm(props) {
             });
 
             const responseData = await response.json();
-            console.log(responseData);
-            if (!response.ok) setErrors(responseData.errors);
+            if (!response.ok) {
+                setErrors(responseData.errors);
+            } else {
+                setCurrentUserId(responseData.current_user_id)
+                history.push('/users')
+            }
         }
         loginUser();
     }

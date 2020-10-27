@@ -11,14 +11,16 @@ function App() {
     const [currentUserId, setCurrentUserId] = useState(null);
     const authContextValue = {
         fetchWithCSRF,
+        currentUserId,
+        setCurrentUserId
     };
+
     const logoutUser = async ()=> {
-        console.log("top of logoutUser event-handler")
         const response = await fetchWithCSRF('/logout', {
             method: 'POST',
             credentials: 'include'
         });
-        if(response.ok) setCurrentUserId(null)
+        if(response.ok) setCurrentUserId(null);
 }
 
     return (
@@ -35,7 +37,10 @@ function App() {
                 </nav>
                 <Switch>
                     <Route path="/users">
+                        <>
+                        <h1>currentUserId = {currentUserId}</h1>
                         <UserList />
+                        </>
                     </Route>
                     <Route path="/login" component={LoginForm} />
                     <Route path="/">

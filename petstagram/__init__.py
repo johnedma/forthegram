@@ -62,7 +62,7 @@ def login():
     print(user)
     if authenticated:
         login_user(user)
-        return {"current_user": current_user.to_dict(), "is_active": current_user.is_active}
+        return {"current_user_id": current_user.id}
 
     return {"errors": ["Invalid username or password"]}, 401
 
@@ -70,6 +70,5 @@ def login():
 @app.route('/logout', methods=['POST'])
 @login_required
 def logout():
-    print("top of logout route-handler")
     logout_user()
     return {'msg': 'You have been logged out'}, 200
