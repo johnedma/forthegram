@@ -1,6 +1,10 @@
-from flask import Blueprint
+from flask import Blueprint, redirect
 
-bp = Blueprint('posts', __name__, '/api/posts')
+posts = Blueprint('posts', __name__)
 
+
+@posts.route('/', methods=['GET'])
+def index():
+    return 'posts'
 
 # @bp.route('/:id', )
