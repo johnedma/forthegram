@@ -29,7 +29,7 @@ body {
 }
 
 body.has-navbar-fixed-top {
-    padding-top: 4.25rem;
+    /* padding-top: 4.25rem; */
 }
 
 .center-cropped {
@@ -106,4 +106,26 @@ form input{
     padding: 9px 0 7px 8px;
     color: #262626;
     border-radius: 3px;
+}
+
+.fontawe{
+    border: none;
+    background-color: #fff;
+    /* fill: #262626; */
+    cursor: pointer;
+    padding: 8px;
+}
+
+.fontawe svg{
+    height: 24px;
+    width: 24px;
+    /* fill: #262626; */
+}
+
+.svg-inline--fa.fa-w-16 {
+    width: 2em;
+}
+
+.svg-inline--fa.fa-w-12 {
+    width: 1.75em;
 }

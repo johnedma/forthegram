@@ -29,27 +29,32 @@ const currentUser = {
                 {
                     user: '2pac',
                     comment: 'I make mistakes but learn from everyone. And when it’s said and done, I bet this brother be a better one. If I upset you, don’t stress. Never forget that God isn’t finished with me yet. - Ghetto Gospel feat Elton John'
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: 'johnjohn',
                     comment: "trilla"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "pk",
                     comment: "birdhouses are trill too"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "tynaaaaaa",
                     comment: "t in Tyna stands for trill, duh"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "adawg",
                     comment: "......."
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 }
             ],
             hashtag: null
