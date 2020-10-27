@@ -21,7 +21,7 @@ def download(id):
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid)[0].to_dict()
 
-        # new_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{id}.jpg'
+        # new_post_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{id}.jpg'
         return get_post
 
 
