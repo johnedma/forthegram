@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 // import UserList from './components/UsersList';
 import Home from './components/Home';
@@ -10,6 +10,8 @@ import LogIn from './components/LogIn';
 import Comments from './components/Comments';
 import UsersList from './components/UsersList';
 
+import LoginForm from './components/LoginForm';
+import AuthContext from './auth';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
@@ -136,33 +138,43 @@ const currentUser = {
 // will be restructured as individual pages are further structured
 
 function App() {
+    const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
+    const authContextValue = {
+        fetchWithCSRF,
+    };
 
     return (
-        <BrowserRouter>
-            <Navbar />
-            <Switch>
-                <Route path="/users">
-                    <UsersList />
-                </Route>
 
-                <Route path="/login">
-                    <LogIn />
-                </Route>
-                <Route path="/signup">
-                    <SignUp />
-                </Route>
-
-                <Route path="/post">
-                    <Post currentUser={currentUser} />
-                </Route>
-                <Route path="/profile">
-                    <Profile currentUser={currentUser} />
-                </Route>
-                <Route path="/">
-                    <Home currentUser={currentUser} />
-                </Route>
-            </Switch>
-        </BrowserRouter>
+        <AuthContext.Provider value={authContextValue}>
+            <BrowserRouter>
+                <Navbar />
+                <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active">Home</NavLink></li>
+                        <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    </ul>
+                </nav>
+                <Switch>
+                    <Route path="/users">
+                        <UserList />
+                    </Route>
+                    <Route path="/login" component={LoginForm} />
+                    <Route path="/">
+                        <h1>My Home Page</h1>
+                    </Route>
+                    <Route path="/post">
+                        <Post currentUser={currentUser} />
+                    </Route>
+                    <Route path="/profile">
+                        <Profile currentUser={currentUser} />
+                    </Route>
+                    <Route path="/">
+                        <Home currentUser={currentUser} />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+        </AuthContext.Provider>
     );
 }
 
