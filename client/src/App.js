@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
+import UsersList from './components/UsersList';
 
 
 // pass authenticated context to app
@@ -140,9 +141,9 @@ function App() {
         <BrowserRouter>
             <Navbar />
             <Switch>
-                {/* <Route path="/users">
-                    <UserList />
-                </Route> */}
+                <Route path="/users">
+                    <UsersList />
+                </Route>
 
                 <Route path="/login">
                     <LogIn />

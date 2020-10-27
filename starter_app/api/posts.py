@@ -1,5 +1,6 @@
 from flask import Blueprint, send_file, redirect, request
 from starter_app.aws import list_files, download_file, upload_file
+from ..models import db, User, Post
 import os
 
 
@@ -9,9 +10,19 @@ UPLOAD_FOLDER = 'uploads'
 BUCKET = "petstagram"
 
 
-@posts.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
-def download():
-    pass
+@posts.route('/')
+def index():
+    response = Post.query.all()
+    return {"posts": [post.to_dict() for post in response]}
+
+@posts.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def download(id):
+    if request.method == "GET":
+        pid = (int(id))
+        get_post = Post.query.filter(Post.id == pid)[0].to_dict()
+
+        # new_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{id}.jpg'
+        return get_post
 
 
 @posts.route('/', methods=['POST'])
