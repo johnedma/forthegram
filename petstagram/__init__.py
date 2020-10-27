@@ -2,6 +2,8 @@ import os
 from flask import Flask, render_template, request, session
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
+# from flask_login import login_user
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 
 
 from petstagram.models import db, User
