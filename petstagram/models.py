@@ -33,9 +33,15 @@ class User(db.Model, UserMixin):
         user = cls.query.filter(User.user_name == user_name).scalar()
         return check_password_hash(user.hashed_password, password), user
 
-    posts = db.relationship("Post", back_populates="user")
-    comments = db.relationship("Comment", back_populates="user")
-    likes = db.relationship("Like", back_populates="user")
+    posts = db.relationship(
+        "Post", back_populates="user", cascade="all, delete-orphan"
+        )
+    comments = db.relationship(
+        "Comment", back_populates="user", cascade="all, delete-orphan"
+        )
+    likes = db.relationship(
+        "Like", back_populates="user", cascade="all, delete-orphan"
+        )
     # figure out how to implement the following 4 lines w/out errors
     # follows = db.relationship("Follow", back_populates="user")
     # follows = db.relationship(
@@ -68,8 +74,12 @@ class Post(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False)
 
     user = db.relationship("User", back_populates="posts")
-    comments = db.relationship("Comment", back_populates="post")
-    likes = db.relationship("Like", back_populates="post")
+    comments = db.relationship(
+        "Comment", back_populates="post", cascade="all, delete-orphan"
+        )
+    likes = db.relationship(
+        "Like", back_populates="post", cascade="all, delete-orphan"
+        )
     # insert relationship to user via likes or comments?
 
     def to_dict(self):
