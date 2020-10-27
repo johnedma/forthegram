@@ -12,6 +12,7 @@ from petstagram.api.user_routes import user_routes
 from petstagram.config import Config
 
 app = Flask(__name__)
+login_manager = LoginManager(app)
 
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
