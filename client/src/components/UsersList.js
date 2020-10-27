@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import User from './User';
 
-function UsersList (props) {
+function UsersList(props) {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -13,14 +13,14 @@ function UsersList (props) {
         }
         fetchData();
     }, []);
-
+    console.log(users);
     const userComponents = users.map((user) => <User key={user.id} user={user} />)
     return (
         <>
             <h1>User List:</h1>
             {userComponents}
         </>
-        );
+    );
 }
 
 export default UsersList;

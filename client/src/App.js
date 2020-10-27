@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-// import UserList from './components/UsersList';
+import UserList from './components/UsersList';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Post from './components/Post';
@@ -146,9 +146,9 @@ function App() {
         <BrowserRouter>
             <Navbar />
             <Switch>
-                {/* <Route path="/users">
+                <Route path="/users">
                     <UserList />
-                </Route> */}
+                </Route>
 
                 <Route path="/login">
                     <LogIn />

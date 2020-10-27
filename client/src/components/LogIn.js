@@ -23,7 +23,7 @@ const LogIn = () => {
                     <h1 style={{
                         margin: `22px auto 12px`,
                         fontSize: `3em`,
-                        height: `51px`,
+                        height: `20px`,
                         marginBlockStart: `1em`,
                         marginBlockEnd: `1em`
                     }}>Petstagram</h1>

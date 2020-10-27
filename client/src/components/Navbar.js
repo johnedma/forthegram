@@ -14,7 +14,7 @@ const Navbar = () =>
         }}>
 
             <div className="navbar-item">
-                <a class="button has-background-link has-text-white" href="/login" style={{
+                <a className="button has-background-link has-text-white" href="/login" style={{
                     height: `2rem`,
                     paddingLeft: `.5em`,
                     paddingRight: `.5em`

@@ -28,9 +28,9 @@ body {
     padding-right: 16px;
 }
 
-body.has-navbar-fixed-top {
-    /* padding-top: 4.25rem; */
-}
+/* body.has-navbar-fixed-top {
+    padding-top: 4.25rem;
+} */
 
 .center-cropped {
     width: 100px;
@@ -61,28 +61,18 @@ body.has-navbar-fixed-top {
 }
 
 .authFormDiv{
-    color: rgba(var(--i1d,38,38,38),1);
-    font: inherit;
-    vertical-align: baseline;
+
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
     align-items: center;
     background-color: #fff;
-    background-color: rgba(var(--d87,255,255,255),1);
     border: 1px solid #dbdbdb;
-    border: 1px solid rgba(var(--b6a,219,219,219),1);
     border-radius: 1px;
     margin: 0 0 10px;
-    padding: 10px 0;
+    padding: 10px 40px;
     flex-direction: column;
-
 }
 
-authFormInnerWrap{
+.authFormInnerWrap{
     margin-bottom: 10px;
     max-width: 350px;
     width: 100%;
@@ -91,17 +81,14 @@ authFormInnerWrap{
 form{
     margin-top: 24px;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
+    align-items: center;
 }
 
 form input{
     margin: 0 40px 6px;
     background-color:  #fafafa;
-    /* width: 100%; */
+    width: 100%;
     border: 1px solid #dbdbdb;
     padding: 9px 0 7px 8px;
     color: #262626;
@@ -111,9 +98,15 @@ form input{
 .fontawe{
     border: none;
     background-color: #fff;
-    /* fill: #262626; */
     cursor: pointer;
     padding: 8px;
+}
+.fontawe{
+    /* shadow */
+    border-radius: 50px;
+    /* background: #55b9f3; */
+    box-shadow: 1px 2px 5px #489dcf, -1px -1px 4px #62d5ff;
+    margin: 10px;
 }
 
 .fontawe svg{
@@ -121,11 +114,18 @@ form input{
     width: 24px;
     /* fill: #262626; */
 }
+.fontawe svg{
+    /* shadow */
+    border-radius: 50px;
+    background: #55b9f3;
+    /* box-shadow: 20px 20px 60px #489dcf, -20px -20px 60px #62d5ff; */
+    padding: 4px;
+}
 
 .svg-inline--fa.fa-w-16 {
     width: 2em;
 }
 
 .svg-inline--fa.fa-w-12 {
-    width: 1.75em;
+    width: 2em;
 }
