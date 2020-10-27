@@ -8,9 +8,18 @@ import AuthContext from './auth';
 
 function App() {
     const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
+    const [currentUserId, setCurrentUserId] = useState(null);
     const authContextValue = {
         fetchWithCSRF,
     };
+    const logoutUser = async ()=> {
+        console.log("top of logoutUser event-handler")
+        const response = await fetchWithCSRF('/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        if(response.ok) setCurrentUserId(null)
+}
 
     return (
         <AuthContext.Provider value={authContextValue}>
@@ -20,6 +29,7 @@ function App() {
                     <ul>
                         <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                         <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                        <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
                         <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     </ul>
                 </nav>
