@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
+import PostForm from './components/PostForm';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
