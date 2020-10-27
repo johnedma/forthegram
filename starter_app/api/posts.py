@@ -1,18 +1,24 @@
-from flask import Blueprint, send_file
-from aws import list_files, download_file, upload_file
+from flask import Blueprint, send_file, redirect
+from starter_app.aws import list_files, download_file, upload_file
 
 
-bp = Blueprint('posts', __name__, url_prefix='/api/posts')
+posts = Blueprint('posts', __name__)
 
 UPLOAD_FOLDER = 'uploads'
 BUCKET = "petstagram"
 
 
-@bp.route('/:id', methods=['GET', 'PUT', 'DELETE'])
+@posts.route('/:id', methods=['GET', 'PUT', 'DELETE'])
 def download():
     pass
 
 
-@bp.route('/', methods=['POST'])
+@posts.route('/', methods=['POST'])
 def upload():
-    pass
+    if request.method == "POST":
+
+        f = request.files['file']
+        f.save(os.path.join(UPLOAD_FOLDER, f.filename))
+        upload_file(f"uploads/{f.filename}", BUCKET)
+
+        return redirect("/")
