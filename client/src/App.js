@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
-import UsersList from './components/UsersList';
+import UsersLists from './components/UsersList';
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';

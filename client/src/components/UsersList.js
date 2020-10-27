@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Photo from './photo'
+import Photo from './Photo'
 import User from './User';
 
 function UsersList(props) {
