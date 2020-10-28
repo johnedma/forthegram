@@ -19,9 +19,9 @@ with app.app_context():
     created_at = datetime(2000, 1, 15)
     db.session.add(User(
         user_name="demo_user",
-        full_name="Demo User",
-        email="demo@user.com",
-        #   DOB=datetime(1980, 10, 31),
+        first_name="Demo",
+        last_name="User",
+        DOB=datetime(1980, 10, 31),
         password="password",
         created_at=created_at,
         updated_at=datetime(2005, 2, 25),
@@ -33,10 +33,9 @@ with app.app_context():
         user_t.append(created_at)
         db.session.add(User(
             user_name=fake.simple_profile()["username"],
-            full_name=fake.first_name() + " " + fake.last_name(),
-            # last_name=fake.last_name(),
-            # DOB=DOB,
-            email="demo@user.com",
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            DOB=DOB,
             password="password",
             created_at=created_at,
             updated_at=fake.date_time_between(start_date=created_at)
