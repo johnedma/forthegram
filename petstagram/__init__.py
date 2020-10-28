@@ -76,3 +76,10 @@ def login():
 def logout():
     logout_user()
     return {'msg': 'You have been logged out'}, 200
+
+
+@app.route('/restore')
+def restore():
+    id = current_user.id if current_user.is_authenticated else None
+    if current_user:
+        return {"current_user_id": id}
