@@ -175,10 +175,8 @@ function App() {
                         </>
                     </Route>
                     <Route path="/login" component={LoginForm} />
-                    <Route path="/">
-                        <h1>My Home Page</h1>
-                    </Route>
                     <Route path="/post">
+                        <h1>Posts</h1>
                         <Post currentUser={currentUser} />
                     </Route>
                     <Route path="/profile">

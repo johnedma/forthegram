@@ -5,6 +5,7 @@ const Post = ({ currentUser, post }) => {
     // 736 desktop breakpoint for post with photo in its own container to left, everything else to the right
     // 736 img container becomes 359x359
     //
+    console.log("i'm in")
     console.log(currentUser);
     console.log(currentUser.posts[0]);
     if (!post) post = currentUser.posts[0]
