@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import UserList from './components/UsersList';
+import UsersList from './components/UsersList';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Post from './components/Post';
@@ -146,26 +146,45 @@ const currentUser = {
 
 function App() {
     const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
+    const [currentUserId, setCurrentUserId] = useState(null);
     const authContextValue = {
         fetchWithCSRF,
+        currentUserId,
+        setCurrentUserId
     };
 
+    const logoutUser = async () => {
+        const response = await fetchWithCSRF('/logout', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        if (response.ok) setCurrentUserId(null);
+    }
+
     return (
-        <>
+
+        <AuthContext.Provider value={authContextValue}>
             <BrowserRouter>
                 <Navbar />
+                <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active">Home</NavLink></li>
+                        <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                        <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    </ul>
+                </nav>
                 <Switch>
                     <Route path="/users">
-                        <UserList />
+                        <>
+                            <h1>currentUserId = {currentUserId}</h1>
+                            <UsersList />
+                        </>
                     </Route>
 
                     <Route path="/login">
-                        <LogIn />
+                        <LoginForm />
                     </Route>
-                    <Route path="/signup">
-                        <SignUp />
-                    </Route>
-
                     <Route path="/post">
                         <Post currentUser={currentUser} />
                     </Route>
@@ -179,28 +198,7 @@ function App() {
                 </Switch>
                 <Footer />
             </BrowserRouter>
-            <AuthContext.Provider value={authContextValue}>
-                <BrowserRouter>
-                    <Navbar />
-                    <nav>
-                        <ul>
-                            <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                            <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
-                            <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                        </ul>
-                    </nav>
-                    <Switch>
-                        <Route path="/users">
-                            <UserList />
-                        </Route>
-                        <Route path="/login" component={LoginForm} />
-                        <Route path="/">
-                            <h1>My Home Page</h1>
-                        </Route>
-                    </Switch>
-                </BrowserRouter>
-            </AuthContext.Provider>
-        </>
+        </AuthContext.Provider>
     );
 }
 
