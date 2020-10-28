@@ -9,6 +9,8 @@ import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
+import ProtectedRoute from "./components/ProtectedRoute"
+import AuthRoute from "./components/AuthRoute"
 
 
 import LoginForm from './components/LoginForm';
@@ -147,11 +149,25 @@ const currentUser = {
 function App() {
     const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
     const [currentUserId, setCurrentUserId] = useState(null);
+    const [loading, setLoading] = useState(true)
     const authContextValue = {
         fetchWithCSRF,
         currentUserId,
         setCurrentUserId
     };
+
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/restore')
+            const data = await response.json()
+            const { current_user_id } = data
+            setCurrentUserId(current_user_id)
+            setLoading(false)
+        })()
+
+    }, [])
+
+
 
     const logoutUser = async () => {
         const response = await fetchWithCSRF('/logout', {
@@ -162,42 +178,36 @@ function App() {
     }
 
     return (
-
         <AuthContext.Provider value={authContextValue}>
-            <BrowserRouter>
-                <Navbar />
-                {/* <nav>
-                    <ul>
-                        <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                        <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
-                        <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
-                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    </ul>
-                </nav> */}
-                <Switch>
-                    <Route path="/users">
+            { loading && <h1>Loading</h1>}
+            {!loading &&
+                <BrowserRouter>
+                    <Navbar />
+                    <nav>
+                        <ul>
+                            <li><NavLink to="/" activeclass="active">Home</NavLink></li>
+                            <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                            <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
+                            <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                        </ul>
+                    </nav>
+                    <Switch>
+                        {/* <Route path="/users">
                         <>
                             <h1>currentUserId = {currentUserId}</h1>
                             <UsersList />
                         </>
-                    </Route>
+                    </Route> */}
 
-                    <Route path="/login">
-                        <LoginForm />
-                    </Route>
-                    <Route path="/post">
-                        <Post currentUser={currentUser} />
-                    </Route>
-                    <Route path="/profile">
-                        <Profile currentUser={currentUser} />
-                    </Route>
-                    <Route exact path="/">
-                        <Home currentUser={currentUser} />
-                    </Route>
-                    <Route path="/create-post" component={PostForm} />
-                </Switch>
-                <Footer />
-            </BrowserRouter>
+                        <AuthRoute path="/login" component={LoginForm} currentUserId={currentUserId} />
+                        <Route path="/post" component={Post} currentUserId={currentUserId} />
+                        <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
+                        <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
+                        <ProtectedRoute path="/create-post" component={PostForm} currentUserId={currentUserId} />
+                    </Switch>
+                    <Footer />
+                </BrowserRouter>
+            }
         </AuthContext.Provider>
     );
 }
