@@ -171,6 +171,7 @@ function App() {
                         <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                         <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
                         <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
+                        <li><NavLink to="/signup" activeclass="active">Signup</NavLink></li>
                         <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     </ul>
                 </nav>
@@ -185,6 +186,9 @@ function App() {
                     <Route path="/login">
                         <LogIn />
                         {/* <LoginForm /> */}
+                    </Route>
+                    <Route path="/signup">
+                        <SignUp />
                     </Route>
                     <Route path="/post">
                         <Post currentUser={currentUser} />

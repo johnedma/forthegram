@@ -1,24 +1,55 @@
-import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Redirect, useHistory } from 'react-router-dom';
+import AuthContext from '../auth'
 
 
-const SignUp = () => {
+const SignUp = props => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [fullname, setFullname] = useState('');
     const [password, setPassword] = useState('');
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
+    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const [errors, setErrors] = useState([]);
+    const [firstname, setFirstname] = useState('');
+    let history = useHistory();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    };
+    const handleSubmit = e => e.preventDefault()
 
     const updateEmail = e => setEmail(e.target.value);
     const updatePassword = e => setPassword(e.target.value);
-    const updateFullname = e => setFullname(e.target.value)
+    // const updateFullname = e => setFullname(e.target.value)
     const updateUsername = e => setUsername(e.target.value)
 
+    const submitForm = e => {
+        e.preventDefault();
+
+        // Make the following an IIFE?
+        async function signupUser() {
+            const response = await fetchWithCSRF(`/signup`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    email,
+                    username,
+                    firstname,
+                    password
+                })
+            });
+
+            const responseData = await response.json();
+            if (!response.ok) {
+                setErrors(responseData.errors);
+            } else {
+                setCurrentUserId(responseData.current_user_id)
+                history.push('/users')
+            }
+        }
+        signupUser();
+    }
 
     return (
         <div className="authContain">
@@ -42,25 +73,29 @@ const SignUp = () => {
                     <div className="authFormInnerWrap">
                         <form onSubmit={handleSubmit}>
                             <input
+                                className="input"
                                 type="text"
                                 placeholder="Email"
                                 value={email}
-                                onChange={updateEmail} />
+                                onChange={e => setEmail(e.target.value)} name="email" />
                             <input
+                                className="input"
                                 type="text"
-                                placeholder="Full Name"
-                                value={fullname}
-                                onChange={updateFullname} />
+                                placeholder="First Name"
+                                value={firstname}
+                                onChange={e => setFirstname(e.target.value)} name="firstname" />
                             <input
-                                type="text "
+                                className="input"
+                                type="text"
                                 placeholder="Username"
                                 value={username}
-                                onChange={updateUsername} />
+                                onChange={e => setUsername(e.target.value)} name="username" />
                             <input
+                                className="input"
                                 type="password"
                                 placeholder="Password"
                                 value={password}
-                                onChange={updatePassword} />
+                                onChange={e => setPassword(e.target.value)} name="password" />
 
                             <button type="submit" class="button has-background-link has-text-white" style={{
                                 height: `2rem`,
