@@ -35,13 +35,13 @@ class User(db.Model, UserMixin):
 
     posts = db.relationship(
         "Post", back_populates="user", cascade="all, delete-orphan"
-        )
+    )
     comments = db.relationship(
         "Comment", back_populates="user", cascade="all, delete-orphan"
-        )
+    )
     likes = db.relationship(
         "Like", back_populates="user", cascade="all, delete-orphan"
-        )
+    )
     # figure out how to implement the following 4 lines w/out errors
     # follows = db.relationship("Follow", back_populates="user")
     # follows = db.relationship(
@@ -67,8 +67,8 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=False
-        )
-    photo_url = db.Column(db.String(20), unique=True)
+    )
+    photo_url = db.Column(db.String(255))
     caption = db.Column(db.Text)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
@@ -76,10 +76,10 @@ class Post(db.Model):
     user = db.relationship("User", back_populates="posts")
     comments = db.relationship(
         "Comment", back_populates="post", cascade="all, delete-orphan"
-        )
+    )
     likes = db.relationship(
-        "Like", back_populates="post",  
-        )
+        "Like", back_populates="post", cascade="all, delete-orphan"
+    )
     # insert relationship to user via likes or comments?
 
     def to_dict(self):
@@ -123,10 +123,10 @@ class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=False
-        )
+    )
     post_id = db.Column(
         db.Integer, db.ForeignKey("posts.id"), nullable=False
-        )
+    )
     created_at = db.Column(db.DateTime, nullable=False)
     db.UniqueConstraint(user_id, post_id)
 
@@ -148,10 +148,10 @@ class Follow(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     follower_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=False
-        )
+    )
     followed_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=False
-        )
+    )
     created_at = db.Column(db.DateTime, nullable=False)
     db.UniqueConstraint(follower_id, followed_id)
 
@@ -175,12 +175,12 @@ class DirectMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     sender_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=False
-        )
+    )
     recipient_id = db.Column(
         db.Integer,
         db.ForeignKey("users.id"),
         nullable=False
-        )
+    )
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 

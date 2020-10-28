@@ -1,21 +1,179 @@
-/* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Pacifico&display=swap');
+
 *,
 *:before,
 *:after {
    box-sizing: border-box;
 }
 
+h1{
+
+    font-family: 'Pacifico', cursive;
+}
+
 body {
-    padding: 3rem;
+    /* padding: 3rem; */
+    /* font-family: 'Oswald', sans-serif; */
+    font-size: 14px;
+    background-color: #fafafa;
+    line-height: 18px;
  }
 
  .navbar.is-fixed-top{
     display: inline-flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding: .5em;
+    align-items: center;
+    /* padding: .5em; */
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
-body.has-navbar-fixed-top {
+/* body.has-navbar-fixed-top {
     padding-top: 4.25rem;
+} */
+
+.center-cropped {
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+.level, .level-left, .level-right{
+    display: flex;
+    align-items: baseline;
+}
+
+.navbar-item{
+    font-weight: 600;
+}
+
+.authContain{
+    padding-bottom: 44px;
+    display: flex;
+    justify-content: center;
+}
+
+.authForm{
+    justify-content: center;
+    margin-top: 12px;
+    max-width: 350px;
+}
+
+.authFormDiv{
+
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    margin: 0 0 10px;
+    padding: 10px 40px;
+    flex-direction: column;
+}
+
+.authFormInnerWrap{
+    margin-bottom: 10px;
+    max-width: 350px;
+    width: 100%;
+}
+
+form{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form input{
+    margin: 0 40px 6px;
+    background-color:  #fafafa;
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    padding: 9px 0 7px 8px;
+    color: #262626;
+    border-radius: 3px;
+}
+
+.fontawe{
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 8px;
+}
+.fontawe{
+    /* shadow */
+    border-radius: 50px;
+    /* background: #55b9f3; */
+    box-shadow: 1px 2px 5px #489dcf, -1px -1px 4px #62d5ff;
+    margin: 10px;
+}
+
+.fontawe svg{
+    height: 24px;
+    width: 24px;
+    /* fill: #262626; */
+}
+.fontawe svg{
+    /* shadow */
+    border-radius: 50px;
+    /* background: #55b9f3; */
+    /* box-shadow: 20px 20px 60px #489dcf, -20px -20px 60px #62d5ff; */
+    padding: 4px;
+}
+
+.svg-inline--fa.fa-w-16 {
+    width: 2em;
+}
+
+.svg-inline--fa.fa-w-12 {
+    width: 2em;
+}
+
+#post-button {
+    font-size: 55px;
+    border-radius: 75px;
+    position: fixed;
+    bottom: 100px;
+    left: 700px;
+    width: 75px;
+    background-color: #55b9f3;
+}
+
+#post-button:hover, #post-button:focus{
+    outline: none;
+}
+
+.post-form-container{
+    display: flex;
+    margin: 100px;
+    height: 400px;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    border: black 1px solid;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #55b9f3;
+}
+
+.create-post-form{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.create-post-headline{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#create-post-button{
+    border-radius: 25px;
+    width:100px;
+}
+
+#caption-field{
+    line-height: 1.5;
+    border-radius: 5px;
 }
