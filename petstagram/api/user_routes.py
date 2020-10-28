@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from petstagram.models import User, db
 from datetime import datetime
+from flask_login import login_required
 
 user_routes = Blueprint('users', __name__)
 
@@ -21,13 +22,13 @@ def index():
         updated_at = datetime.now()
 
         new_user = User(
-                        user_name=user_name,
-                        first_name=first_name,
-                        last_name=last_name,
-                        DOB=DOB,
-                        password=password,
-                        created_at=created_at,
-                        updated_at=updated_at
+            user_name=user_name,
+            first_name=first_name,
+            last_name=last_name,
+            DOB=DOB,
+            password=password,
+            created_at=created_at,
+            updated_at=updated_at
         )
         db.session.add(new_user)
         db.session.commit()
