@@ -1,5 +1,5 @@
 from flask import Blueprint, send_file, redirect, request
-from starter_app.aws import list_files, download_file, upload_file
+from petstagram.aws import list_files, download_file, upload_file
 import os
 
 

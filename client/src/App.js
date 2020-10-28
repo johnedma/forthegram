@@ -172,9 +172,10 @@ function App() {
                     <Route path="/profile">
                         <Profile currentUser={currentUser} />
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <Home currentUser={currentUser} />
                     </Route>
+                    <Route path="/create-post" component={PostForm} />
                 </Switch>
                 <Footer />
             </BrowserRouter>

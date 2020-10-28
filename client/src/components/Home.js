@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Redirect, Route } from 'react-router-dom';
 import Post from './Post';
 import PostForm from './PostForm'
 
@@ -27,7 +27,7 @@ const Home = ({ currentUser }) => {
                 )}
             </div>
 
-            <button id="post-button" onClick={() => <Route to='/create-post' component={PostForm} />}>+</button>
+            <button id="post-button" onClick={() => window.location.href = './create-post'} >+</button>
 
         </>
     );

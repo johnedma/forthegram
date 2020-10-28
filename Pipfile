@@ -26,6 +26,7 @@ alembic = "*"
 Flask-Migrate = "*"
 faker = "*"
 boto3 = "*"
+flask-login = "*"
 
 [requires]
 python_version = "3.8"

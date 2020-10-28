@@ -143,3 +143,37 @@ form input{
 #post-button:hover, #post-button:focus{
     outline: none;
 }
+
+.post-form-container{
+    display: flex;
+    margin: 100px;
+    height: 400px;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    border: black 1px solid;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #55b9f3;
+}
+
+.create-post-form{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.create-post-headline{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#create-post-button{
+    border-radius: 25px;
+    width:100px;
+}
+
+#caption-field{
+    line-height: 1.5;
+    border-radius: 5px;
+}
