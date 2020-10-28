@@ -10,9 +10,9 @@ class User(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(40), nullable=False, unique=True)
-    full_name = db.Column(db.String(80))
-    email = db.Column(db.String(40), nullable=False)
-    # DOB = db.Column(db.Date, nullable=False)
+    first_name = db.Column(db.String(40))
+    last_name = db.Column(db.String(40))
+    DOB = db.Column(db.Date, nullable=False)
     hashed_password = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
@@ -53,9 +53,9 @@ class User(db.Model, UserMixin):
         return {
             "id": self.id,
             "user_name": self.user_name,
-            "full_name": self.full_name,
-            "email": self.email,
-            # "DOB": self.DOB,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "DOB": self.DOB,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }
