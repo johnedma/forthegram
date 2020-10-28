@@ -159,14 +159,14 @@ function App() {
         <AuthContext.Provider value={authContextValue}>
             <BrowserRouter>
                 <Navbar />
-                <nav>
+                {/* <nav>
                     <ul>
                         <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                         <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
                         <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
                         <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     </ul>
-                </nav>
+                </nav> */}
                 <Switch>
                     <Route path="/users">
                         <>
