@@ -13,7 +13,7 @@ function UsersList(props) {
         }
         fetchData();
     }, []);
-
+    console.log(users);
     const userComponents = users.map((user) => <User key={user.id} user={user} />)
     return (
         <>
