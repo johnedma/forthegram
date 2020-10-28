@@ -16,8 +16,11 @@ const Post = ({ currentUser, post }) => {
             border: `0.5px solid #dbdbdb`,
             border: `1px solid rgb(239, 239, 239)`,
             backgroundColor: `white`,
-            padding: ` 25px 0`,
-            padding: `6px 0px 30px 0px`
+            // padding: ` 25px 0`,
+            // padding: `6px 0px 30px 0px`,
+            maxWidth: `600px`,
+            margin: `20px auto`,
+            borderRadius: `18px`
         }}>
             <header style={{ display: "flex", padding: `16px` }}>
                 <img style={{ width: "32px", height: `32px`, verticaAlign: `middle`, borderRadius: `50%`, marginRight: `10px` }} src={currentUser.profilepic} />
@@ -77,7 +80,7 @@ const Post = ({ currentUser, post }) => {
                 <Comments postComments={post.comments} />
                 {/* <div>July 31</div> */}
             </div>
-        </div>
+        </div >
     );
 };
 
