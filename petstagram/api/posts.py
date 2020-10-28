@@ -34,6 +34,7 @@ def download(id):
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid)[0]
         get_post.caption = request.form['caption']
+        get_post.updated_at = datetime.now()
         db.session.commit()
 
         return redirect("/api/posts")
