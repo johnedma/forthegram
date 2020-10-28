@@ -78,7 +78,7 @@ class Post(db.Model):
         "Comment", back_populates="post", cascade="all, delete-orphan"
         )
     likes = db.relationship(
-        "Like", back_populates="post", cascade="all, delete-orphan"
+        "Like", back_populates="post",  
         )
     # insert relationship to user via likes or comments?
 
