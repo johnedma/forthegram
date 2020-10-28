@@ -183,7 +183,8 @@ function App() {
                     </Route>
 
                     <Route path="/login">
-                        <LoginForm />
+                        <LogIn />
+                        {/* <LoginForm /> */}
                     </Route>
                     <Route path="/post">
                         <Post currentUser={currentUser} />
