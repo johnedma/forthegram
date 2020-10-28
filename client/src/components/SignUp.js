@@ -4,28 +4,31 @@ import AuthContext from '../auth'
 
 
 const SignUp = props => {
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('Email');
+    const [username, setUsername] = useState('Username');
+    const [password, setPassword] = useState('Password');
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
-    const [firstname, setFirstname] = useState('');
+    const [firstname, setFirstname] = useState('First name');
+    const [lastname, setLastname] = useState('Last name');
     let history = useHistory();
 
-    const handleSubmit = e => e.preventDefault()
+    // const handleSubmit = e => e.preventDefault()
 
-    const updateEmail = e => setEmail(e.target.value);
-    const updatePassword = e => setPassword(e.target.value);
-    // const updateFullname = e => setFullname(e.target.value)
-    const updateUsername = e => setUsername(e.target.value)
+    // const updateEmail = e => setEmail(e.target.value);
+    // const updatePassword = e => setPassword(e.target.value);
+    // const updateFirstname = e => setFirstname(e.target.value)
+    // const updateUsername = e => setUsername(e.target.value)
 
     const submitForm = e => {
         e.preventDefault();
 
         // Make the following an IIFE?
         async function signupUser() {
+            console.log("top of event handler")
+            console.log(email, username, firstname, lastname, password)
             const response = await fetchWithCSRF(`/signup`, {
                 method: 'POST',
                 headers: {
@@ -36,6 +39,7 @@ const SignUp = props => {
                     email,
                     username,
                     firstname,
+                    lastname,
                     password
                 })
             });
@@ -71,7 +75,7 @@ const SignUp = props => {
                         textAlign: `center`
                     }}>Sign up to see photos and videos from your friends.</h2>
                     <div className="authFormInnerWrap">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={submitForm}>
                             <input
                                 className="input"
                                 type="text"
@@ -87,6 +91,12 @@ const SignUp = props => {
                             <input
                                 className="input"
                                 type="text"
+                                placeholder="Last Name"
+                                value={lastname}
+                                onChange={e => setLastname(e.target.value)} name="lastname" />
+                            <input
+                                className="input"
+                                type="text"
                                 placeholder="Username"
                                 value={username}
                                 onChange={e => setUsername(e.target.value)} name="username" />
@@ -97,7 +107,7 @@ const SignUp = props => {
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} name="password" />
 
-                            <button type="submit" class="button has-background-link has-text-white" style={{
+                            <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
                                 paddingRight: `.5em`,
