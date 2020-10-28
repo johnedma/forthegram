@@ -99,7 +99,7 @@ def signup():
     )
     db.session.add(new_user)
     db.session.commit()
-    return redirect('/api/users')
+    # return redirect('/api/users')
 
     authenticated, user = User.authenticate(username, password)
     print(authenticated)

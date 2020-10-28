@@ -15,13 +15,6 @@ const SignUp = props => {
     const [lastname, setLastname] = useState('Last name');
     let history = useHistory();
 
-    // const handleSubmit = e => e.preventDefault()
-
-    // const updateEmail = e => setEmail(e.target.value);
-    // const updatePassword = e => setPassword(e.target.value);
-    // const updateFirstname = e => setFirstname(e.target.value)
-    // const updateUsername = e => setUsername(e.target.value)
-
     const submitForm = e => {
         e.preventDefault();
 
