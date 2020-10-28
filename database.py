@@ -15,7 +15,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
     # number of users, including demo_user
-    n_user = 5
+    n_user = 2
     created_at = datetime(2000, 1, 15)
     db.session.add(User(
         user_name="demo_user",
@@ -45,7 +45,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of posts per user
-    n_post_per_user = 5
+    n_post_per_user = 2
     n_post = n_user * n_post_per_user
 
     post_t = []
@@ -67,7 +67,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of comments per post
-    n_comment_per_post = 3
+    n_comment_per_post = 2
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
@@ -90,7 +90,7 @@ with app.app_context():
 
 with app.app_context():
     # probability of a user liking a post:
-    like_prob = 0.3
+    like_prob = 0.7
     like_t = []
     for user_id in range(n_user):
         t_user = user_t[user_id]
@@ -109,7 +109,7 @@ with app.app_context():
 
 with app.app_context():
     # probability of one user following another:
-    follow_prob = 0.5
+    follow_prob = 0.7
     follow_t = []
     for follower_id in range(n_user):
         t_follower = user_t[follower_id]

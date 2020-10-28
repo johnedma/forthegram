@@ -186,14 +186,6 @@ function App() {
 
                 <BrowserRouter>
                     <Navbar />
-                    {/* <nav>
-                    <ul>
-                        <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                        <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
-                        <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
-                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    </ul>
-                </nav> */}
                     <Switch>
                         <Route path="/users" />
                         <Route path="/login" component={LogIn} />
@@ -212,7 +204,7 @@ function App() {
                     </Switch>
                     <Footer />
                 </BrowserRouter>
-
+            }
         </AuthContext.Provider>
     );
 }
