@@ -35,7 +35,7 @@ git clone https://github.com/appacademy-starters/react-project-starter.git --bra
 
 2. Install dependencies
    ```bash
-   pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
+pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install -r requirements.txt
    ```
 
 3. Create a **.env** file based on the example with proper settings for your

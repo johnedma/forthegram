@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager, \
@@ -10,6 +10,7 @@ from petstagram.api.user_routes import user_routes
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
 from petstagram.config import Config
+from datetime import datetime
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -60,6 +61,45 @@ def login():
 
     if not username or not password:
         return {"errors": ["Missing required parameters"]}, 400
+
+    authenticated, user = User.authenticate(username, password)
+    print(authenticated)
+    print(user)
+    if authenticated:
+        login_user(user)
+        return {"current_user_id": current_user.id}
+
+    return {"errors": ["Invalid username or password"]}, 401
+
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    print("top of signup backend route")
+    if not request.is_json:
+        return jsonify({"msg": "Missing JSON in request"}), 400
+
+    username = request.json.get('username', None)
+    password = request.json.get('password', None)
+    firstname = request.json.get('firstname', None)
+    lastname = request.json.get("lastname", None)
+    email = request.json.get('email', None)
+    print(username, password, firstname, lastname, email)
+
+    if not username or not password:
+        return {"errors": ["Missing required parameters"]}, 400
+
+    new_user = User(
+                    user_name=username,
+                    first_name=firstname,
+                    last_name=lastname,
+                    DOB=datetime.now(),
+                    password=password,
+                    created_at=datetime.now(),
+                    updated_at=datetime.now()
+    )
+    db.session.add(new_user)
+    db.session.commit()
+    # return redirect('/api/users')
 
     authenticated, user = User.authenticate(username, password)
     print(authenticated)
