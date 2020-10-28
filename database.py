@@ -1,3 +1,5 @@
+from petstagram.models import User, Post, Comment, Like, Follow
+from petstagram import app, db
 from dotenv import load_dotenv
 from datetime import date, datetime, timedelta
 from faker import Faker
@@ -8,8 +10,6 @@ seed(1)
 fake = Faker()
 load_dotenv()
 
-from petstagram import app, db
-from petstagram.models import User, Post, Comment, Like, Follow
 
 with app.app_context():
     db.drop_all()
@@ -18,28 +18,28 @@ with app.app_context():
     n_user = 5
     created_at = datetime(2000, 1, 15)
     db.session.add(User(
-      user_name="demo_user",
-      first_name="Demo",
-      last_name="User",
-      DOB=datetime(1980, 10, 31),
-      password="password",
-      created_at=created_at,
-      updated_at=datetime(2005, 2, 25),
+        user_name="demo_user",
+        first_name="Demo",
+        last_name="User",
+        DOB=datetime(1980, 10, 31),
+        password="password",
+        created_at=created_at,
+        updated_at=datetime(2005, 2, 25),
     ))
     user_t = [created_at]
     for _ in range(1, n_user):
-        DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
-        created_at = fake.date_time_between(start_date=DOB)
+        # DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
+        created_at = fake.date_time_between(start_date=datetime(1980, 10, 31))
         user_t.append(created_at)
         db.session.add(User(
-                user_name=fake.simple_profile()["username"],
-                first_name=fake.first_name(),
-                last_name=fake.last_name(),
-                DOB=DOB,
-                password="password",
-                created_at=created_at,
-                updated_at=fake.date_time_between(start_date=created_at)
-            ))
+            user_name=fake.simple_profile()["username"],
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            DOB=DOB,
+            password="password",
+            created_at=created_at,
+            updated_at=fake.date_time_between(start_date=created_at)
+        ))
     db.session.commit()
 
 with app.app_context():
@@ -53,7 +53,7 @@ with app.app_context():
         user_id = randrange(n_user)
         created_at = fake.date_time_between(
             start_date=user_t[user_id]
-            )
+        )
         post_t.append(created_at)
         db.session.add(Post(
             user_id=user_id + 1,

@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
 import AuthRoute from "./components/AuthRoute"
 
+import UsersList from './components/UsersList';
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
@@ -176,9 +177,10 @@ function App() {
         });
         if (response.ok) setCurrentUserId(null);
     }
-
+    // <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
     return (
         <AuthContext.Provider value={authContextValue}>
+<<<<<<< HEAD
             { loading && <h1>Loading</h1>}
             {!loading &&
                 <BrowserRouter>
@@ -217,6 +219,44 @@ function App() {
                     <Footer />
                 </BrowserRouter>
             }
+=======
+
+            { loading && <h1>Loading</h1>}
+            {!loading &&
+               
+            <BrowserRouter>
+                <Navbar />
+<<<<<<< HEAD
+=======
+                {/* <nav>
+                    <ul>
+                        <li><NavLink to="/" activeclass="active">Home</NavLink></li>
+                        <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                        <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
+                        <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
+                    </ul>
+                </nav> */}
+>>>>>>> cf735d6... no changes
+                <Switch>
+                    <Route path="/users"/>
+                    <Route path="/login" component={LogIn} />
+                    <Route path="/signup" component={SignUp} />
+                    <Route path="/post">
+                        <h1>Posts</h1>
+                        <Post currentUser={currentUser} />
+                    </Route>
+                    <Route path="/profile">
+                        <Profile currentUser={currentUser} />
+                    </Route>
+                    <Route exact path="/">
+                        <Home currentUser={currentUser} />
+                    </Route>
+                    <Route path="/create-post" component={PostForm} />
+                </Switch>
+                <Footer />
+            </BrowserRouter>
+
+>>>>>>> main
         </AuthContext.Provider>
     );
 }

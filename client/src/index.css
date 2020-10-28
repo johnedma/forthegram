@@ -22,7 +22,7 @@ body {
  .navbar.is-fixed-top{
     display: inline-flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     /* padding: .5em; */
     padding-left: 16px;
     padding-right: 16px;
@@ -117,7 +117,7 @@ form input{
 .fontawe svg{
     /* shadow */
     border-radius: 50px;
-    background: #55b9f3;
+    /* background: #55b9f3; */
     /* box-shadow: 20px 20px 60px #489dcf, -20px -20px 60px #62d5ff; */
     padding: 4px;
 }
