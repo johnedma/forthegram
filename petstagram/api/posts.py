@@ -29,6 +29,16 @@ def download(id):
         db.session.commit()
         return redirect("/api/posts")
 
+    if request.method == 'PUT':
+        pid = (int(id))
+        get_post = Post.query.filter(Post.id == pid)[0]
+        get_post.caption = request.form['caption']
+        db.session.commit()
+
+        return redirect("/api/posts")
+
+
+
 
 
 
