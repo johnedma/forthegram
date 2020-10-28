@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
-import UsersLists from './components/UsersList';
+import UsersList from './components/UsersList';
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
@@ -171,7 +171,7 @@ function App() {
                     <Route path="/users">
                         <>
                         <h1>currentUserId = {currentUserId}</h1>
-                        <UserList />
+                        <UsersList />
                         </>
                     </Route>
                     <Route path="/login" component={LoginForm} />

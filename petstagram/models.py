@@ -62,7 +62,7 @@ class Post(db.Model):
     user_id = db.Column(
         db.Integer, db.ForeignKey("users.id"), nullable=False
         )
-    photo_url = db.Column(db.String(20), unique=True)
+    photo_url = db.Column(db.String(255))
     caption = db.Column(db.Text)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
