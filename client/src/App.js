@@ -9,7 +9,10 @@ import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
+import ProtectedRoute from "./components/ProtectedRoute"
+import AuthRoute from "./components/AuthRoute"
 
+import UsersList from './components/UsersList';
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
@@ -147,11 +150,25 @@ const currentUser = {
 function App() {
     const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
     const [currentUserId, setCurrentUserId] = useState(null);
+    const [loading, setLoading] = useState(true)
     const authContextValue = {
         fetchWithCSRF,
         currentUserId,
         setCurrentUserId
     };
+
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/restore')
+            const data = await response.json()
+            const { current_user_id } = data
+            setCurrentUserId(current_user_id)
+            setLoading(false)
+        })()
+
+    }, [])
+
+
 
     const logoutUser = async () => {
         const response = await fetchWithCSRF('/logout', {
@@ -160,32 +177,32 @@ function App() {
         });
         if (response.ok) setCurrentUserId(null);
     }
-
+    // <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
     return (
-
         <AuthContext.Provider value={authContextValue}>
+
+            { loading && <h1>Loading</h1>}
+            {!loading &&
+               
             <BrowserRouter>
                 <Navbar />
-                <nav>
+<<<<<<< HEAD
+=======
+                {/* <nav>
                     <ul>
                         <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                         <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
                         <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
                         <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     </ul>
-                </nav>
+                </nav> */}
+>>>>>>> cf735d6... no changes
                 <Switch>
-                    <Route path="/users">
-                        <>
-                            <h1>currentUserId = {currentUserId}</h1>
-                            <UsersList />
-                        </>
-                    </Route>
-
-                    <Route path="/login">
-                        <LoginForm />
-                    </Route>
+                    <Route path="/users"/>
+                    <Route path="/login" component={LogIn} />
+                    <Route path="/signup" component={SignUp} />
                     <Route path="/post">
+                        <h1>Posts</h1>
                         <Post currentUser={currentUser} />
                     </Route>
                     <Route path="/profile">
@@ -198,6 +215,7 @@ function App() {
                 </Switch>
                 <Footer />
             </BrowserRouter>
+
         </AuthContext.Provider>
     );
 }
