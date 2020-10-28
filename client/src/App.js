@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-// import UserList from './components/UsersList';
+import UsersList from './components/UsersList';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Post from './components/Post';
@@ -8,10 +8,12 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Comments from './components/Comments';
-import UsersList from './components/UsersList';
+import Footer from './components/Footer';
+
 
 import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
+import PostForm from './components/PostForm';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
@@ -31,27 +33,32 @@ const currentUser = {
                 {
                     user: '2pac',
                     comment: 'I make mistakes but learn from everyone. And when it’s said and done, I bet this brother be a better one. If I upset you, don’t stress. Never forget that God isn’t finished with me yet. - Ghetto Gospel feat Elton John'
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: 'johnjohn',
                     comment: "trilla"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "pk",
                     comment: "birdhouses are trill too"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "tynaaaaaa",
                     comment: "t in Tyna stands for trill, duh"
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 },
                 {
                     user: "adawg",
                     comment: "......."
-                    , createdAt: "Oct 5th"
+                    , createdAt: "Oct 5th",
+                    profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
                 }
             ],
             hashtag: null
@@ -146,13 +153,13 @@ function App() {
         setCurrentUserId
     };
 
-    const logoutUser = async ()=> {
+    const logoutUser = async () => {
         const response = await fetchWithCSRF('/logout', {
             method: 'POST',
             credentials: 'include'
         });
-        if(response.ok) setCurrentUserId(null);
-}
+        if (response.ok) setCurrentUserId(null);
+    }
 
     return (
 
@@ -170,13 +177,13 @@ function App() {
                 <Switch>
                     <Route path="/users">
                         <>
-                        <h1>currentUserId = {currentUserId}</h1>
-                        <UsersList />
+                            <h1>currentUserId = {currentUserId}</h1>
+                            <UsersList />
                         </>
                     </Route>
-                    <Route path="/login" component={LoginForm} />
-                    <Route path="/">
-                        <h1>My Home Page</h1>
+
+                    <Route path="/login">
+                        <LoginForm />
                     </Route>
                     <Route path="/post">
                         <Post currentUser={currentUser} />
@@ -184,10 +191,12 @@ function App() {
                     <Route path="/profile">
                         <Profile currentUser={currentUser} />
                     </Route>
-                    <Route path="/">
+                    <Route exact path="/">
                         <Home currentUser={currentUser} />
                     </Route>
+                    <Route path="/create-post" component={PostForm} />
                 </Switch>
+                <Footer />
             </BrowserRouter>
         </AuthContext.Provider>
     );
