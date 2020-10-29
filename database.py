@@ -28,7 +28,7 @@ with app.app_context():
     ))
     user_t = [created_at]
     for _ in range(1, n_user):
-        # DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
+        DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
         created_at = fake.date_time_between(start_date=datetime(1980, 10, 31))
         user_t.append(created_at)
         db.session.add(User(
