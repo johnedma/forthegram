@@ -7,14 +7,14 @@ import Post from './components/Post';
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
+import LogOut from './components/LogOut';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
 import AuthRoute from "./components/AuthRoute"
 
 
-
-import LoginForm from './components/LoginForm';
+// import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
 import PostForm from './components/PostForm';
 
@@ -170,14 +170,14 @@ function App() {
 
 
 
-    const logoutUser = async () => {
-        const response = await fetchWithCSRF('/logout', {
-            method: 'POST',
-            credentials: 'include'
-        });
-        if (response.ok) setCurrentUserId(null);
-    }
-    // <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
+    // const logoutUser = async () => {
+    //     const response = await fetchWithCSRF('/logout', {
+    //         method: 'POST',
+    //         credentials: 'include'
+    //     });
+    //     if (response.ok) setCurrentUserId(null);
+    // }
+
     return (
         <AuthContext.Provider value={authContextValue}>
             { loading && <h1>Loading</h1>}
@@ -193,6 +193,7 @@ function App() {
                         </Route>
                         <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
                         <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
+                        <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
                         <ProtectedRoute path="/create-post" component={PostForm} />
                     </Switch>
                     <Footer />
