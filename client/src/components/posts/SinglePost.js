@@ -10,7 +10,7 @@ function SinglePost(props) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api${props.location.pathname}`)
+                const response = await fetch(`/api${props.location.pathname}`)
 
                 if (response.ok) {
                     const data = await response.json()
