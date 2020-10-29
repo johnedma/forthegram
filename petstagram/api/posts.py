@@ -1,7 +1,7 @@
 from flask import Blueprint, send_file, redirect, request
 from petstagram.aws import list_files, download_file, upload_file
 from datetime import datetime
-from ..models import db, User, Post
+from ..models import db, User, Post, Comment
 import os
 import time
 
@@ -23,8 +23,10 @@ def download(id):
     if request.method == "GET":
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid)[0].to_dict()
+        get_comments = Comment.query.filter(Comment.post_id == pid).all()
+        get_post["comments"] = [comment.to_dict() for comment in get_comments]
 
-        return get_post
+        return {"post": get_post}
     if request.method == 'DELETE':
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid).delete()
