@@ -160,7 +160,7 @@ form input{
 .create-post-form{
     display: flex;
     justify-content: center;
-    
+
 }
 
 .create-post-headline{
@@ -176,4 +176,13 @@ form input{
 #caption-field{
     line-height: 1.5;
     border-radius: 5px;
+}
+
+.add-name_input:focus{
+    background-color: #fafafa;
+    outline: none;
+}
+.add-name_input::placeholder{
+    color: #808080;
+    font-weight: bold;
 }
