@@ -156,7 +156,7 @@ form input{
     border: black 1px solid;
     flex-direction: column;
     border-radius: 15px;
-    background-color: #55b9f3;
+    background-color: white;
 }
 
 .create-post-form{
@@ -168,6 +168,8 @@ form input{
 .create-post-headline{
     font-weight: bold;
     font-size: 25px;
+     text-shadow: 4px 4px 4px #aaa;
+     font-family: 'HennyPenny', Courier, monospace;
 }
 
 #create-post-button{
