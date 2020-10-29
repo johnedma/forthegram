@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
-function Photo() {
+const Photo = ({pic}) => {
+    //get url back from post data
+    // const [ photo, setPhoto ] = useState(pic)
+
+
     return (
         <div>
-            <h1>Photo</h1>
+            <img alt='Not Found' src={pic}/>
         </div>
     )
 }
