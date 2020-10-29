@@ -5,12 +5,12 @@ import RightSide from './RightSide';
 
 
 function SinglePost(props) {
-    const {postData, setPostData} = useContext(PostContext)
+    const { postData, setPostData } = useContext(PostContext)
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api${props.location.pathname}`)
+                const response = await fetch(`/api${props.location.pathname}`)
 
                 if (response.ok) {
                     const data = await response.json()
@@ -24,7 +24,7 @@ function SinglePost(props) {
     if (!postData) return null
     return (
         <div className='post-wrapper'>
-            <Photo pic={postData.post.photo_url}/>
+            <Photo pic={postData.post.photo_url} />
             <RightSide />
         </div>
     )
