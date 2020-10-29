@@ -56,25 +56,37 @@ def login():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
-    username = request.json.get('username', None)
+    username_or_email = request.json.get('usernameoremail', None)
     password = request.json.get('password', None)
+    print(username_or_email, password)
 
-    if not username or not password:
+    if not username_or_email or not password:
         return {"errors": ["Missing required parameters"]}, 400
 
-    authenticated, user = User.authenticate(username, password)
+    authenticated1, user1 = User.authenticate1(username_or_email, password)
+    authenticated2, user2 = User.authenticate2(username_or_email, password)
+
+    if authenticated1:
+        user = user1
+        authenticated = authenticated1
+    elif authenticated2:
+        user = user2
+        authenticated = authenticated2
+    else:
+        authenticated = False
+        user = None
+
     print(authenticated)
     print(user)
     if authenticated:
         login_user(user)
         return {"current_user_id": current_user.id}
 
-    return {"errors": ["Invalid username or password"]}, 401
+    return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    print("top of signup backend route")
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
@@ -83,7 +95,6 @@ def signup():
     firstname = request.json.get('firstname', None)
     lastname = request.json.get("lastname", None)
     email = request.json.get('email', None)
-    print(username, password, firstname, lastname, email)
 
     if not username or not password:
         return {"errors": ["Missing required parameters"]}, 400
@@ -93,6 +104,7 @@ def signup():
                     first_name=firstname,
                     last_name=lastname,
                     DOB=datetime.now(),
+                    email=email,
                     password=password,
                     created_at=datetime.now(),
                     updated_at=datetime.now()
@@ -108,7 +120,7 @@ def signup():
         login_user(user)
         return {"current_user_id": current_user.id}
 
-    return {"errors": ["Invalid username or password"]}, 401
+    return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
 @app.route('/logout', methods=['POST'])
