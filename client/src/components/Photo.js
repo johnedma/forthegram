@@ -5,6 +5,7 @@ import AuthContext from "../auth"
 
 const Photo = () => {
     let history = useHistory();
+    const [preview, setPreview] = useState('')
     const { currentUserId } = useContext(AuthContext)
     const [file, setFileName] = useState("");
     const [caption, setCaption] = useState("");
@@ -41,15 +42,22 @@ const Photo = () => {
         submitForm();
     }
 
+    const handleImage = e => {
+        setFileName(e.target.files[0])
+        setPreview(URL.createObjectURL(e.target.files[0]))
+
+    }
+
     return (
         <div className="post-form-container">
             {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
             <h2 className="create-post-headline">New Post</h2>
             <form id="post-create-form" onSubmit={handleSubmit} encType="multipart/form-data">
+                {file ? <img id="img-post" src={preview} /> : <input type="file" name="file" onChange={handleImage} />}
+                {file ? <textarea id="caption-field" onChange={(e) => setCaption(e.target.value)}
+                    name="caption" wrap="hard" rows="5" cols="33" placeholder="Write a Caption..." /> : ''}
+                {caption ? <button id="create-post-button" type='submit'>Share</button> : ''}
 
-                <input type="file" name="file" onChange={(e) => setFileName(e.target.files[0])} />
-                <textarea id="caption-field" onChange={(e) => setCaption(e.target.value)} name="caption" wrap="hard" rows="5" cols="33" placeholder="Write a Caption..." />
-                <button id="create-post-button" type='submit'>Share</button>
             </form>
         </div>
     )
