@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import LogOut from './components/LogOut';
+import EditUser from './components/EditUser';
 import Comments from './components/Comments';
 import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
@@ -194,6 +195,7 @@ function App() {
                         <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
                         <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
                         <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
+                        <ProtectedRoute path="/edituser" component={EditUser} currentUserId={currentUserId} />
                         <ProtectedRoute path="/create-post" component={PostForm} />
                     </Switch>
                     <Footer />

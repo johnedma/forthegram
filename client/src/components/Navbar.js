@@ -14,11 +14,18 @@ const Navbar = ({currentUserId}) =>
         }}>
             <>
                 {currentUserId &&
-                    <div className="navbar-item" >
-                        <a href="/logout">
-                            <span >Log Out</span>
-                        </a>
-                    </div>
+                    <>
+                        <div className="navbar-item" >
+                            <a href="/logout">
+                                <span >Log Out</span>
+                            </a>
+                        </div>
+                        <div className="navbar-item" >
+                            <a href="/edituser">
+                                <span >Edit Account Details</span>
+                            </a>
+                        </div>
+                    </>
                 }
                 {!currentUserId &&
                     <>

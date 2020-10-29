@@ -37,23 +37,32 @@ def index():
 
 @user_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
+    user = User.query.filter(User.id == int(id))[0]
+    print("user.to_dict() = ", user.to_dict())
     if request.method == "GET":
-        uid = (int(id))
-        get_user = User.query.filter(User.id == uid)[0].to_dict()
-
-        return get_user
+        return user.to_dict()
     if request.method == 'DELETE':
-        uid = (int(id))
-        get_user = User.query.filter(User.id == uid).delete()
+        user.delete()
         db.session.commit()
         return redirect("/api/users")
-
     if request.method == 'PUT':
-        uid = (int(id))
-        get_user = User.query.filter(User.id == uid)[0]
-        get_user.user_name = request.form['userName']
-        get_user.password = request.form['password']
-        get_user.updated_at = datetime.now()
-        db.session.commit()
+        user = user.to_dict()
+        print(user)
+        if not request.is_json:
+            return jsonify({"msg": "Missing JSON in request"}), 400
+        user.username = request.json.get('username', None) or user.username
+        #user.password = request.json.get('password', None) or user.password
+        # user.password2 = request.json.get('password2', None) or user.password2
+        user.firstname = request.json.get('firstname', None) or user.firstname
+        user.lastname = request.json.get("lastname", None) or user.lastname
+        user.email = request.json.get('email', None) or user.email
+        user.fullname = request.json.get('fullname', None) or user.fullname
+        user.website = request.json.get('website', None) or user.website
+        user.bio = request.json.get('bio', None) or user.bio
+        user.phone = request.json.get('phone', None) or user.phone
+        user.gender = request.json.get('gender', None) or user.gender
+        user.updated_at = datetime.now(),
 
-        return redirect("/api/users")
+        db.session.commit()
+        # return redirect('/api/users')
+        return {"current_user_id": current_user.id}
