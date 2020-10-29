@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import AuthContext from '../auth'
 
 function LogIn(props) {
-    const [username, setUsername] = useState("");
+    const [usernameoremail, setUsernameoremail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
@@ -21,7 +21,7 @@ function LogIn(props) {
                 },
                 credentials: 'include',
                 body: JSON.stringify({
-                    username,
+                    usernameoremail,
                     password
                 })
             });
@@ -53,10 +53,10 @@ function LogIn(props) {
                             {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
                             <input
                                 type="text"
-                                placeholder="Username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                name="username" />
+                                placeholder="Username or email"
+                                value={usernameoremail}
+                                onChange={(e) => setUsernameoremail(e.target.value)}
+                                name="usernameoremail" />
                             <input
                                 type="password"
                                 placeholder="Password"
@@ -64,7 +64,7 @@ function LogIn(props) {
                                 onChange={(e) => setPassword(e.target.value)}
                                 name="password"
                             />
-                            <button type="submit" class="button has-background-link has-text-white" style={{
+                            <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
                                 paddingRight: `.5em`,
