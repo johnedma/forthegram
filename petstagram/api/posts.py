@@ -50,7 +50,7 @@ def upload(userId, caption):
         f.filename = change_name(f.filename)
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         upload_file(f"uploads/{f.filename}", BUCKET)
-        photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{f.filename}'
+        photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/uploads/{f.filename}'
         created_at = datetime.now()
         updated_at = datetime.now()
 
