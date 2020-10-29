@@ -113,7 +113,7 @@ def signup():
     db.session.commit()
     # return redirect('/api/users')
 
-    authenticated, user = User.authenticate(username, password)
+    authenticated, user = User.authenticate1(username, password)
     print(authenticated)
     print(user)
     if authenticated:
