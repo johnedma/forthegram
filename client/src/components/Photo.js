@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom'
 import AuthContext from "../auth"
-
+import ImageEditor from "tui-image-editor"
+// import blackTheme from '.js/theme/black-theme'
 
 const Photo = () => {
     let history = useHistory();
@@ -42,18 +43,30 @@ const Photo = () => {
         submitForm();
     }
 
+
+
     const handleImage = e => {
         setFileName(e.target.files[0])
         setPreview(URL.createObjectURL(e.target.files[0]))
 
     }
 
+    let instance = new ImageEditor(document.querySelector('#tui-image-editor'), {
+        cssMaxWidth: 700,
+        cssMaxHeight: 500,
+        selectionStyle: {
+            cornerSize: 20,
+            rotatingPointOffset: 70
+        }
+    });
+
+
     return (
         <div className="post-form-container">
             {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
             <h2 className="create-post-headline">New Post</h2>
             <form id="post-create-form" onSubmit={handleSubmit} encType="multipart/form-data">
-                {file ? <img id="img-post" src={preview} /> : <input type="file" name="file" onChange={handleImage} />}
+                {file ? <div id="tui-image-editor"></div> : <input type="file" name="file" onChange={handleImage} />}
                 {file ? <textarea id="caption-field" onChange={(e) => setCaption(e.target.value)}
                     name="caption" wrap="hard" rows="5" cols="33" placeholder="Write a Caption..." /> : ''}
                 {caption ? <button id="create-post-button" type='submit'>Share</button> : ''}
