@@ -1,9 +1,16 @@
 import React from 'react'
+import AddComment from './AddComment'
+import CommentSection from './CommentSection'
+import Header from './Header'
+import Icons from './Icons'
 
-function rightSide() {
+function rightSide(props) {
     return (
         <div>
-            <h1>Right Side</h1>
+            <Header />
+            <Icons />
+            <CommentSection />
+            <AddComment />
         </div>
     )
 }
