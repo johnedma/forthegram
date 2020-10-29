@@ -3,6 +3,7 @@ from petstagram.aws import list_files, download_file, upload_file
 from datetime import datetime
 from ..models import db, User, Post
 import os
+import time
 
 
 posts = Blueprint('posts', __name__)
@@ -40,22 +41,19 @@ def download(id):
         return redirect("/api/posts")
 
 
-@posts.route('/', methods=['POST'])
-def upload():
+@posts.route('/<userId>/<caption>', methods=['POST'])
+def upload(userId, caption):
     if request.method == "POST":
-
         f = request.files['file']
+        f.filename = change_name(f.filename)
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         upload_file(f"uploads/{f.filename}", BUCKET)
-
-        user_id = 'currentUserId'
         photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{f.filename}'
-        caption = request.form['caption']
         created_at = datetime.now()
         updated_at = datetime.now()
 
         new_post = Post(
-                        user_id=currentUserId,
+                        user_id=userId,
                         photo_url=photo_url,
                         caption=caption,
                         created_at=created_at,
@@ -63,8 +61,13 @@ def upload():
         )
         db.session.add(new_post)
         db.session.commit()
-        return {'user_id': user_id,
+
+        data = {'user_id': userId,
                 'photo_url': photo_url,
                 'caption': caption,
                 'created_at': created_at,
                 'updated_at': updated_at}
+        return {'data': data}
+
+def change_name(file_name):
+    return f"{time.ctime().replace(' ', '').replace(':', '')}.png"
