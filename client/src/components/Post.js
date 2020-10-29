@@ -51,7 +51,7 @@ const Post = ({ currentUser, post }) => {
                         </div>
                         <div className="level-item">
                             <button className="fontawe">
-                                <i className="fas fa-feather-alt"></i>
+                                <i class="fas fa-feather-alt"></i>
                                 {/* <i className="far fa-paper-plane"></i> */}
                             </button>
                         </div>

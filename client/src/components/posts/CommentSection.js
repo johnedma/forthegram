@@ -1,18 +1,11 @@
-import React, { useState, useContext } from 'react'
-import PostContext from '../../PostContext'
+import React from 'react'
 
-
-const CommentSection = () => {
-    const post = useContext(PostContext)
-    const comments = post.postData.post.comments
-
+function CommentSection() {
     return (
         <div>
-            {comments.map((comment, idx) =>
-                <div key={idx}>UserName {comment.content}</div>
-            )}
+            <h1>Comment Section</h1>
         </div>
-    );
+    )
 }
 
 export default CommentSection

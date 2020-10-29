@@ -3,7 +3,7 @@ import React from 'react'
 function AddComment() {
     return (
         <div>
-            <textarea />
+            <h1>Add Comment</h1>
         </div>
     )
 }
