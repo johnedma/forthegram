@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Comments = ({ postComments }) => {
+const Comments = () => {
+    const [comments, setComments] = useEffect(null)
+    const placeholder_comments = [
+        "Omg so cute!",
+        "Can't believe you're in town ... let's catch up",
+        "Killing it!"
+    ]
     return (
         <div className="comments">
-            {postComments.map(comment =>
+            {placeholder_comments.map(comment =>
 
                 <div className="comment" key="" style={{
                     paddingBottom: `16px`,
