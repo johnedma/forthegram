@@ -4,8 +4,6 @@ import Post from './Post';
 import PostForm from './PostForm'
 
 const Home = ({ currentUserId }) => {
-    console.log(currentUserId)
-
 
     return (
         <>
