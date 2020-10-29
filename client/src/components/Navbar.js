@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Navbar = ({currentUserId}) =>
+const Navbar = ({currentUserId, currentUserName}) =>
     <nav className="navbar is-fixed-top" style={{ border: `1px solid #efefef` }}>
         <div className="navbar-brand" style={{ alignItems: `center` }}>
             <NavLink to="/" activeClassName="active"><h1 style={{ alignItems: `center`, fontSize: `24px` }}>Petstagram</h1></NavLink>
@@ -16,6 +16,13 @@ const Navbar = ({currentUserId}) =>
                 {currentUserId &&
                     <div className="navbar-item" >
                         <a href="/logout">
+                            <span style={{
+                                height: `2rem`,
+                                paddingLeft: `.5em`,
+                                paddingRight: `.5em`
+                            }}>
+                                {currentUserName}
+                            </span>
                             <span >Log Out</span>
                         </a>
                     </div>

@@ -58,7 +58,6 @@ def login():
 
     username_or_email = request.json.get('usernameoremail', None)
     password = request.json.get('password', None)
-    print(username_or_email, password)
 
     if not username_or_email or not password:
         return {"errors": ["Missing required parameters"]}, 400
@@ -76,11 +75,9 @@ def login():
         authenticated = False
         user = None
 
-    print(authenticated)
-    print(user)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id}
+        return {"current_user_id": current_user.id, "current_user_name": current_user.full_name}
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -92,8 +89,9 @@ def signup():
 
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    firstname = request.json.get('firstname', None)
-    lastname = request.json.get("lastname", None)
+    firstname = request.json.get('fullname', None)
+    lastname = request.json.get("fullname", None)
+    fullname = request.json.get("fullname", None)
     email = request.json.get('email', None)
 
     if not username or not password:
@@ -101,8 +99,9 @@ def signup():
 
     new_user = User(
                     user_name=username,
-                    first_name=firstname,
-                    last_name=lastname,
+                    first_name=fullname,
+                    last_name=fullname,
+                    full_name=fullname,
                     DOB=datetime.now(),
                     email=email,
                     password=password,
@@ -114,11 +113,9 @@ def signup():
     # return redirect('/api/users')
 
     authenticated, user = User.authenticate1(username, password)
-    print(authenticated)
-    print(user)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id}
+        return {"current_user_id": current_user.id, "current_user_name": current_user.full_name}
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -134,4 +131,5 @@ def logout():
 def restore():
     id = current_user.id if current_user.is_authenticated else None
     if current_user:
-        return {"current_user_id": id}
+        print(current_user.is_authenticated)
+        return {"current_user_id": id, "current_user_name": current_user.id}

@@ -19,8 +19,9 @@ with app.app_context():
     created_at = datetime(2000, 1, 15)
     db.session.add(User(
         user_name="demo_user",
-        first_name="Demo",
-        last_name="User",
+        first_name="Demo User",
+        last_name="Demo User",
+        full_name="Demo User",
         DOB=datetime(1980, 10, 31),
         password="password",
         email="demo@user.com",
@@ -34,8 +35,9 @@ with app.app_context():
         user_t.append(created_at)
         db.session.add(User(
             user_name=fake.simple_profile()["username"],
-            first_name=fake.first_name(),
-            last_name=fake.last_name(),
+            first_name=fake.name(),
+            last_name=fake.name(),
+            full_name=fake.name(),
             email=fake.simple_profile()["mail"],
             DOB=DOB,
             password="password",

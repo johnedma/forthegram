@@ -5,6 +5,7 @@ import AuthContext from '../auth'
 function LogIn(props) {
     const [usernameoremail, setUsernameoremail] = useState("");
     const [password, setPassword] = useState("");
+    const [currentUser, setCurrentUser] = useState("");
     const [errors, setErrors] = useState([]);
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     let history = useHistory();
@@ -30,7 +31,9 @@ function LogIn(props) {
             if (!response.ok) {
                 setErrors(responseData.errors);
             } else {
-                setCurrentUserId(responseData.current_user_id)
+                setCurrentUserId(responseData.current_user_id);
+                setCurrentUser(responseData.current_user);
+                // console.log("current_user = ", responseData.current_user)
                 history.push('/users')
             }
         }

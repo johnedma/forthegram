@@ -11,8 +11,7 @@ const SignUp = props => {
     // const dispatch = useDispatch();
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
-    const [firstname, setFirstname] = useState('First name');
-    const [lastname, setLastname] = useState('Last name');
+    const [fullname, setFullname] = useState('Full name');
     let history = useHistory();
 
     const submitForm = e => {
@@ -21,8 +20,6 @@ const SignUp = props => {
 
         // Make the following an IIFE?
         async function signupUser() {
-            console.log("top of inner signup event handler")
-            console.log(email, username, firstname, lastname, password)
             const response = await fetchWithCSRF(`/signup`, {
                 method: 'POST',
                 headers: {
@@ -32,8 +29,7 @@ const SignUp = props => {
                 body: JSON.stringify({
                     email,
                     username,
-                    firstname,
-                    lastname,
+                    fullname,
                     password
                 })
             });
@@ -79,15 +75,9 @@ const SignUp = props => {
                             <input
                                 className="input"
                                 type="text"
-                                placeholder="First Name"
-                                value={firstname}
-                                onChange={e => setFirstname(e.target.value)} name="firstname" />
-                            <input
-                                className="input"
-                                type="text"
-                                placeholder="Last Name"
-                                value={lastname}
-                                onChange={e => setLastname(e.target.value)} name="lastname" />
+                                placeholder="Full Name"
+                                value={fullname}
+                                onChange={e => setFullname(e.target.value)} name="fullname" />
                             <input
                                 className="input"
                                 type="text"
