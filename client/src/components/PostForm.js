@@ -1,10 +1,10 @@
 import React from 'react';
 import Photo from './Photo';
 
-const PostForm = ({ currentUserId }) => {
+const PostForm = () => {
     return (
         <div>
-            <Photo currentUserId={currentUserId} />
+            <Photo />
         </div>
     );
 };

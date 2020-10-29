@@ -1,15 +1,8 @@
 {
     "_meta": {
-<<<<<<< HEAD
-        "hashes": [
-            "sha256:4ce5b9bb3a701b5a294ce356ef40802a724b91a222c8ebb7787da26841e4cb2d",
-            "sha256:7f985069814d78452e207a8c77f4c30a1e17d088843df83243ff77d4ca92547f"
-        ],
-=======
         "hash": {
-            "sha256": "0c35be923cdc86bcebf9cb70c395ff16ad5a37794473fcfe9ead71cf211fc1c7"
+            "sha256": "7f985069814d78452e207a8c77f4c30a1e17d088843df83243ff77d4ca92547f"
         },
->>>>>>> main
         "pipfile-spec": 6,
         "requires": {
             "python_version": "3.8"

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import AuthContext from '../auth'
 
 function LogIn(props) {
-    const [usernameoremail, setUsernameoremail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
@@ -21,7 +21,7 @@ function LogIn(props) {
                 },
                 credentials: 'include',
                 body: JSON.stringify({
-                    usernameoremail,
+                    username,
                     password
                 })
             });
@@ -31,7 +31,7 @@ function LogIn(props) {
                 setErrors(responseData.errors);
             } else {
                 setCurrentUserId(responseData.current_user_id)
-                history.push('/')
+                history.push('/users')
             }
         }
         loginUser();
@@ -53,10 +53,10 @@ function LogIn(props) {
                             {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
                             <input
                                 type="text"
-                                placeholder="Username or email"
-                                value={usernameoremail}
-                                onChange={(e) => setUsernameoremail(e.target.value)}
-                                name="usernameoremail" />
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                name="username" />
                             <input
                                 type="password"
                                 placeholder="Password"
@@ -64,7 +64,7 @@ function LogIn(props) {
                                 onChange={(e) => setPassword(e.target.value)}
                                 name="password"
                             />
-                            <button type="submit" className="button has-background-link has-text-white" style={{
+                            <button type="submit" class="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
                                 paddingRight: `.5em`,

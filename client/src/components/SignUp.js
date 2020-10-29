@@ -16,12 +16,11 @@ const SignUp = props => {
     let history = useHistory();
 
     const submitForm = e => {
-        console.log("top of outer signup event handler")
         e.preventDefault();
 
         // Make the following an IIFE?
         async function signupUser() {
-            console.log("top of inner signup event handler")
+            console.log("top of event handler")
             console.log(email, username, firstname, lastname, password)
             const response = await fetchWithCSRF(`/signup`, {
                 method: 'POST',

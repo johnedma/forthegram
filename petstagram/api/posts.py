@@ -3,7 +3,6 @@ from petstagram.aws import list_files, download_file, upload_file
 from datetime import datetime
 from ..models import db, User, Post
 import os
-import time
 
 
 posts = Blueprint('posts', __name__)
@@ -16,7 +15,6 @@ BUCKET = "petstagram"
 def index():
     response = Post.query.all()
     return {"posts": [post.to_dict() for post in response]}
-
 
 @posts.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def download(id):
@@ -41,19 +39,26 @@ def download(id):
         return redirect("/api/posts")
 
 
-@posts.route('/<userId>/<caption>', methods=['POST'])
-def upload(userId, caption):
+
+
+
+
+@posts.route('/', methods=['POST'])
+def upload():
     if request.method == "POST":
+
         f = request.files['file']
-        f.filename = change_name(f.filename)
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         upload_file(f"uploads/{f.filename}", BUCKET)
+
+        user_id = 'current_user.id'
         photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{f.filename}'
+        caption = request.form['caption']
         created_at = datetime.now()
         updated_at = datetime.now()
 
         new_post = Post(
-                        user_id=userId,
+                        user_id=3,
                         photo_url=photo_url,
                         caption=caption,
                         created_at=created_at,
@@ -61,13 +66,4 @@ def upload(userId, caption):
         )
         db.session.add(new_post)
         db.session.commit()
-
-        data = {'user_id': userId,
-                'photo_url': photo_url,
-                'caption': caption,
-                'created_at': created_at,
-                'updated_at': updated_at}
-        return {'data': data}
-
-def change_name(file_name):
-    return f"{time.ctime().replace(' ', '').replace(':', '')}.png"
+        return redirect("/api/posts")

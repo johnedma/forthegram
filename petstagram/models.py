@@ -13,7 +13,6 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
     DOB = db.Column(db.Date, nullable=False)
-    email = db.Column(db.String(63))
     hashed_password = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
@@ -30,20 +29,9 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     @classmethod
-    def authenticate1(cls, user_name, password):
+    def authenticate(cls, user_name, password):
         user = cls.query.filter(User.user_name == user_name).scalar()
-        if user:
-            return check_password_hash(user.hashed_password, password), user
-        else:
-            return False, None
-
-    @classmethod
-    def authenticate2(cls, email, password):
-        user = cls.query.filter(User.email == email).scalar()
-        if user:
-            return check_password_hash(user.hashed_password, password), user
-        else:
-            return False, None
+        return check_password_hash(user.hashed_password, password), user
 
     posts = db.relationship(
         "Post", back_populates="user", cascade="all, delete-orphan"
@@ -67,7 +55,6 @@ class User(db.Model, UserMixin):
             "user_name": self.user_name,
             "first_name": self.first_name,
             "last_name": self.last_name,
-            "email": self.email,
             "DOB": self.DOB,
             "created_at": self.created_at,
             "updated_at": self.updated_at
@@ -102,7 +89,7 @@ class Post(db.Model):
             "photo_url": self.photo_url,
             "caption": self.caption,
             "created_at": self.created_at,
-            "updated_at": self.updated_at,
+            "updated_at": self.updated_at
         }
 
 
