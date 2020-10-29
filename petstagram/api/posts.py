@@ -16,6 +16,7 @@ def index():
     response = Post.query.all()
     return {"posts": [post.to_dict() for post in response]}
 
+
 @posts.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def download(id):
     if request.method == "GET":
@@ -39,10 +40,6 @@ def download(id):
         return redirect("/api/posts")
 
 
-
-
-
-
 @posts.route('/', methods=['POST'])
 def upload():
     if request.method == "POST":
@@ -51,14 +48,14 @@ def upload():
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         upload_file(f"uploads/{f.filename}", BUCKET)
 
-        user_id = 'current_user.id'
+        user_id = 'currentUserId'
         photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{f.filename}'
         caption = request.form['caption']
         created_at = datetime.now()
         updated_at = datetime.now()
 
         new_post = Post(
-                        user_id=3,
+                        user_id=currentUserId,
                         photo_url=photo_url,
                         caption=caption,
                         created_at=created_at,
@@ -66,4 +63,8 @@ def upload():
         )
         db.session.add(new_post)
         db.session.commit()
-        return redirect("/api/posts")
+        return {'user_id': user_id,
+                'photo_url': photo_url,
+                'caption': caption,
+                'created_at': created_at,
+                'updated_at': updated_at}

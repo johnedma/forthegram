@@ -193,7 +193,7 @@ function App() {
                         </Route>
                         <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
                         <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
-                        <ProtectedRoute path="/create-post" component={PostForm} />
+                        <ProtectedRoute path="/create-post" component={PostForm} currentUserId={currentUserId} />
                     </Switch>
                     <Footer />
                 </BrowserRouter>
