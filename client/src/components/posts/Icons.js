@@ -42,6 +42,17 @@ function Icons() {
                     </div>
                 </div>
             </div>
+            {like_count === 0 ? <div>
+                <button style={{
+                        backgroundColor: `#fff`,
+                        border: `none`,
+                        fontWeight: `800`,
+                        fontSize: `1em`,
+                        padding: `16px 0`
+                    }}>
+                    Be the first to like this!
+                </button>
+            </div>:
             <div>
                     <button style={{
                         backgroundColor: `#fff`,
@@ -54,6 +65,7 @@ function Icons() {
                         {latest_like} and {like_count - 1} others liked this
                     </button>
                 </div>
+            }
         </>
     )
 }
