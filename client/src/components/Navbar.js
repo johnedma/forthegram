@@ -21,17 +21,26 @@ const Navbar = ({currentUserId}) =>
                         paddingLeft: `.5em`,
                         paddingRight: `.5em`
 
-                    }}>
-                        <span>Log In</span>
-                    </a>
-                </div>
-                <div className="navbar-item" >
-                    <a href="/signup">
-                        <span >Sign Up</span>
-                    </a>
-                </div>
-                </>
-            }
+            <div className="navbar-item">
+                <a className="button has-background-link has-text-white" href="/login" style={{
+                    height: `2rem`,
+                    paddingLeft: `.5em`,
+                    paddingRight: `.5em`
+
+                }}>
+                    <span>Log In</span>
+                </a>
+            </div>
+            <div className="navbar-item" >
+                <a href="/logout">
+                    <span >Log Out</span>
+                </a>
+            </div>
+            <div className="navbar-item" >
+                <a href="/signup">
+                    <span >Sign Up</span>
+                </a>
+            </div>
         </div>
         {/* </div> */}
     </nav>
