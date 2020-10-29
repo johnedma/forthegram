@@ -64,7 +64,7 @@ function LogIn(props) {
                                 onChange={(e) => setPassword(e.target.value)}
                                 name="password"
                             />
-                            <button type="submit" class="button has-background-link has-text-white" style={{
+                            <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
                                 paddingRight: `.5em`,

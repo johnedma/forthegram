@@ -13,6 +13,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
     DOB = db.Column(db.Date, nullable=False)
+    email = db.Column(db.String(63))
     hashed_password = db.Column(db.String(100), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
@@ -55,6 +56,7 @@ class User(db.Model, UserMixin):
             "user_name": self.user_name,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "email": self.email,
             "DOB": self.DOB,
             "created_at": self.created_at,
             "updated_at": self.updated_at
@@ -89,7 +91,7 @@ class Post(db.Model):
             "photo_url": self.photo_url,
             "caption": self.caption,
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
         }
 
 

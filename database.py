@@ -15,7 +15,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
     # number of users, including demo_user
-    n_user = 2
+    n_user = 5
     created_at = datetime(2000, 1, 15)
     db.session.add(User(
         user_name="demo_user",
@@ -23,18 +23,20 @@ with app.app_context():
         last_name="User",
         DOB=datetime(1980, 10, 31),
         password="password",
+        email="demo@user.com",
         created_at=created_at,
         updated_at=datetime(2005, 2, 25),
     ))
     user_t = [created_at]
     for _ in range(1, n_user):
-        # DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
+        DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
         created_at = fake.date_time_between(start_date=datetime(1980, 10, 31))
         user_t.append(created_at)
         db.session.add(User(
             user_name=fake.simple_profile()["username"],
             first_name=fake.first_name(),
             last_name=fake.last_name(),
+            email=fake.simple_profile()["mail"],
             DOB=DOB,
             password="password",
             created_at=created_at,
@@ -45,7 +47,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of posts per user
-    n_post_per_user = 2
+    n_post_per_user = 5
     n_post = n_user * n_post_per_user
 
     post_t = []
@@ -67,7 +69,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of comments per post
-    n_comment_per_post = 2
+    n_comment_per_post = 5
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
@@ -90,7 +92,7 @@ with app.app_context():
 
 with app.app_context():
     # probability of a user liking a post:
-    like_prob = 0.7
+    like_prob = 0.5
     like_t = []
     for user_id in range(n_user):
         t_user = user_t[user_id]
@@ -109,7 +111,7 @@ with app.app_context():
 
 with app.app_context():
     # probability of one user following another:
-    follow_prob = 0.7
+    follow_prob = 0.5
     follow_t = []
     for follower_id in range(n_user):
         t_follower = user_t[follower_id]

@@ -74,7 +74,6 @@ def login():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    print("top of signup backend route")
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
@@ -83,7 +82,6 @@ def signup():
     firstname = request.json.get('firstname', None)
     lastname = request.json.get("lastname", None)
     email = request.json.get('email', None)
-    print(username, password, firstname, lastname, email)
 
     if not username or not password:
         return {"errors": ["Missing required parameters"]}, 400
@@ -93,6 +91,7 @@ def signup():
                     first_name=firstname,
                     last_name=lastname,
                     DOB=datetime.now(),
+                    email=email,
                     password=password,
                     created_at=datetime.now(),
                     updated_at=datetime.now()
