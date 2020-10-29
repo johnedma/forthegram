@@ -30,9 +30,20 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     @classmethod
-    def authenticate(cls, user_name, password):
+    def authenticate1(cls, user_name, password):
         user = cls.query.filter(User.user_name == user_name).scalar()
-        return check_password_hash(user.hashed_password, password), user
+        if user:
+            return check_password_hash(user.hashed_password, password), user
+        else:
+            return False, None
+
+    @classmethod
+    def authenticate2(cls, email, password):
+        user = cls.query.filter(User.email == email).scalar()
+        if user:
+            return check_password_hash(user.hashed_password, password), user
+        else:
+            return False, None
 
     posts = db.relationship(
         "Post", back_populates="user", cascade="all, delete-orphan"
