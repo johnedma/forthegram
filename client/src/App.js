@@ -183,7 +183,7 @@ function App() {
             { loading && <h1>Loading</h1>}
             {!loading &&
                 <BrowserRouter>
-                    <Navbar />
+                    <Navbar currentUserId={currentUserId} />
                     <Switch>
                         <Route path="/users" />
                         <AuthRoute path="/login" component={LogIn} />
