@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import PostContext from '../../PostContext';
+
 
 function Icons() {
+    const data = useContext(PostContext)
+    const post = data.postData.post
+    const likes = post.likes
+    const like_count = post.like_count
+    const latest_like = post.latest_like
     return (
         <>
             <div className="after-photo" style={{ padding: `0 16px` }} >
@@ -44,7 +51,7 @@ function Icons() {
                         padding: `16px 0`
                     }}>
                         {/* replace with likes from post */}
-                        10 likes
+                        {latest_like} and {like_count - 1} others liked this
                     </button>
                 </div>
         </>
