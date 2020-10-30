@@ -12,9 +12,14 @@ class User(db.Model, UserMixin):
     user_name = db.Column(db.String(40), nullable=False, unique=True)
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
+    full_name = db.Column(db.String(60))
     DOB = db.Column(db.Date, nullable=False)
     email = db.Column(db.String(63))
     hashed_password = db.Column(db.String(100), nullable=False)
+    website = db.Column(db.String(255))
+    bio = db.Column(db.Text)
+    phone = db.Column(db.Integer)
+    gender = db.Column(db.String(31))
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
@@ -67,8 +72,13 @@ class User(db.Model, UserMixin):
             "user_name": self.user_name,
             "first_name": self.first_name,
             "last_name": self.last_name,
+            "full_name": self.full_name,
             "email": self.email,
             "DOB": self.DOB,
+            "website": self.website,
+            "bio": self.bio,
+            "phone": self.phone,
+            "gender":    self.gender,
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }
