@@ -16,7 +16,6 @@ import AuthRoute from "./components/AuthRoute"
 
 // import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
-import PostForm from './components/PostForm';
 import SinglePost from './components/posts/SinglePost';
 import PostContext from './PostContext';
 
@@ -186,25 +185,25 @@ function App() {
     return (
         <AuthContext.Provider value={authContextValue}>
             <PostContext.Provider value={postContextValue}>
-            { loading && <h1>Loading</h1>}
-            {!loading &&
-                <BrowserRouter>
-                    <Navbar currentUserId={currentUserId} />
-                    <Switch>
-                        <Route path="/users" />
-                        <AuthRoute path="/login" component={LogIn} />
-                        <AuthRoute path="/signup" component={SignUp} />
-                        <Route path="/posts/:id" component={SinglePost}>
+                {loading && <h1>Loading</h1>}
+                {!loading &&
+                    <BrowserRouter>
+                        <Navbar currentUserId={currentUserId} />
+                        <Switch>
+                            <Route path="/users" />
+                            <AuthRoute path="/login" component={LogIn} />
+                            <AuthRoute path="/signup" component={SignUp} />
+                            <Route path="/posts/:id" component={SinglePost}>
 
-                        </Route>
-                        <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
-                        <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
-                        <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
-                        <ProtectedRoute path="/create-post" component={PostForm} />
-                    </Switch>
-                    <Footer />
-                </BrowserRouter>
-            }
+                            </Route>
+                            <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
+                            <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
+                            <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
+
+                        </Switch>
+                        <Footer />
+                    </BrowserRouter>
+                }
             </PostContext.Provider>
         </AuthContext.Provider>
     );

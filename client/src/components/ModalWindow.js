@@ -1,15 +1,13 @@
 
 import React, { useState, useContext } from 'react';
 import { Link, Redirect, Route } from 'react-router-dom';
-import { useHistory } from 'react-router-dom'
 import AuthContext from "../auth"
 
 
 
 
 const ModalWindow = props => {
-    const [show, setShow] = useState(false);
-    let history = useHistory();
+
     const [preview, setPreview] = useState('')
     const { currentUserId } = useContext(AuthContext)
     const [file, setFileName] = useState("");
@@ -23,7 +21,6 @@ const ModalWindow = props => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(file.name)
         async function submitForm() {
             let formData = new FormData();
             formData.append('file', file);
@@ -31,10 +28,7 @@ const ModalWindow = props => {
             console.log(captionURI)
             const response = await fetch(`/api/posts/${currentUserId}/${captionURI}`, {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                    "type": "formData"
-                },
+
 
                 body: formData
             });
@@ -44,7 +38,9 @@ const ModalWindow = props => {
             } else {
                 // console.log(responseData)
 
-                history.push('/')
+                onClose()
+                setFileName('')
+                setCaption('')
             }
         }
         submitForm();
@@ -56,7 +52,6 @@ const ModalWindow = props => {
 
     }
 
-    console.log(props.show)
     if (props.show === false) {
         return null;
     }
