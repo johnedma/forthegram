@@ -46,23 +46,24 @@ def user_info(id):
         db.session.commit()
         return redirect("/api/users")
     if request.method == 'PUT':
-        user = user.to_dict()
+        print("==========================================================================")
         print(user)
+        print(user.to_dict())
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
-        user.username = request.json.get('username', None) or user.username
-        #user.password = request.json.get('password', None) or user.password
+        user.user_name = request.json.get('username', None) or user.to_dict()["user_name"]
+        # user.password = request.json.get('password', None) or user.password
         # user.password2 = request.json.get('password2', None) or user.password2
-        user.firstname = request.json.get('firstname', None) or user.firstname
-        user.lastname = request.json.get("lastname", None) or user.lastname
-        user.email = request.json.get('email', None) or user.email
-        user.fullname = request.json.get('fullname', None) or user.fullname
-        user.website = request.json.get('website', None) or user.website
-        user.bio = request.json.get('bio', None) or user.bio
-        user.phone = request.json.get('phone', None) or user.phone
-        user.gender = request.json.get('gender', None) or user.gender
+        user.first_name = request.json.get('fullname', None) or user.to_dict()["first_name"]
+        user.last_name = request.json.get("fullname", None) or user.to_dict()["last_name"]
+        user.email = request.json.get('email', None) or user.to_dict()["email"]
+        user.full_name = request.json.get('fullname', None) or user.full_name
+        user.website = request.json.get('website', None) or user.to_dict()["website"]
+        user.bio = request.json.get('bio', None) or user.to_dict()["bio"]
+        user.phone = request.json.get('phone', None) or user.to_dict()["phone"]
+        user.gender = request.json.get('gender', None) or user.to_dict()["gender"]
         user.updated_at = datetime.now(),
 
         db.session.commit()
         # return redirect('/api/users')
-        return {"current_user_id": current_user.id}
+        return {"current_user_id": user.id}

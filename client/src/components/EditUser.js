@@ -4,7 +4,7 @@ import AuthContext from '../auth'
 
 
 const EditUser = props => {
-    const [email, setEmail] = useState('Email');
+    const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');

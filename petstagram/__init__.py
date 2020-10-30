@@ -92,8 +92,9 @@ def signup():
 
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    firstname = request.json.get('firstname', None)
-    lastname = request.json.get("lastname", None)
+    # firstname = request.json.get('firstname', None)
+    # lastname = request.json.get("lastname", None)
+    fullname = request.json.get("fullname", None)
     email = request.json.get('email', None)
 
     if not username or not password:
@@ -101,8 +102,9 @@ def signup():
 
     new_user = User(
                     user_name=username,
-                    first_name=firstname,
-                    last_name=lastname,
+                    first_name=fullname,
+                    last_name=fullname,
+                    full_name=fullname,
                     DOB=datetime.now(),
                     email=email,
                     password=password,
