@@ -45,7 +45,8 @@ const Home = () => {
             {show ? "" : <button id="post-button" onClick={showModal} >+</button>}
             <h2>Test</h2>
 
-
+            <img src="https://petstagram.s3.us-east-2.amazonaws.com/uploads/FriOct301725302020.png" />
+            <img src="https://petstagram.s3.us-east-2.amazonaws.com/uploads/FriOct301745292020.png" />
         </div>
     );
 };
