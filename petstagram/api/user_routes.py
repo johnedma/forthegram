@@ -35,7 +35,7 @@ def index():
         return redirect('/api/users')
 
 
-@user_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+@user_routes.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
     # print("user.to_dict() = ", user.to_dict())
@@ -46,6 +46,7 @@ def user_info(id):
         db.session.commit()
         return redirect("/api/users")
     if request.method == 'PUT':
+        print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -71,5 +72,5 @@ def user_info(id):
             return {"errors": ["Passwords must match."]}, 400
 
         db.session.commit()
-        return redirect('/api/users')
-        #  return {"current_user_id": user.id}
+        return user.to_dict()
+
