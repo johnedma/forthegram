@@ -18,6 +18,8 @@ import AuthRoute from "./components/AuthRoute"
 // import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
 import PostForm from './components/PostForm';
+import SinglePost from './components/posts/SinglePost';
+import PostContext from './PostContext';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
@@ -152,11 +154,14 @@ function App() {
     const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
     const [currentUserId, setCurrentUserId] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [postData, setPostData] = useState(null)
     const authContextValue = {
         fetchWithCSRF,
         currentUserId,
         setCurrentUserId
     };
+
+    const postContextValue = { postData, setPostData };
 
     useEffect(() => {
         (async () => {
@@ -181,6 +186,7 @@ function App() {
 
     return (
         <AuthContext.Provider value={authContextValue}>
+            <PostContext.Provider value={postContextValue}>
             { loading && <h1>Loading</h1>}
             {!loading &&
                 <BrowserRouter>
@@ -189,8 +195,8 @@ function App() {
                         <Route path="/users" />
                         <AuthRoute path="/login" component={LogIn} />
                         <AuthRoute path="/signup" component={SignUp} />
-                        <Route path="/post" component={Post} currentUserId={currentUserId}>
-                            <h1>Posts</h1>
+                        <Route path="/posts/:id" component={SinglePost}>
+
                         </Route>
                         <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
                         <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
@@ -201,6 +207,7 @@ function App() {
                     <Footer />
                 </BrowserRouter>
             }
+            </PostContext.Provider>
         </AuthContext.Provider>
     );
 }

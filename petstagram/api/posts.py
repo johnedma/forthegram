@@ -1,7 +1,7 @@
 from flask import Blueprint, send_file, redirect, request
 from petstagram.aws import list_files, download_file, upload_file
 from datetime import datetime
-from ..models import db, User, Post
+from ..models import db, User, Post, Comment, Like
 import os
 import time
 
@@ -24,7 +24,19 @@ def download(id):
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid)[0].to_dict()
 
-        return get_post
+        get_comments = Comment.query.filter(Comment.post_id == pid).all()
+
+        get_likes = Like.query.filter(Comment.post_id == pid).order_by(Like.created_at.desc()).all()
+
+        get_post["user"] = User.query.filter(User.id == get_post["user_id"])[0].user_name
+        get_post["comments"] = [comment.to_dict() for comment in get_comments]
+        get_post["likes"] = [like.to_dict() for like in get_likes]
+        get_post["like_count"] = len(get_likes)
+        if get_post["like_count"] > 0:
+            get_post["latest_like"] = User.query.filter(User.id == get_likes[0].user_id).first().user_name
+
+
+        return {"post": get_post}
     if request.method == 'DELETE':
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid).delete()
@@ -48,7 +60,7 @@ def upload(userId, caption):
         f.filename = change_name(f.filename)
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
         upload_file(f"uploads/{f.filename}", BUCKET)
-        photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/{f.filename}'
+        photo_url = f'https://petstagram.s3.us-east-2.amazonaws.com/uploads/{f.filename}'
         created_at = datetime.now()
         updated_at = datetime.now()
 
