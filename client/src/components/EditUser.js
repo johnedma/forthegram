@@ -6,8 +6,6 @@ import AuthContext from '../auth'
 const EditUser = props => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
     const [fullname, setFullname] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('')
@@ -35,8 +33,6 @@ const EditUser = props => {
                 body: JSON.stringify({
                     email,
                     username,
-                    firstname,
-                    lastname,
                     fullname,
                     password,
                     password2,
@@ -68,7 +64,7 @@ const EditUser = props => {
                         height: `20px`,
                         marginBlockStart: `1em`,
                         marginBlockEnd: `1em`
-                    }}>Petstagram{props.currentUserId}</h1>
+                    }}>Petstagram</h1>
                     <h2 style={{
                         color: `#8e8e8e`,
                         fontSize: `17px`,
@@ -79,6 +75,7 @@ const EditUser = props => {
                     }}>Edit profile.</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
+                            {errors.length ? errors.map(err => <li key={err} >{err}</li>) : ''}
                             <input
                                 className="input"
                                 type="text"
@@ -131,8 +128,8 @@ const EditUser = props => {
                                 className="input"
                                 type="password"
                                 placeholder="Confirm new password"
-                                value={password}
-                                onChange={e => setPassword2(e.target.value)} name="password" />
+                                value={password2}
+                                onChange={e => setPassword2(e.target.value)} name="password2" />
 
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,

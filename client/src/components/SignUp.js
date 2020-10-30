@@ -4,26 +4,21 @@ import AuthContext from '../auth'
 
 
 const SignUp = props => {
-    const [email, setEmail] = useState('Email');
-    const [username, setUsername] = useState('Username');
-    const [password, setPassword] = useState('Password');
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
-    // const [firstname, setFirstname] = useState('First name');
-    // const [lastname, setLastname] = useState('Last name');
-    const [fullname, setFullname] = useState('Full name');
+    const [fullname, setFullname] = useState('');
     let history = useHistory();
 
     const submitForm = e => {
-        console.log("top of outer signup event handler")
         e.preventDefault();
-
         // Make the following an IIFE?
         async function signupUser() {
-            console.log("top of inner signup event handler")
-            console.log(email, username, fullname, password)
             const response = await fetchWithCSRF(`/signup`, {
                 method: 'POST',
                 headers: {
@@ -34,9 +29,8 @@ const SignUp = props => {
                     email,
                     username,
                     fullname,
-                    // firstname,
-                    // lastname,
-                    password
+                    password,
+                    password2
                 })
             });
 
@@ -72,6 +66,7 @@ const SignUp = props => {
                     }}>Sign up to see photos and videos from your friends.</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
+                            {errors.length ? errors.map(err => <li key={err} >{err}</li>) : ''}
                             <input
                                 className="input"
                                 type="text"
@@ -96,6 +91,12 @@ const SignUp = props => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} name="password" />
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Confirm password"
+                                value={password2}
+                                onChange={e => setPassword2(e.target.value)} name="password2" />
 
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,

@@ -46,23 +46,26 @@ def user_info(id):
         db.session.commit()
         return redirect("/api/users")
     if request.method == 'PUT':
-        print("==========================================================================")
-        print(user)
-        print(user.to_dict())
+        userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
-        user.user_name = request.json.get('username', None) or user.to_dict()["user_name"]
-        # user.password = request.json.get('password', None) or user.password
-        # user.password2 = request.json.get('password2', None) or user.password2
-        user.first_name = request.json.get('fullname', None) or user.to_dict()["first_name"]
-        user.last_name = request.json.get("fullname", None) or user.to_dict()["last_name"]
-        user.email = request.json.get('email', None) or user.to_dict()["email"]
-        user.full_name = request.json.get('fullname', None) or user.full_name
-        user.website = request.json.get('website', None) or user.to_dict()["website"]
-        user.bio = request.json.get('bio', None) or user.to_dict()["bio"]
-        user.phone = request.json.get('phone', None) or user.to_dict()["phone"]
-        user.gender = request.json.get('gender', None) or user.to_dict()["gender"]
-        user.updated_at = datetime.now(),
+        user.user_name = request.json.get('username', None) or userd["user_name"]
+        user.password = request.json.get('password', None) or userd["password"]
+        user.password2 = request.json.get('password2', None) or userd["password2"]
+        user.first_name = request.json.get('fullname', None) or userd["first_name"]
+        user.last_name = request.json.get("fullname", None) or userd["last_name"]
+        user.email = request.json.get('email', None) or userd["email"]
+        user.full_name = request.json.get('fullname', None) or userd["full_name"]
+        user.website = request.json.get('website', None) or userd["website"]
+        user.bio = request.json.get('bio', None) or userd["bio"]
+        user.phone = request.json.get('phone', None) or userd["phone"]
+        user.gender = request.json.get('gender', None) or userd["gender"]
+        user.updated_at = datetime.now()
+        password = request.json.get('password', None)
+        if password == request.json.get('password2', None):
+            user.password = password
+        else:
+            return {"errors": ["Passwords must match."]}, 400
 
         db.session.commit()
         # return redirect('/api/users')

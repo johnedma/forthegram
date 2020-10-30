@@ -92,13 +92,15 @@ def signup():
 
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-    # firstname = request.json.get('firstname', None)
-    # lastname = request.json.get("lastname", None)
+    password2 = request.json.get('password2', None)
     fullname = request.json.get("fullname", None)
     email = request.json.get('email', None)
 
     if not username or not password:
         return {"errors": ["Missing required parameters"]}, 400
+
+    if not password == password2:
+        return {"errors": ["Passwords must match each other"]}, 400
 
     new_user = User(
                     user_name=username,
@@ -116,8 +118,6 @@ def signup():
     # return redirect('/api/users')
 
     authenticated, user = User.authenticate1(username, password)
-    print(authenticated)
-    print(user)
     if authenticated:
         login_user(user)
         return {"current_user_id": current_user.id}
