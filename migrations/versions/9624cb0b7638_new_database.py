@@ -1,8 +1,8 @@
-"""initial migration
+"""new database
 
-Revision ID: f61254fbd4ec
+Revision ID: 9624cb0b7638
 Revises: 
-Create Date: 2020-10-26 17:03:36.887119
+Create Date: 2020-10-30 12:21:12.621856
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f61254fbd4ec'
+revision = '9624cb0b7638'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,8 +23,14 @@ def upgrade():
     sa.Column('user_name', sa.String(length=40), nullable=False),
     sa.Column('first_name', sa.String(length=40), nullable=True),
     sa.Column('last_name', sa.String(length=40), nullable=True),
+    sa.Column('full_name', sa.String(length=60), nullable=True),
     sa.Column('DOB', sa.Date(), nullable=False),
+    sa.Column('email', sa.String(length=63), nullable=True),
     sa.Column('hashed_password', sa.String(length=100), nullable=False),
+    sa.Column('website', sa.String(length=255), nullable=True),
+    sa.Column('bio', sa.Text(), nullable=True),
+    sa.Column('phone', sa.Integer(), nullable=True),
+    sa.Column('gender', sa.String(length=31), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
@@ -53,13 +59,12 @@ def upgrade():
     op.create_table('posts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('photo_url', sa.String(length=20), nullable=True),
+    sa.Column('photo_url', sa.String(length=255), nullable=True),
     sa.Column('caption', sa.Text(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('photo_url')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),

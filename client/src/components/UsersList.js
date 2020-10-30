@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Photo from './Photo'
+
 import User from './User';
 
 function UsersList(props) {
@@ -17,7 +17,7 @@ function UsersList(props) {
     const userComponents = users.map((user) => <User key={user.id} user={user} />)
     return (
         <>
-            <Photo />
+
             <h1>User List:</h1>
             {userComponents}
         </>
