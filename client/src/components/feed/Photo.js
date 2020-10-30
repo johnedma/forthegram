@@ -1,9 +1,11 @@
 import React from 'react'
 
-function Photo() {
+function Photo({ pic }) {
     return (
         <div>
-            <h1>Feed Post Photo</h1>
+            <img alt='NOT FOUND' src={pic} style={{
+                width: "600px",
+            }}/>
         </div>
     )
 }
