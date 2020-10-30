@@ -19,6 +19,7 @@ import AuthContext from './auth';
 import PostForm from './components/PostForm';
 import SinglePost from './components/posts/SinglePost';
 import PostContext from './PostContext';
+import AllPosts from './components/feed/AllPosts';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
@@ -198,7 +199,7 @@ function App() {
 
                         </Route>
                         <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
-                        <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
+                        <ProtectedRoute exact path="/" component={AllPosts} currentUserId={currentUserId} />
                         <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
                         <ProtectedRoute path="/create-post" component={PostForm} />
                     </Switch>

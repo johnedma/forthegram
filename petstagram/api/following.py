@@ -20,8 +20,6 @@ def index(id):
     pid_list = [
         [pid.id for post in post_list for pid in post]
     ]
-    print('****************************')
-    print(pid_list)
 
     return {"following": following_list, "follower-posts": pid_list}
 #get user_id of following
