@@ -38,7 +38,7 @@ def index():
 @user_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
-    print("user.to_dict() = ", user.to_dict())
+    # print("user.to_dict() = ", user.to_dict())
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
@@ -50,23 +50,26 @@ def user_info(id):
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
         user.user_name = request.json.get('username', None) or userd["user_name"]
-        user.password = request.json.get('password', None) or userd["password"]
-        user.password2 = request.json.get('password2', None) or userd["password2"]
+        user.password = request.json.get('password', None)  # or userd["password"]
+        user.password2 = request.json.get('password2', None)  # or userd["password2"]
         user.first_name = request.json.get('fullname', None) or userd["first_name"]
         user.last_name = request.json.get("fullname", None) or userd["last_name"]
         user.email = request.json.get('email', None) or userd["email"]
-        user.full_name = request.json.get('fullname', None) or userd["full_name"]
+        user.full_name = request.json.get("fullname", None) or userd["full_name"]
         user.website = request.json.get('website', None) or userd["website"]
         user.bio = request.json.get('bio', None) or userd["bio"]
         user.phone = request.json.get('phone', None) or userd["phone"]
         user.gender = request.json.get('gender', None) or userd["gender"]
         user.updated_at = datetime.now()
         password = request.json.get('password', None)
-        if password == request.json.get('password2', None):
+        password2 = request.json.get('password2', None)
+        if not password or not password2:
+            return {"errors": ["Missing required parameters"]}, 400
+        if password == password2:
             user.password = password
         else:
             return {"errors": ["Passwords must match."]}, 400
 
         db.session.commit()
-        # return redirect('/api/users')
-        return {"current_user_id": user.id}
+        return redirect('/api/users')
+        #  return {"current_user_id": user.id}

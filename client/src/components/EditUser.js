@@ -4,18 +4,19 @@ import AuthContext from '../auth'
 
 
 const EditUser = props => {
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [fullname, setFullname] = useState('');
+    const { fetchWithCSRF, currentUserId, setCurrentUserId, currentUser } = useContext(AuthContext);
+    const [email, setEmail] = useState(currentUser.email);
+    const [username, setUsername] = useState(currentUser.user_name);
+    const [fullname, setFullname] = useState(currentUser.full_name);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('')
-    const [website, setWebsite] = useState('');
-    const [bio, setBio] = useState('');
-    const [phone, setPhone] = useState('');
-    const [gender, setGender] = useState('');
+    const [website, setWebsite] = useState(currentUser.website);
+    const [bio, setBio] = useState(currentUser.bio);
+    const [phone, setPhone] = useState(currentUser.phone);
+    const [gender, setGender] = useState(currentUser.gender);
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+
     const [errors, setErrors] = useState([]);
     let history = useHistory();
 
@@ -53,7 +54,6 @@ const EditUser = props => {
         }
         editUser();
     }
-
     return (
         <div className="authContain">
             <div className="authForm">
@@ -94,21 +94,21 @@ const EditUser = props => {
                                 placeholder="Website"
                                 value={website}
                                 onChange={e => setWebsite(e.target.value)} name="website" />
-                            <input
+                            <textarea
                                 className="input"
-                                type="text"
+                                rows="4"
                                 placeholder="Bio"
                                 value={bio}
-                                onChange={e => setBio(e.target.value)} name="bio" />
+                                onChange={e => setBio(e.target.value)} name="bio"></textarea>
                             <input
                                 className="input"
-                                type="text"
+                                type="email"
                                 placeholder="Email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)} name="email" />
                             <input
                                 className="input"
-                                type="text"
+                                type="number"
                                 placeholder="Phone"
                                 value={phone}
                                 onChange={e => setPhone(e.target.value)} name="phone" />
@@ -121,13 +121,13 @@ const EditUser = props => {
                             <input
                                 className="input"
                                 type="password"
-                                placeholder="New password"
+                                placeholder="New password (required)"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} name="password" />
                             <input
                                 className="input"
                                 type="password"
-                                placeholder="Confirm new password"
+                                placeholder="Confirm new password (required)"
                                 value={password2}
                                 onChange={e => setPassword2(e.target.value)} name="password2" />
 

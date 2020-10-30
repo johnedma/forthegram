@@ -1,9 +1,10 @@
-# PK has been using this file to test functions for seeding db.
-from faker import Faker
-from datetime import timedelta, date
-from random import randint, seed
-
-seed(1)
-fake = Faker()
-
-print("caption = ", fake.paragraph(nb_sentences=2, variable_nb_sentences=True))
+from random import randrange
+# The first element of each tuple should be the url of a photo in AWS.
+my_posts = [
+    ("abc", "Cool dog!"),
+    ("bca", "Love this one."),
+    ("cab", "Yippee!"),
+    ("cba", "Which one is the owner?")
+    ]
+n = randrange(len(my_posts))
+print(my_posts[n])

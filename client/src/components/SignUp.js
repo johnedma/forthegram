@@ -10,7 +10,7 @@ const SignUp = props => {
     const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, current_user_id, current_user } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
     const [fullname, setFullname] = useState('');
     let history = useHistory();
@@ -39,7 +39,7 @@ const SignUp = props => {
                 setErrors(responseData.errors);
             } else {
                 setCurrentUserId(responseData.current_user_id)
-                history.push('/users')
+                // history.push('/users')
             }
         }
         signupUser();

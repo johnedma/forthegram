@@ -60,7 +60,7 @@ def login():
 
     username_or_email = request.json.get('usernameoremail', None)
     password = request.json.get('password', None)
-    print(username_or_email, password)
+    # print(username_or_email, password)
 
     if not username_or_email or not password:
         return {"errors": ["Missing required parameters"]}, 400
@@ -78,11 +78,11 @@ def login():
         authenticated = False
         user = None
 
-    print(authenticated)
-    print(user)
+    # print(authenticated)
+    # print(user)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id}
+        return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -122,7 +122,7 @@ def signup():
     authenticated, user = User.authenticate1(username, password)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id}
+        return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -137,5 +137,7 @@ def logout():
 @app.route('/restore')
 def restore():
     id = current_user.id if current_user.is_authenticated else None
+    user = None if not current_user.is_authenticated else current_user.to_dict()
     if current_user:
-        return {"current_user_id": id}
+        return {"current_user_id": id, "current_user": user}
+        #  return {"current_user_id": id, "current_user": current_user.to_dict()}
