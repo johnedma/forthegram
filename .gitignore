@@ -2,8 +2,5 @@
 __pycache__/
 *.py[cod]
 .DS_Store
-<<<<<<< HEAD
 Pipfile.lock
-=======
 pet_photos/
->>>>>>> 5ec6897cb6d2e5f2d3aa8af4dc03984d1a7eb9f7
