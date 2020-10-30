@@ -1,10 +1,10 @@
 import boto3
-from .env import S3_KEY, S3_SECRET
+from .config import Config
 
 s3 = boto3.client(
     "s3",
-    aws_access_key_id=S3_KEY,
-    aws_secret_access_key=S3_SECRET
+    aws_access_key_id=Config.S3_KEY,
+    aws_secret_access_key=Config.S3_SECRET
 )
 
 
