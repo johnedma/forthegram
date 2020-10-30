@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager, \
     current_user, login_user, logout_user, login_required
-
+from flask_migrate import Migrate
 from petstagram.models import db, User
 from petstagram.api.user_routes import user_routes
 from petstagram.api.posts import posts
@@ -15,7 +15,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
-
+migrate = Migrate(app, db)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(posts, url_prefix='/api/posts')
