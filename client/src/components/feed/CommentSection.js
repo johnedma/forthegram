@@ -1,12 +1,12 @@
 import React from 'react'
 
-function CommentSection() {
-    const comments = [
-        "OMG this is so cute!",
-        "Killing em",
-        "Hey, I didn't know you were in town!",
-        "That hate is awesome LOL"
-    ]
+function CommentSection({comments}) {
+    // const comments = [
+    //     "OMG this is so cute!",
+    //     "Killing em",
+    //     "Hey, I didn't know you were in town!",
+    //     "That hate is awesome LOL"
+    // ]
 
     return (
         <div className="feed-post-comments" style={{
@@ -16,7 +16,7 @@ function CommentSection() {
             marginBottom: "10px"
         }}>
             {comments.map((comment, idx) =>
-                <div key={idx}>UserName {comment}</div>
+                <div key={idx}>UserName {comment.content}</div>
             )}
         </div>
     );

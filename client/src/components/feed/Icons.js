@@ -1,7 +1,7 @@
 import React from 'react'
 import FeedPost from './FeedPost'
 
-function Icons() {
+function Icons({ likes, like_count, lat_like}) {
     const temp_postId = 5
     const temp_like_count = 322
     return (
@@ -39,7 +39,7 @@ function Icons() {
                 </div>
             </div>
             {/* replace with like count from post */}
-            {temp_like_count === 0 ? <div>
+            {like_count === 0 ? <div>
                 <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
@@ -63,7 +63,7 @@ function Icons() {
 
                     }}>
                         {/* replace with likes from post  and latest like*/}
-                        PawPaw and {temp_like_count-1} others liked this
+                        {lat_like} and {like_count} others liked this
                     </button>
                 </div>
             }

@@ -21,7 +21,7 @@ def index(id):
         pid_list = [
             [pid.id for post in post_list for pid in post]
         ]
-        return {"following": following_list, "follower-posts": pid_list}
+        return {"following": following_list, "followerPosts": pid_list}
 
     if request.method == 'POST':
         followed_id = request.form['uid']
