@@ -3,24 +3,30 @@ import { Redirect, useHistory } from 'react-router-dom';
 import AuthContext from '../auth'
 
 
-const SignUp = props => {
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
+const EditUser = props => {
+    const { fetchWithCSRF, currentUserId, setCurrentUserId, currentUser } = useContext(AuthContext);
+    const [email, setEmail] = useState(currentUser.email);
+    const [username, setUsername] = useState(currentUser.user_name);
+    const [fullname, setFullname] = useState(currentUser.full_name);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('')
+    const [website, setWebsite] = useState(currentUser.website);
+    const [bio, setBio] = useState(currentUser.bio);
+    const [phone, setPhone] = useState(currentUser.phone);
+    const [gender, setGender] = useState(currentUser.gender);
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
-    const { fetchWithCSRF, setCurrentUserId, current_user_id, current_user } = useContext(AuthContext);
+
     const [errors, setErrors] = useState([]);
-    const [fullname, setFullname] = useState('');
     let history = useHistory();
 
     const submitForm = e => {
         e.preventDefault();
+
         // Make the following an IIFE?
-        async function signupUser() {
-            const response = await fetchWithCSRF(`/signup`, {
-                method: 'POST',
+        async function editUser() {
+            const response = await fetchWithCSRF(`/api/users/${props.currentUserId}`, {
+                method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -30,7 +36,11 @@ const SignUp = props => {
                     username,
                     fullname,
                     password,
-                    password2
+                    password2,
+                    website,
+                    bio,
+                    phone,
+                    gender
                 })
             });
 
@@ -38,13 +48,12 @@ const SignUp = props => {
             if (!response.ok) {
                 setErrors(responseData.errors);
             } else {
-                setCurrentUserId(responseData.current_user_id)
-                // history.push('/users')
+                // setCurrentUserId(responseData.current_user_id)
+                history.push('/users')
             }
         }
-        signupUser();
+        editUser();
     }
-
     return (
         <div className="authContain">
             <div className="authForm">
@@ -63,16 +72,10 @@ const SignUp = props => {
                         lineHeight: `20px`,
                         margin: `0 40px 10px`,
                         textAlign: `center`
-                    }}>Sign up to see photos and videos from your friends.</h2>
+                    }}>Edit profile.</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
                             {errors.length ? errors.map(err => <li key={err} >{err}</li>) : ''}
-                            <input
-                                className="input"
-                                type="text"
-                                placeholder="Email"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)} name="email" />
                             <input
                                 className="input"
                                 type="text"
@@ -87,14 +90,44 @@ const SignUp = props => {
                                 onChange={e => setUsername(e.target.value)} name="username" />
                             <input
                                 className="input"
+                                type="text"
+                                placeholder="Website"
+                                value={website}
+                                onChange={e => setWebsite(e.target.value)} name="website" />
+                            <textarea
+                                className="input"
+                                rows="4"
+                                placeholder="Bio"
+                                value={bio}
+                                onChange={e => setBio(e.target.value)} name="bio"></textarea>
+                            <input
+                                className="input"
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)} name="email" />
+                            <input
+                                className="input"
+                                type="number"
+                                placeholder="Phone"
+                                value={phone}
+                                onChange={e => setPhone(e.target.value)} name="phone" />
+                            <input
+                                className="input"
+                                type="text"
+                                placeholder="Gender"
+                                value={gender}
+                                onChange={e => setGender(e.target.value)} name="gender" />
+                            <input
+                                className="input"
                                 type="password"
-                                placeholder="Password"
+                                placeholder="New password (required)"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} name="password" />
                             <input
                                 className="input"
                                 type="password"
-                                placeholder="Confirm password"
+                                placeholder="Confirm new password (required)"
                                 value={password2}
                                 onChange={e => setPassword2(e.target.value)} name="password2" />
 
@@ -105,7 +138,7 @@ const SignUp = props => {
                                 margin: `8px 40px`,
                                 fontWeight: `600`
 
-                            }}>Sign Up</button>
+                            }}>Submit changes</button>
                         </form>
                     </div>
                 </div>
@@ -114,4 +147,4 @@ const SignUp = props => {
     );
 };
 
-export default SignUp;
+export default EditUser;

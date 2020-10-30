@@ -160,7 +160,7 @@ form input{
 .create-post-form{
     display: flex;
     justify-content: center;
-    
+
 }
 
 .create-post-headline{
@@ -248,3 +248,11 @@ form input{
       margin-top: 10px;
       margin-right: 15px;
   }
+.add-name_input:focus{
+    background-color: #fafafa;
+    outline: none;
+}
+.add-name_input::placeholder{
+    color: #808080;
+    font-weight: bold;
+}
