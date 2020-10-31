@@ -1,13 +1,26 @@
 import boto3
+from .config import Config
 
-
-def upload_file(file_name, bucket):
+s3 = boto3.client(
+    "s3",
+    aws_access_key_id=Config.S3_KEY,
+    aws_secret_access_key=Config.S3_SECRET
+)
+print("Config.S3_KEY = ", Config.S3_KEY)
+print("Config.S3_SECRET = ", Config.S3_SECRET)
+print("==============================================")
+# boto3.set_stream_logger("botocore", level="DEBUG")
+def upload_file(file_name, bucket, acl="public-read"):
     """
     Function to upload a file to an S3 bucket
     """
+    print("bucket = ", bucket)
+    print("=======================================================")
     object_name = file_name
-    s3_client = boto3.client('s3')
-    response = s3_client.upload_file(file_name, bucket, object_name)
+    # s3_client = boto3.client('s3')
+    response = s3.upload_file(file_name, bucket, object_name, ExtraArgs={
+        "ACL":acl,
+    })
 
     return response
 
@@ -16,7 +29,7 @@ def download_file(file_name, bucket):
     """
     Function to download a given file from an S3 bucket
     """
-    s3 = boto3.resource('s3')
+    # s3 = boto3.resource('s3')
     output = f"downloads/{file_name}"
     s3.Bucket(bucket).download_file(file_name, output)
 

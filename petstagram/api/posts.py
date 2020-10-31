@@ -32,10 +32,15 @@ def download(id):
         get_post["comments"] = [comment.to_dict() for comment in get_comments]
         get_post["likes"] = [like.to_dict() for like in get_likes]
         get_post["like_count"] = len(get_likes)
+
         if get_post["like_count"] > 0:
             get_post["latest_like"] = User.query.filter(User.id == get_likes[0].user_id).first().user_name
+<<<<<<< HEAD
 
+=======
+>>>>>>> a0eabe24674e495f82285f3723f2a5ace64765bf
         return {"post": get_post}
+        
     if request.method == 'DELETE':
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid).delete()
@@ -55,6 +60,7 @@ def download(id):
 @posts.route('/<userId>/<caption>', methods=['POST'])
 def upload(userId, caption):
     if request.method == "POST":
+        print("WE Here", request.files)
         f = request.files['file']
         f.filename = change_name(f.filename)
         f.save(os.path.join(UPLOAD_FOLDER, f.filename))
