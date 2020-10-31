@@ -1,17 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../auth';
-import PostContext from '../../PostContext';
 
-function AddComment() {
+function AddComment({ post_id }) {
     const [content, setContent] = useState('')
-    const post = useContext(PostContext)
     const { currentUserId } = useContext(AuthContext)
-    const post_id = post.postData.post.id
 
 
     const sayHello =e=> {
         setContent(e.target.value)
-        // console.log(content)
     }
 
     const onSubmit = async (e) => {
@@ -24,15 +20,15 @@ function AddComment() {
         }
 
             try{
-                const res = await fetch(`/api/comments/${post_id}`, {
+                const res = await fetch(`api/comments/${post_id}`, {
                     method: "POST",
                     headers: {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 })
-                if (res.ok){
-                    const comment = await res.json()
+                if (!res.ok){
+                    // console.log(error)
                 }
             } catch(e) {
                 console.error(e)
@@ -40,35 +36,11 @@ function AddComment() {
         setContent('')
 
     }
-
-
-
-    // const makeComment = async (e) => {
-    //     e.preventDefault()
-    //     if (content === '') return
-    //     const data = {
-    //         user_id: currentUserId,
-    //         post_id: post_id,
-    //         content: content,
-    //     }
-    //     const res = await fetch(`/comments/${post_id}`, {
-    //         method: "POST",
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(data)
-    //     })
-
-    //     const comment = await res.json()
-    //     if (res.ok){
-    //         post.postData.post.comments.append(comment)
-    //         setContent('')
-    //     }
-
-    // }
     return (
         <div className="add-comment-wrapper">
             <form style={{
                 display: "grid",
-                gridTemplateColumns: "350px 10px",
+                gridTemplateColumns: "500px 10px",
                 justifyItems: "start"
             }} onSubmit={onSubmit}>
                 <input style={{
@@ -88,7 +60,6 @@ function AddComment() {
                     cursor: "pointer"
                 }} className="add-comment_button" type="submit">Post</button>
             </form>
-
         </div>
     )
 }
