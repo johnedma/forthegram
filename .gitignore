@@ -4,3 +4,4 @@ __pycache__/
 .DS_Store
 Pipfile.lock
 pet_photos/
+seeder_data/
