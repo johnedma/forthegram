@@ -1,20 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../auth';
-// import PostContext from '../../PostContext';
 
 function AddComment({ post_id }) {
     const [content, setContent] = useState('')
     const { currentUserId } = useContext(AuthContext)
 
-    // const getComment = e => {
-    //     console.log('hello');
-    //     // console.log(e.target.value)
-    //     // setContent(e.target.value)
-    // }
 
     const sayHello =e=> {
         setContent(e.target.value)
-        // console.log(content)
     }
 
     const onSubmit = async (e) => {
@@ -27,61 +20,46 @@ function AddComment({ post_id }) {
         }
 
             try{
-                const res = await fetch(`api/comments/30`, {
+                const res = await fetch(`api/comments/${post_id}`, {
                     method: "POST",
                     headers: {
                         'Content-type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 })
-                if (res.ok){
-                    // const comment = await res.json()
-                    console.log('hello')
+                if (!res.ok){
+                    // console.log(error)
                 }
             } catch(e) {
                 console.error(e)
             }
-        // console.log(data)
         setContent('')
 
     }
-
-    // const makeComment = async (e) => {
-    //     e.preventDefault()
-    //     if (content === '') return
-    //     const data = {
-    //         user_id: currentUserId,
-    //         post_id: post_id,
-    //         content: content,
-    //     }
-    //     const res = await fetch(`/comments/${post_id}`, {
-    //         method: "POST",
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(data)
-    //     })
-
-    //     const comment = await res.json()
-    //     if (res.ok){
-    //         post.postData.post.comments.append(comment)
-    //         setContent('')
-    //     }
-
-    // }
     return (
         <div className="add-comment-wrapper">
-            <form onSubmit={onSubmit}>
-                <input type="text" placeholder="add comment..." value={content} onChange={sayHello}/>
-                <input type="submit"/>
-            </form>
-            {/* <form className="comment-form" onSubmit={makeComment}>
-                <textarea style={{
-                    width: "400px",
+            <form style={{
+                display: "grid",
+                gridTemplateColumns: "500px 10px",
+                justifyItems: "start"
+            }} onSubmit={onSubmit}>
+                <input style={{
                     border: "0px",
                     height: "45px",
-                    margin: "0 auto",
-                }} className="add-name_input" placeholder="Add a comment..." value={content} onChange={getComment} />
-                <button className="add-comment_button" type="submit">Post</button>
-            </form> */}
+                    right: "100px",
+                    backgroundColor: "#ffff"
+
+
+                }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello}/>
+                <button style={{
+                    border: "0px",
+                    color: "#489dcf",
+                    backgroundColor: "#ffff",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    cursor: "pointer"
+                }} className="add-comment_button" type="submit">Post</button>
+            </form>
         </div>
     )
 }

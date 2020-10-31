@@ -8,11 +8,6 @@ function AddComment() {
     const { currentUserId } = useContext(AuthContext)
     const post_id = post.postData.post.id
 
-    // const getComment = e => {
-    //     console.log('hello');
-    //     // console.log(e.target.value)
-    //     // setContent(e.target.value)
-    // }
 
     const sayHello =e=> {
         setContent(e.target.value)
@@ -29,7 +24,7 @@ function AddComment() {
         }
 
             try{
-                const res = await fetch(`/comments/30`, {
+                const res = await fetch(`api/comments/${post_id}`, {
                     method: "POST",
                     headers: {
                         'Content-type': 'application/json'
@@ -38,12 +33,10 @@ function AddComment() {
                 })
                 if (res.ok){
                     const comment = await res.json()
-                    console.log('hello')
                 }
             } catch(e) {
                 console.error(e)
             }
-        console.log(data)
         setContent('')
 
     }
@@ -73,19 +66,29 @@ function AddComment() {
     // }
     return (
         <div className="add-comment-wrapper">
-            <form onSubmit={onSubmit}>
-                <input type="text" placeholder="add comment..." value={content} onChange={sayHello}/>
-                <input type="submit"/>
-            </form>
-            {/* <form className="comment-form" onSubmit={makeComment}>
-                <textarea style={{
-                    width: "400px",
+            <form style={{
+                display: "grid",
+                gridTemplateColumns: "350px 10px",
+                justifyItems: "start"
+            }} onSubmit={onSubmit}>
+                <input style={{
                     border: "0px",
                     height: "45px",
-                    margin: "0 auto",
-                }} className="add-name_input" placeholder="Add a comment..." value={content} onChange={getComment} />
-                <button className="add-comment_button" type="submit">Post</button>
-            </form> */}
+                    right: "100px",
+                    backgroundColor: "#ffff"
+
+
+                }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello}/>
+                <button style={{
+                    border: "0px",
+                    color: "#489dcf",
+                    backgroundColor: "#ffff",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                    cursor: "pointer"
+                }} className="add-comment_button" type="submit">Post</button>
+            </form>
+
         </div>
     )
 }
