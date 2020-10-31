@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../auth';
-import PostContext from '../../PostContext';
+// import PostContext from '../../PostContext';
 
-function AddComment() {
+function AddComment({ post_id }) {
     const [content, setContent] = useState('')
-    const post = useContext(PostContext)
     const { currentUserId } = useContext(AuthContext)
-    const post_id = post.postData.post.id
 
     // const getComment = e => {
     //     console.log('hello');
@@ -29,7 +27,7 @@ function AddComment() {
         }
 
             try{
-                const res = await fetch(`/comments/30`, {
+                const res = await fetch(`api/comments/30`, {
                     method: "POST",
                     headers: {
                         'Content-type': 'application/json'
@@ -37,18 +35,16 @@ function AddComment() {
                     body: JSON.stringify(data)
                 })
                 if (res.ok){
-                    const comment = await res.json()
+                    // const comment = await res.json()
                     console.log('hello')
                 }
             } catch(e) {
                 console.error(e)
             }
-        console.log(data)
+        // console.log(data)
         setContent('')
 
     }
-
-
 
     // const makeComment = async (e) => {
     //     e.preventDefault()

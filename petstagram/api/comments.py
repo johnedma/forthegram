@@ -2,6 +2,7 @@ from flask import Blueprint, request, redirect
 from petstagram.models import Comment, db, Post
 from datetime import datetime
 from flask_login import current_user
+import json
 
 comments = Blueprint('comments',__name__)
 
@@ -15,9 +16,12 @@ def index(id):
         return {"comments": [comment.to_dict() for comment in get_comments]}
 
     if request.method == 'POST':
-        user_id = current_user.id
-        post_id = pid
-        content = request.form['comment']
+        # print('************')
+        data = json.loads(request.data.decode("utf-8"))
+        # print(data['content'])
+        user_id = data['user_id']
+        post_id = data['post_id']
+        content = data['content']
         created_at = datetime.now()
         updated_at = datetime.now()
 
