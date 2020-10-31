@@ -17,7 +17,7 @@ const Navbar = ({currentUserId, currentUser}) =>
                     <>
                         <div className="navbar-item" >
                             <a href="/edituser">
-                                {currentUser.full_name}
+                                {currentUser.user_name}
                             </a>
                         </div>
                         <div className="navbar-item" >
