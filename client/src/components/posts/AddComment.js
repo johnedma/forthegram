@@ -26,8 +26,8 @@ function AddComment() {
             body: JSON.stringify(data)
         })
 
+        const comment = await res.json()
         if (res.ok){
-            const comment = await res.json()
             post.postData.post.comments.append(comment)
             setContent('')
         }
