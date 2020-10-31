@@ -36,7 +36,7 @@ def download(id):
         if get_post["like_count"] > 0:
             get_post["latest_like"] = User.query.filter(User.id == get_likes[0].user_id).first().user_name
         return {"post": get_post}
-        
+
     if request.method == 'DELETE':
         pid = (int(id))
         get_post = Post.query.filter(Post.id == pid).delete()

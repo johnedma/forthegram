@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import PostContext from '../../PostContext'
+import React, { useState, useContext } from 'react';
+import PostContext from '../../PostContext';
 
 
 const CommentSection = () => {
@@ -7,9 +7,16 @@ const CommentSection = () => {
     const comments = post.postData.post.comments
 
     return (
-        <div>
+        <div style={{
+            width: "400px",
+            height: "400px"
+        }}>
             {comments.map((comment, idx) =>
-                <div key={idx}>UserName {comment.content}</div>
+                <div style={{
+                    marginBottom: "5px",
+                }} key={idx}><strong style={{
+                    color: "#489dcf"
+                }}>UserName</strong> {comment.content}</div>
             )}
         </div>
     );
