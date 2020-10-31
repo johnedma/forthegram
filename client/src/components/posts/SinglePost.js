@@ -5,7 +5,7 @@ import RightSide from './RightSide';
 
 
 function SinglePost(props) {
-    const {postData, setPostData} = useContext(PostContext)
+    const { postData, setPostData } = useContext(PostContext)
 
     useEffect(() => {
         (async () => {
@@ -24,7 +24,7 @@ function SinglePost(props) {
     if (!postData) return null
     return (
         <div className='post-wrapper'>
-            <Photo pic={postData.post.photo_url}/>
+            <Photo pic={postData.post.photo_url} />
             <RightSide />
         </div>
     )

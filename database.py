@@ -15,12 +15,13 @@ with app.app_context():
     db.drop_all()
     db.create_all()
     # number of users, including demo_user
-    n_user = 5
+    n_user = 2
     created_at = datetime(2000, 1, 15)
     db.session.add(User(
         user_name="demo_user",
         first_name="Demo",
         last_name="User",
+        full_name="Demo User",
         DOB=datetime(1980, 10, 31),
         password="password",
         email="demo@user.com",
@@ -36,6 +37,7 @@ with app.app_context():
             user_name=fake.simple_profile()["username"],
             first_name=fake.first_name(),
             last_name=fake.last_name(),
+            full_name=fake.name(),
             email=fake.simple_profile()["mail"],
             DOB=DOB,
             password="password",
@@ -47,7 +49,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of posts per user
-    n_post_per_user = 5
+    n_post_per_user = 1
     n_post = n_user * n_post_per_user
 
     post_t = []
@@ -69,7 +71,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of comments per post
-    n_comment_per_post = 5
+    n_comment_per_post = 1
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
