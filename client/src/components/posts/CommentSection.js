@@ -1,15 +1,23 @@
-import React, { useState, useContext } from 'react'
-import PostContext from '../../PostContext'
+import React, { useState, useContext } from 'react';
+import PostContext from '../../PostContext';
 
 
 const CommentSection = () => {
     const post = useContext(PostContext)
     const comments = post.postData.post.comments
+    const names = post.postData.post.names
 
     return (
-        <div>
+        <div style={{
+            width: "400px",
+            height: "240px"
+        }}>
             {comments.map((comment, idx) =>
-                <div key={idx}>UserName {comment.content}</div>
+                <div style={{
+                    marginBottom: "5px",
+                }} key={idx}><strong style={{
+                    color: "#489dcf"
+                }}>{names[idx]}</strong> {comment.content}</div>
             )}
         </div>
     );

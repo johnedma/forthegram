@@ -9,12 +9,6 @@ import ModalWindow from './ModalWindow';
 
 const Home = () => {
     const [show, setShow] = useState(false);
-    let history = useHistory();
-    const [preview, setPreview] = useState('')
-    const { currentUserId } = useContext(AuthContext)
-    const [file, setFileName] = useState("");
-    const [caption, setCaption] = useState("");
-    const [errors, setErrors] = useState([]);
 
 
     const showModal = e => {
@@ -40,13 +34,8 @@ const Home = () => {
                 )} */}
                 <h1>Home</h1>
             </div>
-            <h2>Test</h2>
             <ModalWindow onClose={showModal} show={show} />
             {show ? "" : <button id="post-button" onClick={showModal} >+</button>}
-            <h2>Test</h2>
-
-            {/* <img src="https://petstagram.s3.us-east-2.amazonaws.com/uploads/FriOct301725302020.png" />
-            <img src="https://petstagram.s3.us-east-2.amazonaws.com/uploads/FriOct301745292020.png" /> */}
         </div>
     );
 };

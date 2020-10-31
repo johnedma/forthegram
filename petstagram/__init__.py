@@ -10,6 +10,7 @@ from petstagram.api.user_routes import user_routes
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
 from petstagram.api.likes import likes
+from petstagram.api.following import following
 from petstagram.config import Config
 from datetime import datetime
 
@@ -21,6 +22,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(posts, url_prefix='/api/posts')
 app.register_blueprint(comments, url_prefix='/api/comments')
 app.register_blueprint(likes, url_prefix='/api/likes')
+app.register_blueprint(following, url_prefix='/api/following')
 db.init_app(app)
 
 

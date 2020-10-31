@@ -48,7 +48,9 @@ function Icons() {
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`
+                        padding: `16px 0`,
+                        width: "300px",
+                        textAlign: "left"
                     }}>
                     Be the first to like this!
                 </button>
@@ -59,7 +61,10 @@ function Icons() {
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`
+                        padding: `16px 0`,
+                        width: "300px",
+                        textAlign: "left",
+                        color: "#489dcf"
                     }}>
                         {/* replace with likes from post */}
                         {latest_like} and {like_count - 1} others liked this
