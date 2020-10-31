@@ -67,6 +67,7 @@ function Icons({ caption, likes, like_count, lat_like}) {
                         fontWeight: `800`,
                         fontSize: `1em`,
                         padding: `16px 0`,
+                        color: "#489dcf"
 
                     }}>
                         {/* replace with likes from post  and latest like*/}

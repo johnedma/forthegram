@@ -44,7 +44,7 @@ function FeedPost(props) {
             <Header post={postData.user}/>
             <a href={url}><Photo pic={postData.photo_url}/></a>
             <Icons caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like}/>
-            <CommentSection comments={postData.comments}/>
+            <CommentSection comments={postData.comments} names={postData.names}/>
         </div>
     )
 }

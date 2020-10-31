@@ -1,6 +1,6 @@
 import React from 'react'
 
-function CommentSection({comments}) {
+function CommentSection({comments, names}) {
     // const comments = [
     //     "OMG this is so cute!",
     //     "Killing em",
@@ -16,7 +16,11 @@ function CommentSection({comments}) {
             marginBottom: "10px",
         }}>
             {comments.map((comment, idx) =>
-                <div key={idx}>UserName {comment.content}</div>
+                <div style={{
+                    marginBottom: "5px",
+                }} key={idx}><strong style={{
+                    color: "#489dcf"
+                }}>{names[idx]}</strong> {comment.content}</div>
             )}
         </div>
     );
