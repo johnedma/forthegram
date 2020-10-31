@@ -37,9 +37,10 @@ function AddComment() {
         <div className="add-comment-wrapper">
             <form className="comment-form" onSubmit={makeComment}>
                 <textarea style={{
-                    width: "800px",
+                    width: "400px",
                     border: "0px",
-                    height: "45px"
+                    height: "45px",
+                    margin: "0 auto",
                 }} className="add-name_input" placeholder="Add a comment..." value={content} onChange={getComment} />
                 <button className="add-comment_button" type="submit">Post</button>
             </form>

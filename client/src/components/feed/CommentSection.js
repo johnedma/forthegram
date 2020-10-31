@@ -13,7 +13,7 @@ function CommentSection({comments}) {
             width: "700px",
             textAlign: "left",
             margin: "0 auto",
-            marginBottom: "10px"
+            marginBottom: "10px",
         }}>
             {comments.map((comment, idx) =>
                 <div key={idx}>UserName {comment.content}</div>
