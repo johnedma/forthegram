@@ -1,13 +1,9 @@
-import React, { useContext } from 'react';
-import PostContext from '../../PostContext';
+import React from 'react'
+import FeedPost from './FeedPost'
 
-
-function Icons() {
-    const data = useContext(PostContext)
-    const post = data.postData.post
-    const likes = post.likes
-    const like_count = post.like_count
-    const latest_like = post.latest_like
+function Icons({ caption, likes, like_count, lat_like}) {
+    const temp_postId = 5
+    const temp_like_count = 322
     return (
         <>
             <div className="after-photo" style={{ padding: `0 16px` }} >
@@ -42,31 +38,40 @@ function Icons() {
                     </div>
                 </div>
             </div>
+            {/* replace with like count from post */}
             {like_count === 0 ? <div>
                 <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`,
-                        width: "300px",
-                        textAlign: "left"
+                        padding: `16px 0`
                     }}>
                     Be the first to like this!
                 </button>
             </div>:
-            <div>
+            <div style={{
+                textAlign: "left",
+                marginLeft: "20px"
+            }}>
+                    <div style={{
+                        backgroundColor: `#fff`,
+                        border: `none`,
+                        fontWeight: `800`,
+                        fontSize: `1em`,
+                        padding: `16px 0`,
+                    }}>{caption}</div>
                     <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
                         padding: `16px 0`,
-                        width: "300px",
-                        textAlign: "left"
+
                     }}>
-                        {/* replace with likes from post */}
-                        {latest_like} and {like_count - 1} others liked this
+                        {/* replace with likes from post  and latest like*/}
+
+                        {lat_like} and {like_count} others liked this
                     </button>
                 </div>
             }
