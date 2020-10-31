@@ -1,5 +1,5 @@
 import React from 'react';
-import GridFeed from "./GridFeed"
+// import GridFeed from "./GridFeed"
 
 const Profile = ({ currentUser }) => {
     console.log(currentUser);
@@ -72,7 +72,7 @@ const Profile = ({ currentUser }) => {
                     </section>
                 </header>
                 <div className='row-container'>
-                    <GridFeed currentUser={currentUser} />
+                    {/* <GridFeed currentUser={currentUser} /> */}
                 </div>
             </div>
         </main>

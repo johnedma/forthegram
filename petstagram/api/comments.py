@@ -34,7 +34,7 @@ def index(id):
         )
         db.session.add(new_comment)
         db.session.commit()
-        return redirect(f'/api/comments/{pid}')
+        return 'success'
 
 
 @comments.route('/<id>/<id2>', methods=['DELETE'])

@@ -24,7 +24,7 @@ function AddComment() {
         }
 
             try{
-                const res = await fetch(`api/comments/${post_id}`, {
+                const res = await fetch(`/api/comments/${post_id}`, {
                     method: "POST",
                     headers: {
                         'Content-type': 'application/json'
