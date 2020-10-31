@@ -8,7 +8,7 @@ const Photo = ({pic}) => {
     return (
         <div>
             <img style={{
-                height: "700px"
+                paddingRight: "5px"
             }} alt='Not Found' src={pic}/>
         </div>
     )

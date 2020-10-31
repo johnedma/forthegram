@@ -33,6 +33,9 @@ def download(id):
         get_post["likes"] = [like.to_dict() for like in get_likes]
         get_post["like_count"] = len(get_likes)
 
+        get_post["names"] = [User.query.filter(User.id == comment["user_id"])[0].user_name for comment in get_post["comments"]]
+
+
         if get_post["like_count"] > 0:
             get_post["latest_like"] = User.query.filter(User.id == get_likes[0].user_id).first().user_name
         return {"post": get_post}
