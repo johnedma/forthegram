@@ -1,12 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
 function CommentSection({comments, names}) {
-    // const comments = [
-    //     "OMG this is so cute!",
-    //     "Killing em",
-    //     "Hey, I didn't know you were in town!",
-    //     "That hate is awesome LOL"
-    // ]
 
     return (
         <div className="feed-post-comments" style={{

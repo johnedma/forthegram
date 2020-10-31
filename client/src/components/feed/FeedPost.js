@@ -5,6 +5,7 @@
 //when post is clicked, navigate to posts/id front end route
 
 import React, {useState, useEffect} from 'react'
+import AddComment from './AddComment'
 import CommentSection from './CommentSection'
 import Header from './Header'
 import Icons from './Icons'
@@ -45,6 +46,7 @@ function FeedPost(props) {
             <a href={url}><Photo pic={postData.photo_url}/></a>
             <Icons caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like}/>
             <CommentSection comments={postData.comments} names={postData.names}/>
+            <AddComment post_id={postData.id}/>
         </div>
     )
 }
