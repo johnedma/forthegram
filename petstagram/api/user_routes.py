@@ -36,6 +36,7 @@ def index():
 
 
 @user_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+@login_required
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
     # print("user.to_dict() = ", user.to_dict())

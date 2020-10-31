@@ -4,6 +4,7 @@ from datetime import datetime
 from ..models import db, User, Post, Comment, Like
 import os
 import time
+from flask_login import login_required
 
 
 posts = Blueprint('posts', __name__)
@@ -54,6 +55,7 @@ def download(id):
 
 
 @posts.route('/<userId>/<caption>', methods=['POST'])
+@login_required
 def upload(userId, caption):
     if request.method == "POST":
         print("WE Here", request.files)

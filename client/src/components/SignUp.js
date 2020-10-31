@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
 import AuthContext from '../auth'
 
 
@@ -10,10 +9,10 @@ const SignUp = props => {
     const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
-    const { fetchWithCSRF, setCurrentUserId, current_user_id, current_user } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
     const [fullname, setFullname] = useState('');
-    let history = useHistory();
+
 
     const submitForm = e => {
         e.preventDefault();

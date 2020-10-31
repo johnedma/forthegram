@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import UsersList from './components/UsersList';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import Post from './components/Post';
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import LogOut from './components/LogOut';
 import EditUser from './components/EditUser';
-import Comments from './components/Comments';
 import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
 import AuthRoute from "./components/AuthRoute"
