@@ -4,7 +4,8 @@ function Photo({ pic }) {
     return (
         <div>
             <img alt='NOT FOUND' src={pic} style={{
-                width: "600px",
+                width: "300px",
+                height: "300px"
             }}/>
         </div>
     )

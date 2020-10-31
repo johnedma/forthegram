@@ -23,7 +23,10 @@ function SinglePost(props) {
     }, [props.location.pathname, setPostData])
     if (!postData) return null
     return (
-        <div className='post-wrapper'>
+        <div style={{
+            width: "500px",
+            margin: "0 auto"
+        }} className='post-wrapper'>
             <Photo pic={postData.post.photo_url}/>
             <RightSide />
         </div>
