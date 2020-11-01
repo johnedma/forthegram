@@ -12,25 +12,23 @@ h1{
 }
 
 body {
-    /* padding: 3rem; */
+    padding: 3rem;
     /* font-family: 'Oswald', sans-serif; */
     font-size: 14px;
     background-color: #fafafa;
     line-height: 18px;
+    max-width: 1020px;
+    inline-size: fit-content;
+
  }
 
  .navbar.is-fixed-top{
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: .5em; */
     padding-left: 16px;
     padding-right: 16px;
 }
-
-/* body.has-navbar-fixed-top {
-    padding-top: 4.25rem;
-} */
 
 .center-cropped {
     width: 100px;
