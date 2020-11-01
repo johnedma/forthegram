@@ -59,8 +59,8 @@ class User(db.Model, UserMixin):
     likes = db.relationship(
         "Like", back_populates="user", cascade="all, delete-orphan"
     )
-    follows = db.relationship(
-       "Follow", back_populates="user")
+    # follows = db.relationship(
+    #    "Follow", back_populates="user")
     # figure out how to implement the following 4 lines w/out errors
     # follows = db.relationship("Follow", back_populates="user")
     # follows = db.relationship(
@@ -100,8 +100,8 @@ class Follow(db.Model):
     db.UniqueConstraint(follower_id, followed_id)
 
     # figure out how to insert back_populates="follows" into next 2 lines
-    follower = db.relationship("User", foreign_keys=[follower_id], back_populates="follows")
-    followed = db.relationship("User", foreign_keys=[followed_id], back_populates="follows")
+    # follower = db.relationship("User", foreign_keys=[follower_id], back_populates="follows")
+    # followed = db.relationship("User", foreign_keys=[followed_id], back_populates="follows")
 
     def to_dict(self):
         return {

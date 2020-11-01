@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, redirect
-from petstagram.models import User, db
+from petstagram.models import User, db, Follow
 from datetime import datetime
 from flask_login import login_required
 
@@ -43,10 +43,21 @@ def user_info(id):
         return user.to_dict()
     if request.method == 'DELETE':
         print(user)
-        db.session.delete(user)
-        db.session.commit()
+        follows = Follow.query.filter(
+            # Follow.follower_id == int(id) or Follow.followed_id == int(id)
+            Follow.follower_id == int(id)
+            # or Follow.followed_id == int(id)
+            ).all()
+        print("--------------------------------------------")
+        print(follows[0].follower_id, follows[0].followed_id)
+        print("++++++++++++++++++++++++++++++++++++++++++++")
+        # for follow in follows:
+        #     db.session.delete(follow)
+        # db.session.commit()
+        # db.session.delete(user)
+        # db.session.commit()
         # return redirect("/api/users")
-        return {message: "goodbye"}
+        return {"message": "goodbye"}
     if request.method == 'PUT':
         # print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         userd = user.to_dict()
