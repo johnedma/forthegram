@@ -32,6 +32,9 @@ users = [
 
 posts = [
     ("FriOct302019202020.png", 1, "Baby Yoda"),
+    ("SunNov11332182020.png", 1, "Ahh ... the Big Apple!"),
+    ("SunNov11334492020.png", 1, "Please meet my green-eyed friend."),
+    ("SunNov11335522020.png", 1, "Can you tell how much I'm loved?"),
     ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
     ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
     ("FriOct302146372020.png", 4, "Snacking with my bud."),
