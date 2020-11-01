@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import ModalWindow from './ModalWindow';
 
 const Navbar = ({ currentUserId, currentUser }) => {
-
+    console.log((currentUser));
     const [show, setShow] = useState(false);
 
 
@@ -26,8 +26,8 @@ const Navbar = ({ currentUserId, currentUser }) => {
                             <ModalWindow onClose={showModal} show={show} />
                             {show ? "" : <button id="post-button" onClick={showModal} >+</button>}
                             <div className="navbar-item" >
-                                <a href="/edituser">
-                                    {currentUser.full_name}
+                                <a href={`/${currentUser.user_name}`}>
+                                    {currentUser.user_name}
                                 </a>
                             </div>
                             <div className="navbar-item" >
