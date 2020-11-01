@@ -12,6 +12,7 @@ from petstagram.api.comments import comments
 from petstagram.api.likes import likes
 from petstagram.api.following import following
 from petstagram.config import Config
+from petstagram.api.profile import profile
 from datetime import datetime
 
 app = Flask(__name__)
@@ -23,6 +24,7 @@ app.register_blueprint(posts, url_prefix='/api/posts')
 app.register_blueprint(comments, url_prefix='/api/comments')
 app.register_blueprint(likes, url_prefix='/api/likes')
 app.register_blueprint(following, url_prefix='/api/following')
+app.register_blueprint(profile, url_prefix='/api/profile')
 db.init_app(app)
 
 
@@ -107,15 +109,15 @@ def signup():
         return {"errors": ["Passwords must match each other"]}, 400
 
     new_user = User(
-                    user_name=username,
-                    first_name=fullname,
-                    last_name=fullname,
-                    full_name=fullname,
-                    DOB=datetime.now(),
-                    email=email,
-                    password=password,
-                    created_at=datetime.now(),
-                    updated_at=datetime.now()
+        user_name=username,
+        first_name=fullname,
+        last_name=fullname,
+        full_name=fullname,
+        DOB=datetime.now(),
+        email=email,
+        password=password,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
     )
     db.session.add(new_user)
     db.session.commit()

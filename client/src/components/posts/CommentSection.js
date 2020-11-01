@@ -15,9 +15,15 @@ const CommentSection = () => {
             {comments.map((comment, idx) =>
                 <div style={{
                     marginBottom: "5px",
-                }} key={idx}><strong style={{
+                }} key={idx}>
+                    {/* <strong style={{
                     color: "#489dcf"
-                }}>{names[idx]}</strong> {comment.content}</div>
+                }}>{names[idx]}</strong>  */}
+                    <a href={`/${names[idx]}`}>
+                        <strong style={{
+                            color: "#489dcf"
+                        }}>{names[idx]}</strong> </a>
+                    {comment.content}</div>
             )}
         </div>
     );

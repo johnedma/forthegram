@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function CommentSection({comments, names}) {
+function CommentSection({ comments, names }) {
 
     return (
         <div className="feed-post-comments" style={{
@@ -12,9 +12,12 @@ function CommentSection({comments, names}) {
             {comments.map((comment, idx) =>
                 <div style={{
                     marginBottom: "5px",
-                }} key={idx}><strong style={{
-                    color: "#489dcf"
-                }}>{names[idx]}</strong> {comment.content}</div>
+                }} key={idx}>
+                    <a href={`/${names[idx]}`}>
+                        <strong style={{
+                            color: "#489dcf"
+                        }}>{names[idx]}</strong> </a>
+                    {comment.content}</div>
             )}
         </div>
     );
