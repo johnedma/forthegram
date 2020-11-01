@@ -147,7 +147,7 @@ with app.app_context():
         )
         post_t.append(created_at)
         db.session.add(Post(
-            user_id=user_id + 1,
+            user_id=user_id,
             photo_url="https://petstagram.s3.us-east-2.amazonaws.com/uploads/" + post[0],
             created_at=created_at,
             updated_at=created_at,
