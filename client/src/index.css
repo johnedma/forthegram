@@ -254,3 +254,6 @@ form input{
     color: #808080;
     font-weight: bold;
 }
+.add-comment_button:hover{
+    transform: scale(1.1);
+}
