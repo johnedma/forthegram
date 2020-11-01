@@ -42,11 +42,13 @@ def user_info(id):
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
-        user.delete()
+        print(user)
+        db.session.delete(user)
         db.session.commit()
-        return redirect("/api/users")
+        # return redirect("/api/users")
+        return {message: "goodbye"}
     if request.method == 'PUT':
-        print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -73,4 +75,3 @@ def user_info(id):
 
         db.session.commit()
         return user.to_dict()
-

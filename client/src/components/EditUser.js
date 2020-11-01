@@ -54,6 +54,32 @@ const EditUser = props => {
         }
         editUser();
     }
+
+    const deleteUser = e => {
+        e.preventDefault();
+
+        // Make the following an IIFE?
+        async function deleteUser() {
+            const response = await fetchWithCSRF(`/api/users/${props.currentUserId}`, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: 'include',
+                body: JSON.stringify({})
+            });
+
+            const responseData = await response.json();
+            if (!response.ok) {
+                setErrors(responseData.errors);
+            } else {
+                // setCurrentUserId(responseData.current_user_id)
+                history.push('/')
+            }
+        }
+        deleteUser();
+    }
+
     return (
         <div className="authContain">
             <div className="authForm">
@@ -137,8 +163,27 @@ const EditUser = props => {
                                 paddingRight: `.5em`,
                                 margin: `8px 40px`,
                                 fontWeight: `600`
-
                             }}>Submit changes</button>
+                        </form>
+                    </div>
+                    <h2 style={{
+                        color: `#8e8e8e`,
+                        fontSize: `17px`,
+                        fontWeight: `600`,
+                        lineHeight: `20px`,
+                        margin: `0 40px 10px`,
+                        textAlign: `center`
+                    }}>Would you like to delete your account?</h2>
+                    <div className="authFormInnerWrap">
+                        <form onSubmit={deleteUser}>
+                            <button type="submit" className="button has-background-link has-text-white"     style={{
+                                    height: `2rem`,
+                                    paddingLeft: `.5em`,
+                                    paddingRight: `.5em`,
+                                    margin: `8px 40px`,
+                                    fontWeight: `600`
+                                }}>Delete account
+                            </button>
                         </form>
                     </div>
                 </div>
