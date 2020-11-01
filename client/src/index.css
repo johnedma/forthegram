@@ -195,15 +195,10 @@ form input{
     left: 500px;
     border-radius: 15px;
     background-color: rgba(255,255,255,1);
-<<<<<<< HEAD
     box-shadow: 0 4px 8px 0 rgba(0, 0, 
     0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
    
     
-=======
-
-
->>>>>>> d22e9fcae0a0dc43bd273585e61356219ae14cc3
 }
 .button-container{
     display: flex;

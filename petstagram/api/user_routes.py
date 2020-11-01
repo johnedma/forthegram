@@ -35,12 +35,7 @@ def index():
         return redirect('/api/users')
 
 
-<<<<<<< HEAD
-@user_routes.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
-@login_required
-=======
 @user_routes.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
->>>>>>> d22e9fcae0a0dc43bd273585e61356219ae14cc3
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
     # print("user.to_dict() = ", user.to_dict())
