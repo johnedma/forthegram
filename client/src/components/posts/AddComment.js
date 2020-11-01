@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Redirect from 'react-dom'
 import AuthContext from '../../auth';
 import PostContext from '../../PostContext';
 
@@ -9,7 +10,7 @@ function AddComment() {
     const post_id = post.postData.post.id
 
 
-    const sayHello =e=> {
+    const sayHello = e => {
         setContent(e.target.value)
         // console.log(content)
     }
@@ -23,22 +24,22 @@ function AddComment() {
             content,
         }
 
-            try{
-                const res = await fetch(`/api/comments/${post_id}`, {
-                    method: "POST",
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                if (res.ok){
-                    const comment = await res.json()
-                }
-            } catch(e) {
-                console.error(e)
+        try {
+            const res = await fetch(`/api/comments/${post_id}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            if (res.ok) {
+                const comment = await res.json()
             }
+        } catch (e) {
+            console.error(e)
+        }
         setContent('')
-
+        window.location.href = '/';
     }
 
 
@@ -78,7 +79,7 @@ function AddComment() {
                     backgroundColor: "#ffff"
 
 
-                }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello}/>
+                }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello} />
                 <button style={{
                     border: "0px",
                     color: "#489dcf",
