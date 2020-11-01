@@ -32,6 +32,7 @@ users = [
 
 posts = [
     ("FriOct302019202020.png", 1, "Baby Yoda"),
+<<<<<<< HEAD
     # ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
     # ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
     # ("FriOct302146372020.png", 4, "Snacking with my bud."),
@@ -70,6 +71,49 @@ posts = [
     # ("SatOct310951162020.png", 13, "... as long as she doen't put me in the overhead compartment (again!)."),
     # ("SatOct310953542020.png", 14, "Time for a jump in the pond!"),
     # ("SatOct310956552020.png", 15, "My latest trick: levitation."),
+=======
+    ("SunNov11332182020.png", 1, "Ahh ... the Big Apple!"),
+    ("SunNov11334492020.png", 1, "Please meet my green-eyed friend."),
+    ("SunNov11335522020.png", 1, "Can you tell how much I'm loved?"),
+    ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
+    ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
+    ("FriOct302146372020.png", 4, "Snacking with my bud."),
+    ("FriOct302149462020.png", 5, "Can you tell which one is ME?"),
+    ("FriOct302152322020.png", 1, "Bad && Bougie"),
+    ("FriOct302155302020.png", 2, "'Excuse me... is this with soy milk?' Just kidding, Popeye would never..."),
+    ("FriOct302158132020.png", 3, "You KNOW that I don't like baths..."),
+    ("FriOct302201142020.png", 4, "Who do you think is the tallest?"),
+    ("FriOct302204202020.png", 5, "Yoga, anyone? Namaste right here on the couch."),
+    ("FriOct302206472020.png", 1, "Can we watch spooky movies all day?"),
+    ("FriOct302210052020.png", 2, "'You got this.' In case you needed some motivational words today..."),
+    ("FriOct302212512020.png", 4, "We promise to gas it up before we return home."),
+    ("FriOct302214352020.png", 5, "scarf weather"),
+    ("FriOct302218142020.png", 6, "Ah ... fall."),
+    ("FriOct302220302020.png", 1, "I think that I'm Fall'n for you."),
+    ("FriOct302222302020.png", 2, "Send beer ASAP."),
+    ("FriOct302224422020.png", 3, "I dare you to say that to my face."),
+    ("FriOct302227052020.png", 4, "Since you are already up, how about bringing us some milk?"),
+    ("FriOct302230002020.png", 5, "Every cowdog needs a horse, needs a horse ..."),
+    ("FriOct302233012020.png", 1, "My third tall skinny today."),
+    ("FriOct302234562020.png", 2, "fish & chips ftw"),
+    ("FriOct302237342020.png", 4, "Siamese triplets?  I think NOT."),
+    ("FriOct302239502020.png", 1, "Can you tell which one is me?"),
+    ("FriOct302242412020.png", 2, "I think that I just sat on an acorn."),
+    ("FriOct302245052020.png", 4, "Who's that other guy?"),
+    ("FriOct302247352020.png", 1, "If you've got it, flaunt it!"),
+    ("FriOct302255392020.png", 3, "Did you see a mouse walk past here a few minutes ago?"),
+    ("FriOct302257502020.png", 5, "I smell gum."),
+    ("FriOct302259492020.png", 2, "This is worth rolling of bed for, I suppose."),
+    ("SatOct310933352020.png", 7, "The future's looking bright ..."),
+    ("SatOct310939302020.png", 8, "Please pass the soap."),
+    ("SatOct310942492020.png", 9, "I was here first!"),
+    ("SatOct310945022020.png", 10, "I can hardly handle all of this stress!"),
+    ("SatOct310946482020.png", 11, "Do I dare?"),
+    ("SatOct310948522020.png", 12, "Don't believe everything that you read."),
+    ("SatOct310951162020.png", 13, "... as long as she doen't put me in the overhead compartment (again!)."),
+    ("SatOct310953542020.png", 14, "Time for a jump in the pond!"),
+    ("SatOct310956552020.png", 15, "My latest trick: levitation."),
+>>>>>>> main
 ]
 
 comments = [
@@ -144,7 +188,7 @@ with app.app_context():
         )
         post_t.append(created_at)
         db.session.add(Post(
-            user_id=user_id + 1,
+            user_id=user_id,
             photo_url="https://petstagram.s3.us-east-2.amazonaws.com/uploads/" + post[0],
             created_at=created_at,
             updated_at=created_at,

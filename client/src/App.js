@@ -1,21 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import UsersList from './components/UsersList';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import Post from './components/Post';
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import LogOut from './components/LogOut';
 import EditUser from './components/EditUser';
-import Comments from './components/Comments';
 import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
 import AuthRoute from "./components/AuthRoute"
-
-
-// import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
 import SinglePost from './components/posts/SinglePost';
 import PostContext from './PostContext';
@@ -173,6 +167,8 @@ function App() {
             const { current_user_id, current_user } = data
             setCurrentUserId(current_user_id)
             setCurrentUser(current_user)
+            console.log(current_user);
+            console.log(current_user_id);
             setLoading(false)
         })()
 
@@ -196,16 +192,14 @@ function App() {
                     <BrowserRouter>
                         <Navbar currentUserId={currentUserId} currentUser={currentUser} />
                         <Switch>
-                            <Route path="/users" />
-                            <AuthRoute path="/login" component={LogIn} />
-                            <AuthRoute path="/signup" component={SignUp} />
-                            <Route path="/posts/:id" component={SinglePost}>
-
-                            </Route>
-                            <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
+                            <AuthRoute exact path="/login" component={LogIn} />
+                            <AuthRoute exact path="/signup" component={SignUp} />
+                            <Route path="/posts/:id" component={SinglePost} />
+                            {/* <ProtectedRoute path="/:profile" component={Profile} currentUserId={currentUserId} /> */}
+                            <ProtectedRoute exact path="/logout" component={LogOut} currentUserId={currentUserId} />
+                            <ProtectedRoute exact path="/edituser" component={EditUser} currentUser={currentUser} currentUserId={currentUserId} />
+                            <Route exact path="/:profile" component={Profile} currentUserId={currentUserId} />
                             <ProtectedRoute exact path="/" component={AllPosts} currentUserId={currentUserId} />
-                            <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
-                            <ProtectedRoute path="/edituser" component={EditUser} currentUser={currentUser} currentUserId={currentUserId} />
                         </Switch>
                         <Footer />
                     </BrowserRouter>

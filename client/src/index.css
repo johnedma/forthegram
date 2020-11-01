@@ -12,25 +12,23 @@ h1{
 }
 
 body {
-    /* padding: 3rem; */
+    padding: 3rem;
     /* font-family: 'Oswald', sans-serif; */
     font-size: 14px;
     background-color: #fafafa;
     line-height: 18px;
+    max-width: 1020px;
+    inline-size: fit-content;
+
  }
 
  .navbar.is-fixed-top{
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
-    /* padding: .5em; */
     padding-left: 16px;
     padding-right: 16px;
 }
-
-/* body.has-navbar-fixed-top {
-    padding-top: 4.25rem;
-} */
 
 .center-cropped {
     width: 100px;
@@ -130,7 +128,7 @@ form input{
     width: 2em;
 }
 
-#post-button {
+/* #post-button {
     font-size: 55px;
     border-radius: 75px;
     position: fixed;
@@ -142,7 +140,7 @@ form input{
 
 #post-button:hover, #post-button:focus{
     outline: none;
-}
+} */
 
 .post-form-container{
     display: flex;
@@ -197,8 +195,11 @@ form input{
     left: 500px;
     border-radius: 15px;
     background-color: rgba(255,255,255,1);
-
-
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    top: 100px;
+   
+    
 }
 .button-container{
     display: flex;
