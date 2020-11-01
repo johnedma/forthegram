@@ -14,7 +14,6 @@ import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
 import AuthRoute from "./components/AuthRoute"
 
-
 // import LoginForm from './components/LoginForm';
 import AuthContext from './auth';
 import SinglePost from './components/posts/SinglePost';
@@ -198,10 +197,9 @@ function App() {
                             <Route path="/users" />
                             <AuthRoute path="/login" component={LogIn} />
                             <AuthRoute path="/signup" component={SignUp} />
-                            <Route path="/posts/:id" component={SinglePost}>
-
-                            </Route>
-                            <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
+                            <Route path="/posts/:id" component={SinglePost} />
+                            <Route path="/profile" component={Profile} />
+                            {/* <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} /> */}
                             <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
                             <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
                             <ProtectedRoute path="/edituser" component={EditUser} currentUser={currentUser} currentUserId={currentUserId} />
