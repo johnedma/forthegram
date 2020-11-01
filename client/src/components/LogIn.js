@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 import AuthContext from '../auth'
 
 function LogIn(props) {
-    const [usernameoremail, setUsernameoremail] = useState("");
-    const [password, setPassword] = useState("");
+    const [usernameoremail, setUsernameoremail] = useState("dougthepug");
+    const [password, setPassword] = useState("password");
     const [errors, setErrors] = useState([]);
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     let history = useHistory();
@@ -51,12 +51,14 @@ function LogIn(props) {
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
                             {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
+                            Username or email
                             <input
                                 type="text"
                                 placeholder="Username or email"
                                 value={usernameoremail}
                                 onChange={(e) => setUsernameoremail(e.target.value)}
                                 name="usernameoremail" />
+                            Password
                             <input
                                 type="password"
                                 placeholder="Password"
