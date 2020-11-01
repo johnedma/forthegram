@@ -128,7 +128,7 @@ form input{
     width: 2em;
 }
 
-#post-button {
+/* #post-button {
     font-size: 55px;
     border-radius: 75px;
     position: fixed;
@@ -140,7 +140,7 @@ form input{
 
 #post-button:hover, #post-button:focus{
     outline: none;
-}
+} */
 
 .post-form-container{
     display: flex;
@@ -197,6 +197,7 @@ form input{
     background-color: rgba(255,255,255,1);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 
     0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    top: 100px;
    
     
 }
