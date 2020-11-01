@@ -24,7 +24,7 @@ const Navbar = ({ currentUserId, currentUser }) => {
                     {currentUserId && currentUser &&
                         <>
                             <ModalWindow onClose={showModal} show={show} />
-                            {show ? "" : <button id="post-button" onClick={showModal} >+</button>}
+                            {show ? "" : <button className="navbar-item" onClick={showModal} >Create Post</button>}
                             <div className="navbar-item" >
                                 <a href={`/${currentUser.user_name}`}>
                                     {currentUser.user_name}
