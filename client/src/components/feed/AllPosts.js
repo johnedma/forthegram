@@ -19,12 +19,13 @@ function AllPosts() {
                 if (res.ok) {
                     const data = await res.json()
                     setFollowList(data.followerPosts[0])
+                    console.log(data);
                 }
-            }catch (err){
+            } catch (err) {
                 console.error(err)
             }
         })()
-    },[setFollowList])
+    }, [setFollowList])
     if (!followList) return
 
     return (
@@ -32,8 +33,8 @@ function AllPosts() {
             margin: "0 auto",
             width: "750px",
         }}>
-            {followList.map((pid,idx) =>
-                <FeedPost key={idx} post={pid}/>
+            {followList.map((pid, idx) =>
+                <FeedPost key={idx} post={pid} />
             )}
         </div>
     )

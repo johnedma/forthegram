@@ -4,7 +4,7 @@
 //make feed posts clickable
 //when post is clicked, navigate to posts/id front end route
 
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import AddComment from './AddComment'
 import CommentSection from './CommentSection'
 import Header from './Header'
@@ -18,23 +18,27 @@ function FeedPost(props) {
     const pid = props.post
 
     useEffect(() => {
-        (async() => {
+        (async () => {
             const res = await fetch(`/api/posts/${pid}`)
-            try{
+            try {
 
                 if (res.ok) {
                     const data = await res.json()
+                    // postInfo setter
                     setPostInfo(data)
-                    // console.log(postInfo)
                 }
-            }catch(err){
+            } catch (err) {
                 console.error(err)
             }
         })()
     }, [pid, setPostInfo])
     if (!postInfo) return null
+
+    //postData is nested object of the actual data contained in postInfo
     const postData = postInfo.post
-    const url= `/posts/${postData.id}`
+    console.log(postData);
+
+    const url = `/posts/${postData.id}`
     return (
         <div className="feed-post" style={{
             textAlign: "center",
@@ -42,11 +46,11 @@ function FeedPost(props) {
             marginBottom: "150px",
             marginTop: "15px"
         }}>
-            <Header post={postData.user}/>
-            <a href={url}><Photo pic={postData.photo_url}/></a>
-            <Icons caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like}/>
-            <CommentSection comments={postData.comments} names={postData.names}/>
-            <AddComment post_id={postData.id}/>
+            <Header username={postData.user} userId={postData.id} />
+            <a href={url}><Photo pic={postData.photo_url} /></a>
+            <Icons caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
+            <CommentSection comments={postData.comments} names={postData.names} />
+            <AddComment post_id={postData.id} />
         </div>
     )
 }
