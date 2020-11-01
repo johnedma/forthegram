@@ -32,6 +32,9 @@ users = [
 
 posts = [
     ("FriOct302019202020.png", 1, "Baby Yoda"),
+    ("SatOct31  2020.png", 1, "Ahhh ... the big apple!"),
+    ("SatOct31  2020.png", 1, "Please meet my green-eyed friend."),
+    ("SatOct31  2020.png", 1, "I'm very loved.  Can't you tell?"),
     ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
     ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
     ("FriOct302146372020.png", 4, "Snacking with my bud."),
@@ -203,13 +206,14 @@ with app.app_context():
         t_follower = user_t[follower_id]
         for followed_id in range(n_user):
             t_followed = user_t[followed_id]
-            if random() < follow_prob and not follower_id == followed_id:
-                later_t = t_followed if t_followed > t_follower else t_follower
-                created_at = fake.date_time_between(start_date=later_t)
-                follow_t.append(created_at)
-                db.session.add(Follow(
-                    follower_id=follower_id + 1,
-                    followed_id=followed_id + 1,
-                    created_at=created_at,
-                ))
+            if not follower_id == followed_id:
+                if random() < follow_prob and not follower_id == 0 or follower_id == 0 and followed_id < 5:
+                    later_t = t_followed if t_followed > t_follower else t_follower
+                    created_at = fake.date_time_between(start_date=later_t)
+                    follow_t.append(created_at)
+                    db.session.add(Follow(
+                        follower_id=follower_id + 1,
+                        followed_id=followed_id + 1,
+                        created_at=created_at,
+                    ))
     db.session.commit()
