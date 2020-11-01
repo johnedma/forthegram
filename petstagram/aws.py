@@ -6,15 +6,14 @@ s3 = boto3.client(
     aws_access_key_id=Config.S3_KEY,
     aws_secret_access_key=Config.S3_SECRET
 )
-print("Config.S3_KEY = ", Config.S3_KEY)
-print("Config.S3_SECRET = ", Config.S3_SECRET)
-print("==============================================")
+# print("Config.S3_KEY = ", Config.S3_KEY)
+# print("Config.S3_SECRET = ", Config.S3_SECRET)
 # boto3.set_stream_logger("botocore", level="DEBUG")
 def upload_file(file_name, bucket, acl="public-read"):
     """
     Function to upload a file to an S3 bucket
     """
-    print("bucket = ", bucket)
+    # print("bucket = ", bucket)
     print("=======================================================")
     object_name = file_name
     # s3_client = boto3.client('s3')

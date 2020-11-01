@@ -32,9 +32,9 @@ users = [
 
 posts = [
     ("FriOct302019202020.png", 1, "Baby Yoda"),
-    ("SatOct31  2020.png", 1, "Ahhh ... the big apple!"),
-    ("SatOct31  2020.png", 1, "Please meet my green-eyed friend."),
-    ("SatOct31  2020.png", 1, "I'm very loved.  Can't you tell?"),
+    ("SunNov11332182020.png", 1, "Ahh ... the Big Apple!"),
+    ("SunNov11334492020.png", 1, "Please meet my green-eyed friend."),
+    ("SunNov11335522020.png", 1, "Can you tell how much I'm loved?"),
     ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
     ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
     ("FriOct302146372020.png", 4, "Snacking with my bud."),
@@ -147,7 +147,7 @@ with app.app_context():
         )
         post_t.append(created_at)
         db.session.add(Post(
-            user_id=user_id + 1,
+            user_id=user_id,
             photo_url="https://petstagram.s3.us-east-2.amazonaws.com/uploads/" + post[0],
             created_at=created_at,
             updated_at=created_at,

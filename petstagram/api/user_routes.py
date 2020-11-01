@@ -46,7 +46,7 @@ def user_info(id):
         db.session.commit()
         return redirect("/api/users")
     if request.method == 'PUT':
-        print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -73,4 +73,3 @@ def user_info(id):
 
         db.session.commit()
         return user.to_dict()
-
