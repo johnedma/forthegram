@@ -64,7 +64,6 @@ def login():
 
     username_or_email = request.json.get('usernameoremail', None)
     password = request.json.get('password', None)
-    # print(username_or_email, password)
 
     if not username_or_email or not password:
         return {"errors": ["Missing required parameters"]}, 400
@@ -82,8 +81,6 @@ def login():
         authenticated = False
         user = None
 
-    # print(authenticated)
-    # print(user)
     if authenticated:
         login_user(user)
         return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
@@ -144,4 +141,3 @@ def restore():
     user = None if not current_user.is_authenticated else current_user.to_dict()
     if current_user:
         return {"current_user_id": id, "current_user": user}
-        #  return {"current_user_id": id, "current_user": current_user.to_dict()}

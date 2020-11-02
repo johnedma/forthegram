@@ -167,22 +167,10 @@ function App() {
             const { current_user_id, current_user } = data
             setCurrentUserId(current_user_id)
             setCurrentUser(current_user)
-            console.log(current_user);
-            console.log(current_user_id);
             setLoading(false)
         })()
 
     }, [])
-
-
-
-    // const logoutUser = async () => {
-    //     const response = await fetchWithCSRF('/logout', {
-    //         method: 'POST',
-    //         credentials: 'include'
-    //     });
-    //     if (response.ok) setCurrentUserId(null);
-    // }
 
     return (
         <AuthContext.Provider value={authContextValue}>

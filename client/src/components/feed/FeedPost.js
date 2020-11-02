@@ -31,7 +31,9 @@ function FeedPost(props) {
                 console.error(err)
             }
         })()
-    }, [pid, postInfo])
+    }, [pid,
+        // postInfo
+    ])
     if (!postInfo) return null
 
     //postData is nested object of the actual data contained in postInfo
