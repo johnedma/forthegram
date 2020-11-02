@@ -167,8 +167,8 @@ function App() {
             const { current_user_id, current_user } = data
             setCurrentUserId(current_user_id)
             setCurrentUser(current_user)
-            console.log(current_user);
-            console.log(current_user_id);
+            // console.log(current_user);
+            // console.log(current_user_id);
             setLoading(false)
         })()
 

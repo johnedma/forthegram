@@ -45,9 +45,9 @@ def user_info(id):
         follows = Follow.query.filter(or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
         for follow in follows:
             db.session.delete(follow)
-        # db.session.commit()
         db.session.delete(user)
         db.session.commit()
+        logout_user()
         # return redirect("/api/users")
         return {"message": "goodbye"}
     if request.method == 'PUT':
