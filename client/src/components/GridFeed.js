@@ -1,11 +1,11 @@
 import React from 'react';
 import '../grid.css'
 
-const GridFeed = ({ currentUser }) => {
+const GridFeed = ({ currentProfile }) => {
     return (
         <div class="container" style={{}}>
             <div class="row">
-                {currentUser.posts.map(post =>
+                {currentProfile.posts.map(post =>
                     <div className='col'>
                         <div class="ratio-square">
                             <a href={`/posts/${post.id}`}     >
