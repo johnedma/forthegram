@@ -1,136 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'// import GridFeed from "./GridFeed"
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import GridFeed from './GridFeed';
+import AuthContext from "../auth"
 
 const Profile = ({ match }) => {
-
-    // const currentUser = {
-    //     user: '2pac',
-    //     profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
-    //     followers: '37M',
-    //     following: 0,
-    //     name: 'Tupac Shakur',
-    //     bio: 'Everybodys at war with different things...Im at war with my own heart sometimes.',
-    //     posts: [
-
-    //         {
-    //             postId: "aaa",
-    //             photo: "https://images.unsplash.com/photo-1581131131269-5ccc5e08f692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-    //             // photo: "https://images.unsplash.com/photo-1581131131269-5ccc5e08f692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-    //             likes: "57",
-    //             comments: [
-    //                 {
-    //                     user: '2pac',
-    //                     comment: 'I make mistakes but learn from everyone. And when it’s said and done, I bet this brother be a better one. If I upset you, don’t stress. Never forget that God isn’t finished with me yet. - Ghetto Gospel feat Elton John'
-    //                     , createdAt: "Oct 5th",
-    //                     profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
-    //                 },
-    //                 {
-    //                     user: 'johnjohn',
-    //                     comment: "trilla"
-    //                     , createdAt: "Oct 5th",
-    //                     profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
-    //                 },
-    //                 {
-    //                     user: "pk",
-    //                     comment: "birdhouses are trill too"
-    //                     , createdAt: "Oct 5th",
-    //                     profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
-    //                 },
-    //                 {
-    //                     user: "tynaaaaaa",
-    //                     comment: "t in Tyna stands for trill, duh"
-    //                     , createdAt: "Oct 5th",
-    //                     profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
-    //                 },
-    //                 {
-    //                     user: "adawg",
-    //                     comment: "......."
-    //                     , createdAt: "Oct 5th",
-    //                     profilepic: 'https://i2-prod.mirror.co.uk/incoming/article7510500.ece/ALTERNATES/s1200b/0_MAIN-tupac.jpg',
-    //                 }
-    //             ],
-    //             hashtag: null
-    //         },
-    //         {
-    //             postId: "aab",
-    //             caption: 'Strength is overcome by weakness. Joy is overcome by pain. The night is overcome by brightness. And love—it remains the same. —Untitled #3',
-    //             photo: "https://images.unsplash.com/photo-1583353858816-0b5850f04adf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-    //             likes: "107",
-    //             comments: [
-    //                 {
-    //                     user: 'johnjohn',
-    //                     comment: "trilla"
-    //                 },
-    //                 {
-    //                     user: "pk",
-    //                     comment: "birdhouses are trill too"
-    //                 },
-    //                 {
-    //                     user: "tynaaaaaa",
-    //                     comment: "t in Tyna stands for trill, duh"
-    //                 },
-    //                 {
-    //                     user: "adawg",
-    //                     comment: "......."
-    //                 }
-    //             ],
-    //             hashtag: null
-    //         },
-    //         {
-    //             postId: "aac",
-    //             caption: 'I exist in the depths of solitude pondering my true goal. Trying 2 find peace of mind and still preserve my soul.” —In the Depths of Solitude',
-    //             photo: "https://images.unsplash.com/photo-1603456372099-2e63deb29f9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-    //             likes: "7",
-    //             comments: [
-    //                 {
-    //                     user: 'johnjohn',
-    //                     comment: "trilla"
-    //                 },
-    //                 {
-    //                     user: "pk",
-    //                     comment: "birdhouses are trill too"
-    //                 },
-    //                 {
-    //                     user: "tynaaaaaa",
-    //                     comment: "t in Tyna stands for trill, duh"
-    //                 },
-    //                 {
-    //                     user: "adawg",
-    //                     comment: "......."
-    //                 }
-    //             ],
-    //             hashtag: null
-    //         },
-    //         {
-    //             postId: "aad",
-    //             caption: 'Even though you’re fed up, you gotta keep your head up. - Keep Ya Head Up',
-    //             photo: "https://images.unsplash.com/photo-1603399880311-c20aa9c29caa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60",
-    //             likes: "1007",
-    //             comments: [
-    //                 {
-    //                     user: 'johnjohn',
-    //                     comment: "trilla"
-    //                 },
-    //                 {
-    //                     user: "pk",
-    //                     comment: "birdhouses are trill too"
-    //                 },
-    //                 {
-    //                     user: "tynaaaaaa",
-    //                     comment: "t in Tyna stands for trill, duh"
-    //                 },
-    //                 {
-    //                     user: "adawg",
-    //                     comment: "......."
-    //                 }
-    //             ],
-    //             hashtag: null
-    //         },
-    //     ]
-    // }
-
-    const [currentUser, setCurrentUser] = useState(null)
+    // in Profile currentProfile is really "current profile being viewed"
+    const { currentUserId } = useContext(AuthContext)
+    console.log(currentUserId);
+    const [currentProfile, setCurrentProfile] = useState(null)
+    const [followStatus, setFollowStatus] = useState("")
     let username = match.params.profile
     useEffect(() => {
         (async () => {
@@ -140,17 +18,111 @@ const Profile = ({ match }) => {
                 if (res.ok) {
                     const data = await res.json()
                     // postInfo setter
-                    setCurrentUser(data)
+                    setCurrentProfile(data)
+                    data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
+                    // setFollowStatus(status);
+                    // setFollowStatus(data.followers.includes(currentUserId));
+                    console.log(followStatus);
+                    // console.log(currentProfile.followers.includes(currentUserId))
+                    // setFollowStatus(currentProfile.followers.includes(currentUserId) ? true : false)
                 }
             } catch (err) {
                 console.error(err)
             }
         })()
-    }, [username])
-    if (!currentUser) return null
+    }, [username, followStatus])
+    if (!currentProfile) return null
+    // console.log(currentProfile.followers.includes(currentUserId))
+    // const [followStatus, setFollowStatus] = useState(currentProfile.followers.includes(currentUserId))
+    // currentProfile.followers.includes(currentUserId) setFollowStatus(true)
+
+    // send and qurey currentProfile.user.id currentUserId
+    // const updateFollowStatus = e =>{
+    //         if (currentProfile.followers.includes(currentUserId)){
+    //             let req="post"
+    //     async () => {
+    //         const res = await fetch(`/api/profile/${username}`)
+    //         try {
+
+    //             if (res.ok) {
+    //                 const data = await res.json()
+    //                 // postInfo setter
+    //                 setCurrentProfile(data)
+    //             }
+    //         } catch (err) {
+    //             console.error(err)
+    //         }
+    //         else const res = await fetch(`/api/profile/${username}`)
+    //         try {
+
+    //             if (res.ok) {
+    //                 const data = await res.json()
+    //                 // postInfo setter
+    //                 setCurrentProfile(data)
+    //             }
+    //         } catch (err) {
+    //             console.error(err)
+    //         }
+    //     }
+    // }
 
 
-    console.log(currentUser);
+    const followUser = async () => {
+        console.log("plugged in to follow");
+        const data = {
+            profile_id: currentProfile.user.id,
+            follower_id: currentUserId
+        }
+        try {
+            const res = await fetch(`/api/profile/follow`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            if (!res.ok) {
+                console.log(res)
+            }
+            setFollowStatus("Following")
+            console.log(res)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    // const followUser = () => {
+    //     console.log(currentProfile.followers);
+    //     currentProfile.followers.push(currentUserId)
+    //     console.log(currentProfile.followers);
+    //     return
+    // }
+
+    const unfollowUser = async () => {
+        console.log("plugged in to unfollow");
+        const data = {
+            profile_id: currentProfile.user.id,
+            follower_id: currentUserId
+        }
+        try {
+            const res = await fetch(`/api/profile/unfollow`, {
+                method: "DELETE",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            if (!res.ok) {
+                console.log(res)
+            }
+            //    console.log(res.json())
+            setFollowStatus("Follow")
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
+    console.log(currentProfile);
     return (
         <main style={{
             backgroundColor: `#fafafa`,
@@ -166,7 +138,13 @@ const Profile = ({ match }) => {
                 border: `0 solid #000`,
 
             }}>
-                <header style={{ display: `flex`, marginBottom: `44px`, flexDirection: `row` }}>
+                <header style={{
+                    display: `flex`,
+                    margin: `0 auto`,
+                    marginBottom: `44px`,
+                    flexDirection: `row`,
+                    maxWidth: `fit-content`
+                }}>
                     <div style={{
                         // flexGrow: `1`,
                         marginRight: `30px`
@@ -178,13 +156,6 @@ const Profile = ({ match }) => {
                             alignSelf: `center`,
                             display: `block`
                         }}>
-                            {/* <div style={{
-                                // position: `absolute`,
-                                top: `-9px`,
-                                left: `-9px`,
-                                width: `168px`,
-                                height: `168px`
-                            }}> */}
                             <span style={{
                                 width: `150px`,
                                 height: `150px`,
@@ -199,7 +170,7 @@ const Profile = ({ match }) => {
                                 position: `relative`
                             }}>
                                 <img src='https://images.unsplash.com/photo-1526660690293-bcd32dc3b123?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80' style={{
-                                    // <img src={currentUser.profilepic} style={{
+                                    // <img src={currentProfile.profilepic} style={{
                                     height: `100%`,
                                     // -webkit-touch-callout: none;
                                     width: `100%`,
@@ -225,11 +196,32 @@ const Profile = ({ match }) => {
                                 lineHeight: `32px`,
                                 margin: `-5px 0 -6px`,
                                 color: `#262626`
-                            }}>{currentUser.user.user_name}</h2>
-                            <button className="button is-info" style={{
-                                marginLeft: `20px`,
-                                fontWeight: `600`
-                            }}>Follow</button>
+                            }}>{currentProfile.user.user_name}</h2>
+
+                            {currentProfile.user.id === currentUserId ?
+                                <button disabled className="button is-info" style={{
+                                    marginLeft: `20px`,
+                                    fontWeight: `600`
+                                }}>
+                                    Follow
+                                    {/* {currentProfile.followers.includes(currentUserId) ? "Following" : "Follow"} */}
+                                    {/* {followStatus ? "Following" : "Follow"} */}
+                                </button>
+                                :
+                                <button className="button is-info"
+                                    onClick={currentProfile.followers.includes(currentUserId) ? () => unfollowUser() : () => followUser()}
+                                    style={{
+                                        marginLeft: `20px`,
+                                        fontWeight: `600`
+                                    }}>
+                                    {/* Follow */}
+                                    {currentProfile.followers.includes(currentUserId) ?
+                                        "Following"
+                                        : "Follow"}
+                                    {/* {console.log(followStatus)} */}
+                                    {/* {followStatus ? "Following" : "Follow"} */}
+                                </button>
+                            }
                         </div>
                         <div style={{
                             display: `flex`,
@@ -241,10 +233,10 @@ const Profile = ({ match }) => {
                                 marginRight: `40px`
                             }}>
                                 {/* <div> */}
-                                <a href={`${currentUser.user.user_name}/feed`}>
+                                <a href={`${currentProfile.user.user_name}/feed`}>
                                     <span style={{
                                         fontWeight: `bold`
-                                    }}>{currentUser.posts.length} </span>
+                                    }}>{currentProfile.posts.length} </span>
                                 posts
                                 {/* </div> */}
                                 </a>
@@ -254,10 +246,10 @@ const Profile = ({ match }) => {
                                 marginRight: `40px`
                             }}>
                                 {/* <div> */}
-                                <a href={`${currentUser.user.user_name}/followers`}>
+                                <a href={`${currentProfile.user.user_name}/followers`}>
                                     <span style={{
                                         fontWeight: `bold`
-                                    }}>{currentUser.followers.length} </span>
+                                    }}>{currentProfile.followers.length} </span>
                                  followers
                                 </a>
                                 {/* </div> */}
@@ -267,10 +259,10 @@ const Profile = ({ match }) => {
                                 marginRight: `40px`
                             }}>
                                 {/* <div> */}
-                                <a href={`${currentUser.user.user_name}/following`}>
+                                <a href={`${currentProfile.user.user_name}/following`}>
                                     <span style={{
                                         fontWeight: `bold`
-                                    }}>{currentUser.following.length} </span>
+                                    }}>{currentProfile.following.length} </span>
                                  following
                                 </a>
                                 {/* </div> */}
@@ -278,14 +270,14 @@ const Profile = ({ match }) => {
 
                         </div>
                         <div>
-                            <span>{currentUser.user.full_name}</span>
+                            <span>{currentProfile.user.full_name}</span>
                             <br />
-                            <span>{currentUser.user.bio ? currentUser.user.bio : currentUser.user.email}</span>
+                            <span>{currentProfile.user.bio ? currentProfile.user.bio : currentProfile.user.email}</span>
                         </div>
                     </section>
                 </header>
                 <div className='row-container'>
-                    <GridFeed currentUser={currentUser} />
+                    <GridFeed currentProfile={currentProfile} />
                 </div>
             </div>
         </main>

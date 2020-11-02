@@ -8,9 +8,9 @@ function rightSide(props) {
     return (
         <div>
             <Header />
-            <Icons />
             <CommentSection />
             <AddComment />
+            <Icons />
         </div>
     )
 }

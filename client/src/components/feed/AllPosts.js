@@ -18,7 +18,8 @@ function AllPosts() {
 
                 if (res.ok) {
                     const data = await res.json()
-                    setFollowList(data.followerPosts[0])
+                    // shuffle(data.followerPosts[0])
+                    setFollowList(data.followerPosts[0].sort(() => Math.random() - 0.5))
                     console.log(data);
                 }
             } catch (err) {

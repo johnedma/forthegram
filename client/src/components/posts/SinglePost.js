@@ -25,11 +25,11 @@ function SinglePost(props) {
     return (
         <div style={{
             width: "500px",
-            margin: "0 auto",
+            // margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "500px 100px"
+            gridTemplateColumns: "500px 100px",
         }} className='post-wrapper'>
-            <Photo pic={postData.post.photo_url}/>
+            <Photo pic={postData.post.photo_url} />
             <RightSide />
         </div>
     )
