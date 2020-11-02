@@ -27,7 +27,7 @@ def download(id):
 
         get_comments = Comment.query.filter(Comment.post_id == pid).all()
 
-        get_likes = Like.query.filter(Comment.post_id == pid).order_by(Like.created_at.desc()).all()
+        get_likes = Like.query.filter(Like.post_id == pid).order_by(Like.created_at.desc()).all()
 
         get_post["user"] = User.query.filter(User.id == get_post["user_id"])[0].user_name
         get_post["comments"] = [comment.to_dict() for comment in get_comments]
