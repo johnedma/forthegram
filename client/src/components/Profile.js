@@ -30,7 +30,7 @@ const Profile = ({ match }) => {
                 console.error(err)
             }
         })()
-    }, [username])
+    }, [username, followStatus])
     if (!currentProfile) return null
     // console.log(currentProfile.followers.includes(currentUserId))
     // const [followStatus, setFollowStatus] = useState(currentProfile.followers.includes(currentUserId))
@@ -84,6 +84,7 @@ const Profile = ({ match }) => {
             if (!res.ok) {
                 console.log(res)
             }
+            setFollowStatus("Following")
             console.log(res)
         } catch (e) {
             console.error(e)
