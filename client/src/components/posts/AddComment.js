@@ -3,12 +3,16 @@ import Redirect from 'react-dom'
 import AuthContext from '../../auth';
 import PostContext from '../../PostContext';
 
-function AddComment() {
+function AddComment({ showRerender: rerender }) {
     const [content, setContent] = useState('')
     const post = useContext(PostContext)
     const { currentUserId } = useContext(AuthContext)
     const post_id = post.postData.post.id
 
+    const commentRerender = e => {
+        rerender && rerender(e);
+
+    };
 
     const sayHello = e => {
         setContent(e.target.value)
@@ -39,7 +43,7 @@ function AddComment() {
             console.error(e)
         }
         setContent('')
-        window.location.href = '/';
+        window.location.href = '/'
     }
 
 
