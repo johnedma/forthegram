@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import ModalWindow from './ModalWindow';
 
 const Navbar = ({ currentUserId, currentUser }) => {
-    // console.log((currentUser));
     const [show, setShow] = useState(false);
 
 
