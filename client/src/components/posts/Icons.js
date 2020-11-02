@@ -10,9 +10,9 @@ function Icons({ showRerender: rerender }) {
     const likes = post.likes
     const like_count = post.like_count
     const latest_like = post.latest_like
+    const caption = post.caption
 
-    console.log(post)
-
+    // console.log(post)
 
     return (
         <>
@@ -62,6 +62,14 @@ function Icons({ showRerender: rerender }) {
                 </button>
             </div> :
                 <div>
+                    <div style={{
+                        backgroundColor: `#fff`,
+                        border: `none`,
+                        fontWeight: `800`,
+                        fontSize: `1em`,
+                        padding: `16px 0`,
+                        width: "300px"
+                    }}>{caption}</div>
                     <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
