@@ -47,18 +47,20 @@ def follow():
     return 'posted'
 
 
-# @profile.route('/delete', methods=['POST'])
-# def follow():
-#     data = request.json
-#     print(data)
-#     new_follow = Follow(
-#         follower_id=data['follower_id'],
-#         followed_id=data['profile_id'],
-#         created_at=datetime.now()
-#     )
-#     db.session.add(new_follow)
-#     db.session.commit()
-#     return 'posted'
+@profile.route('/unfollow', methods=['DELETE'])
+def unfollow():
+    data = request.json
+    print(data)
+
+    query = Follow.query.filter_by(
+        follower_id=data['follower_id'],
+        followed_id=data['profile_id'],
+    ).first()
+    print("------------------QUERY---------------")
+    print(query)
+    db.session.delete(query)
+    db.session.commit()
+    return 'deleted'
 # add followers and following to return and make modal for them on click in protected routes
 # All users need a profile pic in db!!!!!!!!
 # randomize created at for the good profiles, all from the same user are lumped together

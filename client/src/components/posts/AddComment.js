@@ -70,7 +70,7 @@ function AddComment() {
             <form style={{
                 display: "grid",
                 gridTemplateColumns: "350px 10px",
-                justifyItems: "start"
+                justifyItems: "center"
             }} onSubmit={onSubmit}>
                 <input style={{
                     border: "0px",

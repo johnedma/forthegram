@@ -24,7 +24,6 @@ function FeedPost(props) {
 
                 if (res.ok) {
                     const data = await res.json()
-                    // postInfo setter
                     setPostInfo(data)
                 }
             } catch (err) {
@@ -43,6 +42,7 @@ function FeedPost(props) {
     const url = `/posts/${postData.id}`
     return (
         <div className="feed-post" style={{
+            backgroundColor: 'white',
             textAlign: "center",
             border: "solid 2px #e7e7e7",
             marginBottom: "150px",

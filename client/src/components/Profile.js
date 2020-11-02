@@ -98,9 +98,28 @@ const Profile = ({ match }) => {
     //     return
     // }
 
-    const unfollowUser = () => {
+    const unfollowUser = async () => {
         console.log("plugged in to unfollow");
-
+        const data = {
+            profile_id: currentProfile.user.id,
+            follower_id: currentUserId
+        }
+        try {
+            const res = await fetch(`/api/profile/unfollow`, {
+                method: "DELETE",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            if (!res.ok) {
+                console.log(res)
+            }
+            //    console.log(res.json())
+            setFollowStatus("Follow")
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     console.log(currentProfile);

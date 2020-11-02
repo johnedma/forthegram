@@ -12,13 +12,13 @@ h1{
 }
 
 body {
-    padding: 3rem;
+    /* padding: 3rem; */
     /* font-family: 'Oswald', sans-serif; */
     font-size: 14px;
     background-color: #fafafa;
     line-height: 18px;
-    max-width: 1020px;
-    inline-size: fit-content;
+    /* inline-size: fit-content; */
+    margin: 0 auto;
 
  }
 
@@ -195,11 +195,11 @@ form input{
     left: 500px;
     border-radius: 15px;
     background-color: rgba(255,255,255,1);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
     0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     top: 100px;
-   
-    
+
+
 }
 .button-container{
     display: flex;

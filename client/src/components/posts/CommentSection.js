@@ -10,7 +10,8 @@ const CommentSection = () => {
     return (
         <div style={{
             width: "400px",
-            height: "240px"
+            height: "240px",
+            padding: `0 16px`
         }}>
             {comments.map((comment, idx) =>
                 <div style={{
