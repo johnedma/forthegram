@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, redirect
 from petstagram.models import User, db, Follow
 from datetime import datetime
 from flask_login import login_required
+from sqlalchemy import or_
 
 user_routes = Blueprint('users', __name__)
 
@@ -38,24 +39,15 @@ def index():
 @user_routes.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
-    # print("user.to_dict() = ", user.to_dict())
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
-        print(user)
-        follows = Follow.query.filter(
-            # Follow.follower_id == int(id) or Follow.followed_id == int(id)
-            Follow.follower_id == int(id)
-            # or Follow.followed_id == int(id)
-            ).all()
-        print("--------------------------------------------")
-        print(follows[0].follower_id, follows[0].followed_id)
-        print("++++++++++++++++++++++++++++++++++++++++++++")
-        # for follow in follows:
-        #     db.session.delete(follow)
+        follows = Follow.query.filter(or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
+        for follow in follows:
+            db.session.delete(follow)
         # db.session.commit()
-        # db.session.delete(user)
-        # db.session.commit()
+        db.session.delete(user)
+        db.session.commit()
         # return redirect("/api/users")
         return {"message": "goodbye"}
     if request.method == 'PUT':

@@ -17,61 +17,21 @@ users = [
     ("TheOfficialGrumpyCat", "Feline Domesticus", "grump@felines4ever.net"),
     ("amysimbaandmilo", "Amy, Simba, and Milo", "asm@all3OfUs.com"),
     ("Reagandoodle", "Reagan B. Worthington IV", "reagan.worthington@theEstates.org"),
-    # ("mrpokee", "Pokee Much", "pokee@hogHeaven.net"),
-    # ("JoeCool", "Joe", "joe@k9.org"),
-    # ("goldenGlam", "Glam", "glam@gmail.com"),
-    # ("GoldenFive", "DreamTeam", "five.goldens@aol.com"),
-    # ("hector", "Hector", "hector@comcast.com"),
-    # ("winston", "Winston", "winston@myDog.org"),
-    # ("hercules", "Hercules", "hercules@myK9.org"),
-    # ("gertrude491", "Gertrude", "gertie@myPet.com"),
-    # ("MuttAndJeff", "Mutt and Jeff", "doggie2@myDog.net"),
-    # ("houdini393", "Houdini", "houdini.dachsund@aol.com"),
-    # ("PicklesTheCat", "Pickles", "picklepuss@gmail.com")
+    ("mrpokee", "Pokee Much", "pokee@hogHeaven.net"),
+    ("JoeCool", "Joe", "joe@k9.org"),
+    ("goldenGlam", "Glam", "glam@gmail.com"),
+    ("GoldenFive", "DreamTeam", "five.goldens@aol.com"),
+    ("hector", "Hector", "hector@comcast.com"),
+    ("winston", "Winston", "winston@myDog.org"),
+    ("hercules", "Hercules", "hercules@myK9.org"),
+    ("gertrude491", "Gertrude", "gertie@myPet.com"),
+    ("MuttAndJeff", "Mutt and Jeff", "doggie2@myDog.net"),
+    ("houdini393", "Houdini", "houdini.dachsund@aol.com"),
+    ("PicklesTheCat", "Pickles", "picklepuss@gmail.com")
 ]
 
 posts = [
     ("FriOct302019202020.png", 1, "Baby Yoda"),
-<<<<<<< HEAD
-    # ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
-    # ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
-    # ("FriOct302146372020.png", 4, "Snacking with my bud."),
-    # ("FriOct302149462020.png", 5, "Can you tell which one is ME?"),
-    # ("FriOct302152322020.png", 1, "Bad && Bougie"),
-    # ("FriOct302155302020.png", 2, "'Excuse me... is this with soy milk?' Just kidding, Popeye would never..."),
-    # ("FriOct302158132020.png", 3, "You KNOW that I don't like baths..."),
-    # ("FriOct302201142020.png", 4, "Who do you think is the tallest?"),
-    # ("FriOct302204202020.png", 5, "Yoga, anyone? Namaste right here on the couch."),
-    # ("FriOct302206472020.png", 1, "Can we watch spooky movies all day?"),
-    # ("FriOct302210052020.png", 2, "'You got this.' In case you needed some motivational words today..."),
-    # ("FriOct302212512020.png", 4, "We promise to gas it up before we return home."),
-    # ("FriOct302214352020.png", 5, "scarf weather"),
-    # ("FriOct302218142020.png", 6, "Ah ... fall."),
-    # ("FriOct302220302020.png", 1, "I think that I'm Fall'n for you."),
-    # ("FriOct302222302020.png", 2, "Send beer ASAP."),
-    # ("FriOct302224422020.png", 3, "I dare you to say that to my face."),
-    # ("FriOct302227052020.png", 4, "Since you are already up, how about bringing us some milk?"),
-    # ("FriOct302230002020.png", 5, "Every cowdog needs a horse, needs a horse ..."),
-    # ("FriOct302233012020.png", 1, "My third tall skinny today."),
-    # ("FriOct302234562020.png", 2, "fish & chips ftw"),
-    # ("FriOct302237342020.png", 4, "Siamese triplets?  I think NOT."),
-    # ("FriOct302239502020.png", 1, "Can you tell which one is me?"),
-    # ("FriOct302242412020.png", 2, "I think that I just sat on an acorn."),
-    # ("FriOct302245052020.png", 4, "Who's that other guy?"),
-    # ("FriOct302247352020.png", 1, "If you've got it, flaunt it!"),
-    # ("FriOct302255392020.png", 3, "Did you see a mouse walk past here a few minutes ago?"),
-    # ("FriOct302257502020.png", 5, "I smell gum."),
-    # ("FriOct302259492020.png", 2, "This is worth rolling of bed for, I suppose."),
-    # ("SatOct310933352020.png", 7, "The future's looking bright ..."),
-    # ("SatOct310939302020.png", 8, "Please pass the soap."),
-    # ("SatOct310942492020.png", 9, "I was here first!"),
-    # ("SatOct310945022020.png", 10, "I can hardly handle all of this stress!"),
-    # ("SatOct310946482020.png", 11, "Do I dare?"),
-    # ("SatOct310948522020.png", 12, "Don't believe everything that you read."),
-    # ("SatOct310951162020.png", 13, "... as long as she doen't put me in the overhead compartment (again!)."),
-    # ("SatOct310953542020.png", 14, "Time for a jump in the pond!"),
-    # ("SatOct310956552020.png", 15, "My latest trick: levitation."),
-=======
     ("SunNov11332182020.png", 1, "Ahh ... the Big Apple!"),
     ("SunNov11334492020.png", 1, "Please meet my green-eyed friend."),
     ("SunNov11335522020.png", 1, "Can you tell how much I'm loved?"),
@@ -113,7 +73,6 @@ posts = [
     ("SatOct310951162020.png", 13, "... as long as she doen't put me in the overhead compartment (again!)."),
     ("SatOct310953542020.png", 14, "Time for a jump in the pond!"),
     ("SatOct310956552020.png", 15, "My latest trick: levitation."),
->>>>>>> main
 ]
 
 comments = [
@@ -183,8 +142,9 @@ with app.app_context():
     post_t = []
     for post in posts:
         user_id = post[1]
+        print("user_id = ", user_id)
         created_at = fake.date_time_between(
-            start_date=user_t[user_id]
+            start_date=user_t[user_id - 1]
         )
         post_t.append(created_at)
         db.session.add(Post(
@@ -199,7 +159,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of comments per post
-    n_comment_per_post = 0
+    n_comment_per_post = 3
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
@@ -222,7 +182,7 @@ with app.app_context():
 
 with app.app_context():
     # probability of a user liking a post:
-    like_prob = 0
+    like_prob = 0.5
     like_t = []
     for user_id in range(n_user):
         t_user = user_t[user_id]
@@ -241,14 +201,13 @@ with app.app_context():
 
 with app.app_context():
     # probability of one user following another:
-    follow_prob = 0
+    follow_prob = 0.5
     follow_t = []
     for follower_id in range(n_user):
         t_follower = user_t[follower_id]
         for followed_id in range(n_user):
             t_followed = user_t[followed_id]
-            if follower_id == 0 and followed_id ==1:
-            # if random() < follow_prob and not follower_id == followed_id:
+            if random() < follow_prob and not follower_id == followed_id:
                 later_t = t_followed if t_followed > t_follower else t_follower
                 created_at = fake.date_time_between(start_date=later_t)
                 follow_t.append(created_at)
