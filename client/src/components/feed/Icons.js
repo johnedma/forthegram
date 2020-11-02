@@ -1,9 +1,83 @@
-import React from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import FeedPost from './FeedPost'
+import AuthContext from '../../auth'
 
-function Icons({ caption, likes, like_count, lat_like}) {
+function Icons({ postId, caption, likes, like_count, lat_like }) {
     const temp_postId = 5
     const temp_like_count = 322
+    const { currentUserId } = useContext(AuthContext)
+    const [errors, setErrors] = useState([]);
+
+    const handleLike = e => {
+        e.preventDefault();
+
+        async function removeLike(likes, i) {
+            const response = await fetch(`api/likes/${likes[i].id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+            const responseData = await response.json();
+            if (!response.ok) {
+                setErrors(responseData.errors);
+            } else {
+                console.log(responseData)
+                likes.splice(i, 1)
+                console.log(likes)
+                like_count--
+                return responseData
+            }
+        }
+
+
+        async function addLike() {
+            const response = await fetch(`/api/likes/${currentUserId}/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+            const responseData = await response.json();
+            if (!response.ok) {
+                setErrors(responseData.errors);
+            } else {
+                let { data } = responseData
+                console.log(data)
+                likes.push(data)
+                like_count++
+            }
+        }
+        for (let i = 0; i < likes.length; i++) {
+            if (likes[i].user_id === currentUserId) {
+                removeLike(likes, i);
+                return "done"
+            }
+        }
+        addLike()
+    }
+
+
+    useEffect(() => {
+        (async () => {
+            const res = await fetch(`/api/posts/${postId}`)
+            try {
+
+                if (res.ok) {
+                    const data = await res.json()
+                    // postInfo setter
+                    console.log(data)
+                }
+            } catch (err) {
+                console.error(err)
+            }
+        })()
+    }, [])
+
+
+
+
+
     return (
         <>
             <div className="after-photo" style={{ padding: `0 16px` }} >
@@ -11,7 +85,7 @@ function Icons({ caption, likes, like_count, lat_like}) {
                     {/* <!-- Left side --> */}
                     <div className="level-left" >
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button className="fontawe" onClick={handleLike} >
                                 <i className="fas fa-paw"></i>
                             </button>
                         </div>
@@ -41,19 +115,19 @@ function Icons({ caption, likes, like_count, lat_like}) {
             {/* replace with like count from post */}
             {like_count === 0 ? <div>
                 <button style={{
-                        backgroundColor: `#fff`,
-                        border: `none`,
-                        fontWeight: `800`,
-                        fontSize: `1em`,
-                        padding: `16px 0`
-                    }}>
+                    backgroundColor: `#fff`,
+                    border: `none`,
+                    fontWeight: `800`,
+                    fontSize: `1em`,
+                    padding: `16px 0`
+                }}>
                     Be the first to like this!
                 </button>
-            </div>:
-            <div style={{
-                textAlign: "left",
-                marginLeft: "20px"
-            }}>
+            </div> :
+                <div style={{
+                    textAlign: "left",
+                    marginLeft: "20px"
+                }}>
                     <div style={{
                         backgroundColor: `#fff`,
                         border: `none`,
