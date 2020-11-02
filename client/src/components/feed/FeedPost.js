@@ -31,14 +31,14 @@ function FeedPost(props) {
                 console.error(err)
             }
         })()
-    }, [pid,
-        // postInfo
-    ])
+
+    }, [])
+
     if (!postInfo) return null
 
     //postData is nested object of the actual data contained in postInfo
     const postData = postInfo.post
-    console.log(postData);
+
 
     const url = `/posts/${postData.id}`
     return (
@@ -50,7 +50,7 @@ function FeedPost(props) {
         }}>
             <Header username={postData.user} userId={postData.id} />
             <a href={url}><Photo pic={postData.photo_url} /></a>
-            <Icons caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
+            <Icons postId={postData.id} caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
             <CommentSection comments={postData.comments} names={postData.names} />
             <AddComment post_id={postData.id} />
         </div>

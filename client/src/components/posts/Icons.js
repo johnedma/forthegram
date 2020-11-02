@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import PostContext from '../../PostContext';
-
+import AuthContext from '../../auth'
 
 function Icons() {
     const data = useContext(PostContext)
+    const { currentUserId } = useContext(AuthContext)
     const post = data.postData.post
     const likes = post.likes
     const like_count = post.like_count
     const latest_like = post.latest_like
+    console.log(likes)
+    console.log(currentUserId)
     return (
         <>
             <div className="after-photo" style={{ padding: `0 16px` }} >
@@ -44,18 +47,18 @@ function Icons() {
             </div>
             {like_count === 0 ? <div>
                 <button style={{
-                        backgroundColor: `#fff`,
-                        border: `none`,
-                        fontWeight: `800`,
-                        fontSize: `1em`,
-                        padding: `16px 0`,
-                        width: "300px",
-                        textAlign: "left"
-                    }}>
+                    backgroundColor: `#fff`,
+                    border: `none`,
+                    fontWeight: `800`,
+                    fontSize: `1em`,
+                    padding: `16px 0`,
+                    width: "300px",
+                    textAlign: "left"
+                }}>
                     Be the first to like this!
                 </button>
-            </div>:
-            <div>
+            </div> :
+                <div>
                     <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
