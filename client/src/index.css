@@ -128,20 +128,6 @@ form input{
     width: 2em;
 }
 
-/* #post-button {
-    font-size: 55px;
-    border-radius: 75px;
-    position: fixed;
-    bottom: 100px;
-    left: 700px;
-    width: 75px;
-    background-color: #55b9f3;
-}
-
-#post-button:hover, #post-button:focus{
-    outline: none;
-} */
-
 .post-form-container{
     display: flex;
     margin: 100px;
@@ -260,3 +246,9 @@ form input{
 .add-comment_button:hover{
     transform: scale(1.1);
 }
+
+@media only screen and (max-width: 620px) {
+    body {
+      inline-size: fit-content;
+    }
+  }
