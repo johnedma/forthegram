@@ -2,11 +2,15 @@ import React, { useContext, useState, useEffect } from 'react'
 import FeedPost from './FeedPost'
 import AuthContext from '../../auth'
 
-function Icons({ postId, caption, likes, like_count, lat_like }) {
-    const temp_postId = 5
-    const temp_like_count = 322
+function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat_like }) {
+
     const { currentUserId } = useContext(AuthContext)
     const [errors, setErrors] = useState([]);
+
+    const willRerender = e => {
+        rerender && rerender(e);
+
+    };
 
     const handleLike = e => {
         e.preventDefault();
@@ -26,7 +30,7 @@ function Icons({ postId, caption, likes, like_count, lat_like }) {
                 likes.splice(i, 1)
                 console.log(likes)
                 like_count--
-                return responseData
+                willRerender()
             }
         }
 
@@ -46,33 +50,36 @@ function Icons({ postId, caption, likes, like_count, lat_like }) {
                 console.log(data)
                 likes.push(data)
                 like_count++
+                willRerender()
             }
         }
         for (let i = 0; i < likes.length; i++) {
             if (likes[i].user_id === currentUserId) {
+
                 removeLike(likes, i);
                 return "done"
             }
         }
+
         addLike()
     }
 
 
-    useEffect(() => {
-        (async () => {
-            const res = await fetch(`/api/posts/${postId}`)
-            try {
+    // useEffect(() => {
+    //     (async () => {
+    //         const res = await fetch(`/api/posts/${postId}`)
+    //         try {
 
-                if (res.ok) {
-                    const data = await res.json()
-                    // postInfo setter
-                    console.log(data)
-                }
-            } catch (err) {
-                console.error(err)
-            }
-        })()
-    }, [])
+    //             if (res.ok) {
+    //                 const data = await res.json()
+    //                 // postInfo setter
+    //                 console.log(data)
+    //             }
+    //         } catch (err) {
+    //             console.error(err)
+    //         }
+    //     })()
+    // }, [])
 
 
 

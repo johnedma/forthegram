@@ -14,8 +14,12 @@ import Photo from './Photo'
 function FeedPost(props) {
     const [postInfo, setPostInfo] = useState('')
     const test_url = 'https://scontent-dfw5-2.xx.fbcdn.net/v/t1.0-9/s960x960/122591384_3475114832573318_4257193317065004841_o.jpg?_nc_cat=1&ccb=2&_nc_sid=9e2e56&_nc_ohc=olZYvABB2N8AX87_xtD&_nc_ht=scontent-dfw5-2.xx&tp=7&oh=09b4f1efa2bc9d2fa320e0478444f4d5&oe=5FBF9555'
-
+    const [reRender, setRerender] = useState(false)
     const pid = props.post
+
+    const showRerender = e => {
+        setRerender(!reRender)
+    }
 
     useEffect(() => {
         (async () => {
@@ -31,7 +35,7 @@ function FeedPost(props) {
             }
         })()
 
-    }, [])
+    }, [reRender])
 
     if (!postInfo) return null
 
@@ -50,9 +54,9 @@ function FeedPost(props) {
         }}>
             <Header username={postData.user} userId={postData.id} />
             <a href={url}><Photo pic={postData.photo_url} /></a>
-            <Icons postId={postData.id} caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
+            <Icons postId={postData.id} willRerender={showRerender} caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
             <CommentSection comments={postData.comments} names={postData.names} />
-            <AddComment post_id={postData.id} />
+            <AddComment commentRerender={showRerender} post_id={postData.id} />
         </div>
     )
 }

@@ -16,6 +16,7 @@ const ModalWindow = props => {
 
     const onClose = e => {
         props.onClose && props.onClose(e);
+        setFileName('')
     };
 
     const handleSubmit = (e) => {

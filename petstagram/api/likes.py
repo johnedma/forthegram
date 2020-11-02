@@ -46,6 +46,3 @@ def add_likes(currentUserId, postId):
         'created_at': created_at,
     }
     return {'data': data}
-
-    
-

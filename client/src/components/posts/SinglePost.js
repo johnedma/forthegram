@@ -7,6 +7,7 @@ import RightSide from './RightSide';
 function SinglePost(props) {
     const { postData, setPostData } = useContext(PostContext)
 
+
     useEffect(() => {
         (async () => {
             try {
