@@ -142,8 +142,9 @@ with app.app_context():
     post_t = []
     for post in posts:
         user_id = post[1]
+        print("user_id = ", user_id)
         created_at = fake.date_time_between(
-            start_date=user_t[user_id]
+            start_date=user_t[user_id - 1]
         )
         post_t.append(created_at)
         db.session.add(Post(
@@ -158,7 +159,7 @@ with app.app_context():
 with app.app_context():
 
     # avg number of comments per post
-    n_comment_per_post = 6
+    n_comment_per_post = 3
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
