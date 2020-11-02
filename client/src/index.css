@@ -178,12 +178,12 @@ form input{
 .modal-div {
     position: absolute;
     border: solid 1px black;
-    left: 500px;
+    left: 300px;
     border-radius: 15px;
     background-color: rgba(255,255,255,1);
     box-shadow: 0 4px 8px 0 rgba(0, 0,
     0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    top: 100px;
+    top: 15px;
 
 
 }
