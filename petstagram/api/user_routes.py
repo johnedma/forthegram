@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, redirect
 from petstagram.models import User, db, Follow
 from datetime import datetime
-from flask_login import login_required
+from flask_login import login_required, logout_user
 from sqlalchemy import or_
 
 user_routes = Blueprint('users', __name__)
