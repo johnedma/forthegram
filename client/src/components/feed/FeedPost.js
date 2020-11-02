@@ -49,7 +49,7 @@ function FeedPost(props) {
             backgroundColor: 'white',
             textAlign: "center",
             border: "solid 2px #e7e7e7",
-            marginBottom: "150px",
+            marginBottom: "20px",
             marginTop: "15px"
         }}>
             <Header username={postData.user} userId={postData.id} />

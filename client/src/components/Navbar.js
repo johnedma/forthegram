@@ -25,9 +25,14 @@ const Navbar = ({ currentUserId, currentUser }) => {
                             <ModalWindow onClose={showModal} show={show} />
                             {show ? "" : <button className="navbar-item" onClick={showModal} style={{
                                 background: `white`,
-                                border: `none`,
-                                color: `#3273dc`
-                            }}>Create Post</button>}
+                                color: `rgb(50, 115, 220)`,
+                                borderRadius: `50%`,
+                                border: `2px solid`,
+                                cursor: `pointer`
+                            }}>
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                {/* Create Post */}
+                            </button>}
                             <div className="navbar-item" >
                                 <a href={`/${currentUser.user_name}`}>
                                     {currentUser.user_name}
