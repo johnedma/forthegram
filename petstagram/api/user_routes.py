@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request, redirect
-from petstagram.models import User, db
+from petstagram.models import User, db, Follow
 from datetime import datetime
-from flask_login import login_required
+from flask_login import login_required, logout_user
+from sqlalchemy import or_
 
 user_routes = Blueprint('users', __name__)
 
@@ -38,15 +39,19 @@ def index():
 @user_routes.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
-    # print("user.to_dict() = ", user.to_dict())
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
-        user.delete()
+        follows = Follow.query.filter(or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
+        for follow in follows:
+            db.session.delete(follow)
+        db.session.delete(user)
         db.session.commit()
-        return redirect("/api/users")
+        logout_user()
+        # return redirect("/api/users")
+        return {"message": "goodbye"}
     if request.method == 'PUT':
-        print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        # print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
@@ -73,4 +78,3 @@ def user_info(id):
 
         db.session.commit()
         return user.to_dict()
-
