@@ -4,21 +4,27 @@ from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager, \
     current_user, login_user, logout_user, login_required
-
+from flask_migrate import Migrate
 from petstagram.models import db, User
 from petstagram.api.user_routes import user_routes
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
+from petstagram.api.likes import likes
+from petstagram.api.following import following
 from petstagram.config import Config
+from petstagram.api.profile import profile
 from datetime import datetime
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
-
+migrate = Migrate(app, db)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(posts, url_prefix='/api/posts')
 app.register_blueprint(comments, url_prefix='/api/comments')
+app.register_blueprint(likes, url_prefix='/api/likes')
+app.register_blueprint(following, url_prefix='/api/following')
+app.register_blueprint(profile, url_prefix='/api/profile')
 db.init_app(app)
 
 
@@ -77,7 +83,11 @@ def login():
 
     if authenticated:
         login_user(user)
+<<<<<<< HEAD
         return {"current_user_id": current_user.id, "current_user_name": current_user.full_name}
+=======
+        return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
+>>>>>>> main
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -89,24 +99,31 @@ def signup():
 
     username = request.json.get('username', None)
     password = request.json.get('password', None)
+<<<<<<< HEAD
     firstname = request.json.get('fullname', None)
     lastname = request.json.get("fullname", None)
+=======
+    password2 = request.json.get('password2', None)
+>>>>>>> main
     fullname = request.json.get("fullname", None)
     email = request.json.get('email', None)
 
     if not username or not password:
         return {"errors": ["Missing required parameters"]}, 400
 
+    if not password == password2:
+        return {"errors": ["Passwords must match each other"]}, 400
+
     new_user = User(
-                    user_name=username,
-                    first_name=fullname,
-                    last_name=fullname,
-                    full_name=fullname,
-                    DOB=datetime.now(),
-                    email=email,
-                    password=password,
-                    created_at=datetime.now(),
-                    updated_at=datetime.now()
+        user_name=username,
+        first_name=fullname,
+        last_name=fullname,
+        full_name=fullname,
+        DOB=datetime.now(),
+        email=email,
+        password=password,
+        created_at=datetime.now(),
+        updated_at=datetime.now()
     )
     db.session.add(new_user)
     db.session.commit()
@@ -115,7 +132,7 @@ def signup():
     authenticated, user = User.authenticate1(username, password)
     if authenticated:
         login_user(user)
-        return {"current_user_id": current_user.id, "current_user_name": current_user.full_name}
+        return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -130,6 +147,11 @@ def logout():
 @app.route('/restore')
 def restore():
     id = current_user.id if current_user.is_authenticated else None
+    user = None if not current_user.is_authenticated else current_user.to_dict()
     if current_user:
+<<<<<<< HEAD
         print(current_user.is_authenticated)
         return {"current_user_id": id, "current_user_name": current_user.id}
+=======
+        return {"current_user_id": id, "current_user": user}
+>>>>>>> main

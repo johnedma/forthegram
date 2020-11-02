@@ -1,23 +1,21 @@
 import React, { useState, useContext } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
 import AuthContext from '../auth'
 
 
 const SignUp = props => {
-    const [email, setEmail] = useState('Email');
-    const [username, setUsername] = useState('Username');
-    const [password, setPassword] = useState('Password');
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
     const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
-    const [fullname, setFullname] = useState('Full name');
-    let history = useHistory();
+    const [fullname, setFullname] = useState('');
+
 
     const submitForm = e => {
-        console.log("top of outer signup event handler")
         e.preventDefault();
-
         // Make the following an IIFE?
         async function signupUser() {
             const response = await fetchWithCSRF(`/signup`, {
@@ -30,7 +28,8 @@ const SignUp = props => {
                     email,
                     username,
                     fullname,
-                    password
+                    password,
+                    password2
                 })
             });
 
@@ -39,7 +38,7 @@ const SignUp = props => {
                 setErrors(responseData.errors);
             } else {
                 setCurrentUserId(responseData.current_user_id)
-                history.push('/users')
+                // history.push('/users')
             }
         }
         signupUser();
@@ -52,7 +51,7 @@ const SignUp = props => {
                     <h1 style={{
                         margin: `22px auto 12px`,
                         fontSize: `3em`,
-                        height: `20px`,
+                          height: `20px`,
                         marginBlockStart: `1em`,
                         marginBlockEnd: `1em`
                     }}>Petstagram</h1>
@@ -66,6 +65,7 @@ const SignUp = props => {
                     }}>Sign up to see photos and videos from your friends.</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
+                            {errors.length ? errors.map(err => <li key={err} >{err}</li>) : ''}
                             <input
                                 className="input"
                                 type="text"
@@ -75,7 +75,7 @@ const SignUp = props => {
                             <input
                                 className="input"
                                 type="text"
-                                placeholder="Full Name"
+                                placeholder="Name"
                                 value={fullname}
                                 onChange={e => setFullname(e.target.value)} name="fullname" />
                             <input
@@ -90,6 +90,12 @@ const SignUp = props => {
                                 placeholder="Password"
                                 value={password}
                                 onChange={e => setPassword(e.target.value)} name="password" />
+                            <input
+                                className="input"
+                                type="password"
+                                placeholder="Confirm password"
+                                value={password2}
+                                onChange={e => setPassword2(e.target.value)} name="password2" />
 
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,

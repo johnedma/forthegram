@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-import UsersList from './components/UsersList';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
-import Post from './components/Post';
 import Profile from './components/Profile';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import LogOut from './components/LogOut';
-import Comments from './components/Comments';
+import EditUser from './components/EditUser';
 import Footer from './components/Footer';
 import ProtectedRoute from "./components/ProtectedRoute"
 import AuthRoute from "./components/AuthRoute"
 import AuthContext from './auth';
-import PostForm from './components/PostForm';
+import SinglePost from './components/posts/SinglePost';
+import PostContext from './PostContext';
+import AllPosts from './components/feed/AllPosts';
 
 // pass authenticated context to app
 // comments can have commentIds and with commentIds we could create "conversations"
@@ -147,58 +147,52 @@ import PostForm from './components/PostForm';
 function App() {
     const [fetchWithCSRF, setFetchWithCSRF] = useState(() => fetch);
     const [currentUserId, setCurrentUserId] = useState(null);
-    const [currentUserName, setCurrentUserName] = useState("")
+    const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [postData, setPostData] = useState(null)
     const authContextValue = {
         fetchWithCSRF,
         currentUserId,
-        currentUserName,
-        setCurrentUserId
+        setCurrentUserId,
+        currentUser,
+        setCurrentUser
     };
+
+    const postContextValue = { postData, setPostData };
 
     useEffect(() => {
         (async () => {
-            const response = await fetch('/restore');
-            const data = await response.json();
-            const { current_user_id, current_user_name } = data;
-            setCurrentUserId(current_user_id);
-            setCurrentUserName(current_user_name)
-            setLoading(false);
+            const response = await fetch('/restore')
+            const data = await response.json()
+            const { current_user_id, current_user } = data
+            setCurrentUserId(current_user_id)
+            setCurrentUser(current_user)
+            setLoading(false)
         })()
 
     }, [])
 
-
-
-    // const logoutUser = async () => {
-    //     const response = await fetchWithCSRF('/logout', {
-    //         method: 'POST',
-    //         credentials: 'include'
-    //     });
-    //     if (response.ok) setCurrentUserId(null);
-    // }
-
     return (
         <AuthContext.Provider value={authContextValue}>
-            { loading && <h1>Loading</h1>}
-            {!loading &&
-                <BrowserRouter>
-                    <Navbar currentUserId={currentUserId} currentUserName={currentUserName}/>
-                    <Switch>
-                        <Route path="/users" />
-                        <AuthRoute path="/login" component={LogIn} />
-                        <AuthRoute path="/signup" component={SignUp} />
-                        <Route path="/post" component={Post} currentUserId={currentUserId}>
-                            <h1>Posts</h1>
-                        </Route>
-                        <ProtectedRoute path="/profile" component={Profile} currentUserId={currentUserId} />
-                        <ProtectedRoute exact path="/" component={Home} currentUserId={currentUserId} />
-                        <ProtectedRoute path="/logout" component={LogOut} currentUserId={currentUserId} />
-                        <ProtectedRoute path="/create-post" component={PostForm} />
-                    </Switch>
-                    <Footer />
-                </BrowserRouter>
-            }
+            <PostContext.Provider value={postContextValue}>
+                {loading && <h1>Loading</h1>}
+                {!loading &&
+                    <BrowserRouter>
+                        <Navbar currentUserId={currentUserId} currentUser={currentUser} />
+                        <Switch>
+                            <AuthRoute exact path="/login" component={LogIn} />
+                            <AuthRoute exact path="/signup" component={SignUp} />
+                            <Route path="/posts/:id" component={SinglePost} />
+                            {/* <ProtectedRoute path="/:profile" component={Profile} currentUserId={currentUserId} /> */}
+                            <ProtectedRoute exact path="/logout" component={LogOut} currentUserId={currentUserId} />
+                            <ProtectedRoute exact path="/edituser" component={EditUser} currentUser={currentUser} currentUserId={currentUserId} />
+                            <Route exact path="/:profile" component={Profile} currentUserId={currentUserId} />
+                            <ProtectedRoute exact path="/" component={AllPosts} currentUserId={currentUserId} />
+                        </Switch>
+                        <Footer />
+                    </BrowserRouter>
+                }
+            </PostContext.Provider>
         </AuthContext.Provider>
     );
 }

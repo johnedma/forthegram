@@ -10,35 +10,122 @@ seed(1)
 fake = Faker()
 load_dotenv()
 
+# user_name	first_name	email
+users = [
+    ("dougthepug", "Douglas Puglas", "dougie@aol.com"),
+    ("popeyethefoodie", "Popeye Canine", "popI@gmail.com"),
+    ("TheOfficialGrumpyCat", "Feline Domesticus", "grump@felines4ever.net"),
+    ("amysimbaandmilo", "Amy, Simba, and Milo", "asm@all3OfUs.com"),
+    ("Reagandoodle", "Reagan B. Worthington IV", "reagan.worthington@theEstates.org"),
+    ("mrpokee", "Pokee Much", "pokee@hogHeaven.net"),
+    ("JoeCool", "Joe", "joe@k9.org"),
+    ("goldenGlam", "Glam", "glam@gmail.com"),
+    ("GoldenFive", "DreamTeam", "five.goldens@aol.com"),
+    ("hector", "Hector", "hector@comcast.com"),
+    ("winston", "Winston", "winston@myDog.org"),
+    ("hercules", "Hercules", "hercules@myK9.org"),
+    ("gertrude491", "Gertrude", "gertie@myPet.com"),
+    ("MuttAndJeff", "Mutt and Jeff", "doggie2@myDog.net"),
+    ("houdini393", "Houdini", "houdini.dachsund@aol.com"),
+    ("PicklesTheCat", "Pickles", "picklepuss@gmail.com")
+]
+
+posts = [
+    ("FriOct302019202020.png", 1, "Baby Yoda"),
+    ("SunNov11332182020.png", 1, "Ahh ... the Big Apple!"),
+    ("SunNov11334492020.png", 1, "Please meet my green-eyed friend."),
+    ("SunNov11335522020.png", 1, "Can you tell how much I'm loved?"),
+    ("FriOct302023292020.png", 2, "Not feeling so bad about being extra fluffy when you realize you’re not the only one."),
+    ("FriOct302140482020.png", 3, "I WANT CHOCOLATE!"),
+    ("FriOct302146372020.png", 4, "Snacking with my bud."),
+    ("FriOct302149462020.png", 5, "Can you tell which one is ME?"),
+    ("FriOct302152322020.png", 1, "Bad && Bougie"),
+    ("FriOct302155302020.png", 2, "'Excuse me... is this with soy milk?' Just kidding, Popeye would never..."),
+    ("FriOct302158132020.png", 3, "You KNOW that I don't like baths..."),
+    ("FriOct302201142020.png", 4, "Who do you think is the tallest?"),
+    ("FriOct302204202020.png", 5, "Yoga, anyone? Namaste right here on the couch."),
+    ("FriOct302206472020.png", 1, "Can we watch spooky movies all day?"),
+    ("FriOct302210052020.png", 2, "'You got this.' In case you needed some motivational words today..."),
+    ("FriOct302212512020.png", 4, "We promise to gas it up before we return home."),
+    ("FriOct302214352020.png", 5, "scarf weather"),
+    ("FriOct302218142020.png", 6, "Ah ... fall."),
+    ("FriOct302220302020.png", 1, "I think that I'm Fall'n for you."),
+    ("FriOct302222302020.png", 2, "Send beer ASAP."),
+    ("FriOct302224422020.png", 3, "I dare you to say that to my face."),
+    ("FriOct302227052020.png", 4, "Since you are already up, how about bringing us some milk?"),
+    ("FriOct302230002020.png", 5, "Every cowdog needs a horse, needs a horse ..."),
+    ("FriOct302233012020.png", 1, "My third tall skinny today."),
+    ("FriOct302234562020.png", 2, "fish & chips ftw"),
+    ("FriOct302237342020.png", 4, "Siamese triplets?  I think NOT."),
+    ("FriOct302239502020.png", 1, "Can you tell which one is me?"),
+    ("FriOct302242412020.png", 2, "I think that I just sat on an acorn."),
+    ("FriOct302245052020.png", 4, "Who's that other guy?"),
+    ("FriOct302247352020.png", 1, "If you've got it, flaunt it!"),
+    ("FriOct302255392020.png", 3, "Did you see a mouse walk past here a few minutes ago?"),
+    ("FriOct302257502020.png", 5, "I smell gum."),
+    ("FriOct302259492020.png", 2, "This is worth rolling of bed for, I suppose."),
+    ("SatOct310933352020.png", 7, "The future's looking bright ..."),
+    ("SatOct310939302020.png", 8, "Please pass the soap."),
+    ("SatOct310942492020.png", 9, "I was here first!"),
+    ("SatOct310945022020.png", 10, "I can hardly handle all of this stress!"),
+    ("SatOct310946482020.png", 11, "Do I dare?"),
+    ("SatOct310948522020.png", 12, "Don't believe everything that you read."),
+    ("SatOct310951162020.png", 13, "... as long as she doen't put me in the overhead compartment (again!)."),
+    ("SatOct310953542020.png", 14, "Time for a jump in the pond!"),
+    ("SatOct310956552020.png", 15, "My latest trick: levitation."),
+]
+
+comments = [
+    "OMG this is so cute!",
+    "Can't believe you're in town",
+    "Looking good!",
+    "We should definitely meet up for kibble",
+    "You're glowing...",
+    "Living your best life I see",
+    "You are absolutely stunning!!",
+    "GOALSSSS!!",
+    "My best friend is a model yall!!",
+    "This is art",
+    "You're such an inspiration to me",
+    "We should definitely do brunch again some time, that was so fun!!",
+    "Coolest kids on the block",
+    "LOL you should frame this",
+    "You are the cutest!!",
+    "Definitely digging this look",
+    "You are definitely working too hard",
+    "FTW!", "OMG!", "SMH", "LMAO", "WTH?", "ROFL", "You haven't aged a minute since I last saw you.",
+    "I barely even recognize you!", "You are an inspiration to us all.", "John 3:16"
+]
 
 with app.app_context():
     db.drop_all()
     db.create_all()
     # number of users, including demo_user
-    n_user = 5
-    created_at = datetime(2000, 1, 15)
-    db.session.add(User(
-        user_name="demo_user",
-        first_name="Demo User",
-        last_name="Demo User",
-        full_name="Demo User",
-        DOB=datetime(1980, 10, 31),
-        password="password",
-        email="demo@user.com",
-        created_at=created_at,
-        updated_at=datetime(2005, 2, 25),
-    ))
-    user_t = [created_at]
-    for _ in range(1, n_user):
-        DOB = fake.date_of_birth(minimum_age=14, maximum_age=100)
-        created_at = fake.date_time_between(start_date=datetime(1980, 10, 31))
+    n_user = len(users)
+    # created_at = datetime(2000, 1, 15)
+    # db.session.add(User(
+    #     user_name="demo_user",
+    #     first_name="Demo",
+    #     last_name="User",
+    #     full_name="Demo User",
+    #     DOB=datetime(1980, 10, 31),
+    #     password="password",
+    #     email="demo@user.com",
+    #     created_at=created_at,
+    #     updated_at=datetime(2005, 2, 25),
+    # ))
+
+    user_t = []
+    for user in users:
+        DOB = fake.date_between(start_date="-20y")
+        created_at = fake.date_time_between(start_date=DOB)
         user_t.append(created_at)
         db.session.add(User(
-            user_name=fake.simple_profile()["username"],
-            first_name=fake.name(),
-            last_name=fake.name(),
-            full_name=fake.name(),
-            email=fake.simple_profile()["mail"],
+            user_name=user[0],
+            first_name=user[1],
+            last_name=user[1],
+            full_name=user[1],
+            email=user[2],
             DOB=DOB,
             password="password",
             created_at=created_at,
@@ -49,29 +136,29 @@ with app.app_context():
 with app.app_context():
 
     # avg number of posts per user
-    n_post_per_user = 5
-    n_post = n_user * n_post_per_user
+    #n_post_per_user = 0
+    n_post = len(posts)
 
     post_t = []
-    for _ in range(n_post):
-        user_id = randrange(n_user)
+    for post in posts:
+        user_id = post[1]
         created_at = fake.date_time_between(
-            start_date=user_t[user_id]
+            start_date=user_t[user_id - 1]
         )
         post_t.append(created_at)
         db.session.add(Post(
-            user_id=user_id + 1,
-            photo_url=fake.isbn10(),
+            user_id=user_id,
+            photo_url="https://petstagram.s3.us-east-2.amazonaws.com/uploads/" + post[0],
             created_at=created_at,
             updated_at=created_at,
-            caption=fake.paragraph(nb_sentences=2, variable_nb_sentences=True),
+            caption=post[2],
         ))
 
     db.session.commit()
 with app.app_context():
 
     # avg number of comments per post
-    n_comment_per_post = 5
+    n_comment_per_post = 3
     n_comment = n_post * n_comment_per_post
 
     for _ in range(n_comment):
@@ -88,7 +175,7 @@ with app.app_context():
             post_id=post_id + 1,
             created_at=created_at,
             updated_at=created_at,
-            content=fake.paragraph(nb_sentences=2, variable_nb_sentences=True)
+            content=comments[randrange(len(comments))]
         ))
     db.session.commit()
 

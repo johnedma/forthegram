@@ -16,6 +16,10 @@ class User(db.Model, UserMixin):
     DOB = db.Column(db.Date, nullable=False)
     email = db.Column(db.String(63))
     hashed_password = db.Column(db.String(100), nullable=False)
+    website = db.Column(db.String(255))
+    bio = db.Column(db.Text)
+    phone = db.Column(db.Integer)
+    gender = db.Column(db.String(31))
     created_at = db.Column(db.DateTime, nullable=False)
     updated_at = db.Column(db.DateTime, nullable=False)
 
@@ -55,6 +59,8 @@ class User(db.Model, UserMixin):
     likes = db.relationship(
         "Like", back_populates="user", cascade="all, delete-orphan"
     )
+    # follows = db.relationship(
+    #    "Follow", back_populates="user")
     # figure out how to implement the following 4 lines w/out errors
     # follows = db.relationship("Follow", back_populates="user")
     # follows = db.relationship(
@@ -71,8 +77,38 @@ class User(db.Model, UserMixin):
             "full_name": self.full_name,
             "email": self.email,
             "DOB": self.DOB,
+            "website": self.website,
+            "bio": self.bio,
+            "phone": self.phone,
+            "gender":    self.gender,
             "created_at": self.created_at,
             "updated_at": self.updated_at
+        }
+
+
+class Follow(db.Model):
+    __tablename__ = 'follows'
+
+    id = db.Column(db.Integer, primary_key=True)
+    follower_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False
+    )
+    followed_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False
+    )
+    created_at = db.Column(db.DateTime, nullable=False)
+    db.UniqueConstraint(follower_id, followed_id)
+
+    # figure out how to insert back_populates="follows" into next 2 lines
+    # follower = db.relationship("User", foreign_keys=[follower_id], back_populates="follows")
+    # followed = db.relationship("User", foreign_keys=[followed_id], back_populates="follows")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "follower_id": self.follower_id,
+            "followed_id": self.followed_id,
+            "created_at": self.created_at,
         }
 
 
@@ -153,32 +189,6 @@ class Like(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "post_id": self.post_id,
-            "created_at": self.created_at,
-        }
-
-
-class Follow(db.Model):
-    __tablename__ = 'follows'
-
-    id = db.Column(db.Integer, primary_key=True)
-    follower_id = db.Column(
-        db.Integer, db.ForeignKey("users.id"), nullable=False
-    )
-    followed_id = db.Column(
-        db.Integer, db.ForeignKey("users.id"), nullable=False
-    )
-    created_at = db.Column(db.DateTime, nullable=False)
-    db.UniqueConstraint(follower_id, followed_id)
-
-    # figure out how to insert back_populates="follows" into next 2 lines
-    follower = db.relationship("User", foreign_keys=[follower_id])
-    followed = db.relationship("User", foreign_keys=[followed_id])
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "follower_id": self.follower_id,
-            "followed_id": self.followed_id,
             "created_at": self.created_at,
         }
 
