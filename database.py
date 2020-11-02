@@ -142,7 +142,6 @@ with app.app_context():
     post_t = []
     for post in posts:
         user_id = post[1]
-        print("user_id = ", user_id)
         created_at = fake.date_time_between(
             start_date=user_t[user_id - 1]
         )
