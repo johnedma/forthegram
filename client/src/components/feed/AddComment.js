@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../auth';
 
-function AddComment({ post_id }) {
+function AddComment({ commentRerender: rerender, post_id }) {
     const [content, setContent] = useState('')
     const { currentUserId } = useContext(AuthContext)
 
+    const commentRerender = e => {
+        rerender && rerender(e);
 
-    const sayHello =e=> {
+    };
+
+    const sayHello = e => {
         setContent(e.target.value)
     }
 
@@ -19,22 +23,22 @@ function AddComment({ post_id }) {
             content,
         }
 
-            try{
-                const res = await fetch(`api/comments/${post_id}`, {
-                    method: "POST",
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                if (!res.ok){
-                    // console.log(error)
-                }
-            } catch(e) {
-                console.error(e)
+        try {
+            const res = await fetch(`api/comments/${post_id}`, {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            if (!res.ok) {
+                // console.log(error)
             }
+        } catch (e) {
+            console.error(e)
+        }
         setContent('')
-
+        commentRerender();
     }
     return (
         <div className="add-comment-wrapper">
@@ -50,7 +54,7 @@ function AddComment({ post_id }) {
                     backgroundColor: "#ffff"
 
 
-                }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello}/>
+                }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello} />
                 <button style={{
                     border: "0px",
                     color: "#489dcf",

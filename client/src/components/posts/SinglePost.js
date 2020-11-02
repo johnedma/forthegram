@@ -7,6 +7,7 @@ import RightSide from './RightSide';
 function SinglePost(props) {
     const { postData, setPostData } = useContext(PostContext)
 
+
     useEffect(() => {
         (async () => {
             try {
@@ -24,10 +25,11 @@ function SinglePost(props) {
     if (!postData) return null
     return (
         <div style={{
-            width: "500px",
+            // width: "500px",
             // margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "500px 100px",
+            backgroundColor: "white"
         }} className='post-wrapper'>
             <Photo pic={postData.post.photo_url} />
             <RightSide />

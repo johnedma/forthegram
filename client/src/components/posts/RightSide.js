@@ -4,7 +4,7 @@ import CommentSection from './CommentSection'
 import Header from './Header'
 import Icons from './Icons'
 
-function rightSide(props) {
+function rightSide() {
     return (
         <div>
             <Header />
