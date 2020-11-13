@@ -83,11 +83,7 @@ def login():
 
     if authenticated:
         login_user(user)
-<<<<<<< HEAD
-        return {"current_user_id": current_user.id, "current_user_name": current_user.full_name}
-=======
         return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
->>>>>>> main
 
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
@@ -99,12 +95,7 @@ def signup():
 
     username = request.json.get('username', None)
     password = request.json.get('password', None)
-<<<<<<< HEAD
-    firstname = request.json.get('fullname', None)
-    lastname = request.json.get("fullname", None)
-=======
     password2 = request.json.get('password2', None)
->>>>>>> main
     fullname = request.json.get("fullname", None)
     email = request.json.get('email', None)
 
@@ -149,9 +140,4 @@ def restore():
     id = current_user.id if current_user.is_authenticated else None
     user = None if not current_user.is_authenticated else current_user.to_dict()
     if current_user:
-<<<<<<< HEAD
-        print(current_user.is_authenticated)
-        return {"current_user_id": id, "current_user_name": current_user.id}
-=======
         return {"current_user_id": id, "current_user": user}
->>>>>>> main
