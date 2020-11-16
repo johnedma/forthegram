@@ -6,7 +6,7 @@ function LogIn(props) {
     const [usernameoremail, setUsernameoremail] = useState("dougthepug");
     const [password, setPassword] = useState("password");
     const [errors, setErrors] = useState([]);
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, setCurrentUser } = useContext(AuthContext);
     let history = useHistory();
 
     const submitForm = (e) => {
@@ -30,7 +30,8 @@ function LogIn(props) {
             if (!response.ok) {
                 setErrors(responseData.errors);
             } else {
-                setCurrentUserId(responseData.current_user_id)
+                setCurrentUserId(responseData.current_user_id);
+                setCurrentUser(responseData.current_user);
                 history.push('/')
             }
         }

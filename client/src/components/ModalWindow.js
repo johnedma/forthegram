@@ -2,6 +2,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, Redirect, Route } from 'react-router-dom';
 import AuthContext from "../auth"
+import PostContext from "../PostContext";
 
 
 
@@ -13,6 +14,7 @@ const ModalWindow = props => {
     const [file, setFileName] = useState("");
     const [caption, setCaption] = useState("");
     const [errors, setErrors] = useState([]);
+    const { setUpdatedPosts } = useContext(PostContext);
 
     const onClose = e => {
         props.onClose && props.onClose(e);
@@ -42,6 +44,7 @@ const ModalWindow = props => {
                 onClose()
                 setFileName('')
                 setCaption('')
+                setUpdatedPosts(true);
             }
         }
         submitForm();

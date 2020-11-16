@@ -1,11 +1,16 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import PostContext from '../../PostContext'
 import Photo from './Photo';
 import RightSide from './RightSide';
 
 
 function SinglePost(props) {
-    const { postData, setPostData } = useContext(PostContext)
+    const { postData, setPostData, updatedComments, setUpdatedComments } = useContext(PostContext)
+    const [reRender, setRerender] = useState(false)
+
+    const showRerender = e => {
+        setRerender(!reRender)
+    }
 
 
     useEffect(() => {
@@ -21,7 +26,8 @@ function SinglePost(props) {
                 console.error(err)
             }
         })()
-    }, [props.location.pathname, setPostData])
+    }, [props.location.pathname, setPostData, updatedComments, reRender])
+    setUpdatedComments(false);
     if (!postData) return null
     return (
         <div style={{
@@ -32,7 +38,7 @@ function SinglePost(props) {
             backgroundColor: "white"
         }} className='post-wrapper'>
             <Photo pic={postData.post.photo_url} />
-            <RightSide />
+            <RightSide postData={postData} showRerender={showRerender} />
         </div>
     )
 }

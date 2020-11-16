@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import PostContext from '../../PostContext';
 import AuthContext from '../../auth'
 
-function Icons({ showRerender: rerender }) {
+// function Icons({ showRerender: rerender }) {
+function Icons() {
     const data = useContext(PostContext)
     const { currentUserId } = useContext(AuthContext)
     const post = data.postData.post
