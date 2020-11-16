@@ -150,6 +150,8 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true)
     const [postData, setPostData] = useState(null)
+    const [updatedPosts, setUpdatedPosts] = useState(false);
+    const [updatedComments, setUpdatedComments] = useState(false);
     const authContextValue = {
         fetchWithCSRF,
         currentUserId,
@@ -158,7 +160,14 @@ function App() {
         setCurrentUser
     };
 
-    const postContextValue = { postData, setPostData };
+    const postContextValue = {
+        postData,
+        setPostData,
+        updatedPosts,
+        setUpdatedPosts,
+        updatedComments,
+        setUpdatedComments,
+     };
 
     useEffect(() => {
         (async () => {
