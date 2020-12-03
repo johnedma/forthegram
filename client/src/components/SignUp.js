@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
-import AuthContext from '../auth'
+import { useHistory } from 'react-router-dom';
+import AuthContext from '../auth';
+// let history = useHistory();
 
 
 const SignUp = props => {
@@ -9,7 +11,7 @@ const SignUp = props => {
     const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);
     // const dispatch = useDispatch();
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, setCurrentUser } = useContext(AuthContext);
     const [errors, setErrors] = useState([]);
     const [fullname, setFullname] = useState('');
 
@@ -38,6 +40,8 @@ const SignUp = props => {
                 setErrors(responseData.errors);
             } else {
                 setCurrentUserId(responseData.current_user_id)
+                setCurrentUser(responseData.current_user);
+                // history.push('/')
                 // history.push('/users')
             }
         }
