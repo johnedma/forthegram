@@ -7,6 +7,8 @@ s3 = boto3.client(
     aws_secret_access_key=Config.S3_SECRET
 )
 # boto3.set_stream_logger("botocore", level="DEBUG")
+
+
 def upload_file(file_name, bucket, acl="public-read"):
     """
     Function to upload a file to an S3 bucket
@@ -15,7 +17,7 @@ def upload_file(file_name, bucket, acl="public-read"):
     object_name = file_name
     # s3_client = boto3.client('s3')
     response = s3.upload_file(file_name, bucket, object_name, ExtraArgs={
-        "ACL":acl,
+        "ACL": acl,
     })
 
     return response
