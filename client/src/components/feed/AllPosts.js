@@ -44,33 +44,21 @@ function AllPosts() {
                     // shuffle(data.followerPosts[0])
                     setFollowList(data.followerPosts[0].sort(() => Math.random() - 0.5))
                     console.log(data);
+                    if (data.following.length) {
+                        setShow(false)
+                    }
 
-                    // if (followList > 0) {
-                    //     setShow(false)
-                    // }
                 }
             } catch (err) {
                 console.error(err)
             }
         })()
+
     }, [setFollowList])
 
-    // useEffect(() => {
-    //     console.log("are we here?")
-    //     if (followList > 0) {
-    //         setShow(false)
-    //     }
-    // }, [])
-
-    console.log(followList)
     const handleClose = () => {
         setShow(false)
     }
-    // if (followList.length) {
-    //     setShow(true)
-    //     console.log("we made it")
-    //     return
-    // }
 
     return (
         <div>
@@ -89,37 +77,8 @@ function AllPosts() {
                 style={customStyles}
                 contentLabel='Modal'
             >
-                <p>HEllo User</p>
-                {/* <div className='modal'>
-                    <h1>
-                        {name}
-                    </h1>
-                    <div id='links'>
-                        <a href={links.github}>Github</a>
-                        <a href={links.live}>Live</a>
-                    </div>
-                    <div className='modal_images'>
-                        {pics.map((pic, idx) => (
-                            <img
-                                className='modal_img'
-                                alt='Not Found'
-                                src={pic}
-                                key={idx}
-                            />
-                        ))}
-                    </div>
-                    <div id='details'>
-                        {details}
-                    </div>
-                    <div id='tech'>
-                        <h4>Tech Used</h4>
-                        <div id='tech-items'>
-                            {tech.map((i, idx) => (
-                                <span className='item' key={idx}>{i}</span>
-                            ))}
-                        </div>
-                    </div>
-                </div> */}
+                <h2>Suggestions to Follow</h2>
+
 
             </Modal>
         </div>
