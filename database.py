@@ -10,24 +10,24 @@ seed(1)
 fake = Faker()
 load_dotenv()
 
-# user_name	first_name	email
+# can_follow    user_name	full_name	email
 users = [
-    ("dougthepug", "Douglas Puglas", "dougie@aol.com"),
-    ("popeyethefoodie", "Popeye Canine", "popI@gmail.com"),
-    ("TheOfficialGrumpyCat", "Feline Domesticus", "grump@felines4ever.net"),
-    ("amysimbaandmilo", "Amy, Simba, and Milo", "asm@all3OfUs.com"),
-    ("Reagandoodle", "Reagan B. Worthington IV", "reagan.worthington@theEstates.org"),
-    ("mrpokee", "Pokee Much", "pokee@hogHeaven.net"),
-    ("JoeCool", "Joe", "joe@k9.org"),
-    ("goldenGlam", "Glam", "glam@gmail.com"),
-    ("GoldenFive", "DreamTeam", "five.goldens@aol.com"),
-    ("hector", "Hector", "hector@comcast.com"),
-    ("winston", "Winston", "winston@myDog.org"),
-    ("hercules", "Hercules", "hercules@myK9.org"),
-    ("gertrude491", "Gertrude", "gertie@myPet.com"),
-    ("MuttAndJeff", "Mutt and Jeff", "doggie2@myDog.net"),
-    ("houdini393", "Houdini", "houdini.dachsund@aol.com"),
-    ("PicklesTheCat", "Pickles", "picklepuss@gmail.com")
+    (True,"dougthepug", "Douglas Puglas", "dougie@aol.com"),
+    (True,"popeyethefoodie", "Popeye Canine", "popI@gmail.com"),
+    (True, "TheOfficialGrumpyCat", "Feline Domesticus", "grump@felines4ever.net"),
+    (True, "amysimbaandmilo", "Amy, Simba, and Milo", "asm@all3OfUs.com"),
+    (True, "Reagandoodle", "Reagan B. Worthington IV", "reagan.worthington@theEstates.org"),
+    (True, "mrpokee", "Pokee Much", "pokee@hogHeaven.net"),
+    (True, "JoeCool", "Joe", "joe@k9.org"),
+    (False, "goldenGlam", "Glam", "glam@gmail.com"),
+    (False, "GoldenFive", "DreamTeam", "five.goldens@aol.com"),
+    (False, "hector", "Hector", "hector@comcast.com"),
+    (False, "winston", "Winston", "winston@myDog.org"),
+    (False, "hercules", "Hercules", "hercules@myK9.org"),
+    (False, "gertrude491", "Gertrude", "gertie@myPet.com"),
+    (False, "MuttAndJeff", "Mutt and Jeff", "doggie2@myDog.net"),
+    (False, "houdini393", "Houdini", "houdini.dachsund@aol.com"),
+    (False, "PicklesTheCat", "Pickles", "picklepuss@gmail.com")
 ]
 
 posts = [
@@ -121,11 +121,12 @@ with app.app_context():
         created_at = fake.date_time_between(start_date=DOB)
         user_t.append(created_at)
         db.session.add(User(
-            user_name=user[0],
-            first_name=user[1],
-            last_name=user[1],
-            full_name=user[1],
-            email=user[2],
+            can_follow=user[0],
+            user_name=user[1],
+            first_name=user[2],
+            last_name=user[2],
+            full_name=user[2],
+            email=user[3],
             DOB=DOB,
             password="password",
             created_at=created_at,
