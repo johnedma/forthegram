@@ -6,6 +6,7 @@ import PostContext from '../../PostContext';
 function AddComment({ showRerender: rerender }) {
     const [content, setContent] = useState('')
     const post = useContext(PostContext)
+    const { setUpdatedComments } = useContext(PostContext);
     const { currentUserId } = useContext(AuthContext)
     const post_id = post.postData.post.id
 
@@ -42,8 +43,9 @@ function AddComment({ showRerender: rerender }) {
         } catch (e) {
             console.error(e)
         }
-        setContent('')
-        window.location.href = '/'
+        setContent('');
+        setUpdatedComments(true);
+        // window.location.href = '/'
     }
 
 

@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'// import GridFeed
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import GridFeed from './GridFeed';
 import AuthContext from "../auth"
+import PostContext from "../PostContext";
 
 const Profile = ({ match }) => {
     // in Profile currentProfile is really "current profile being viewed"
     const { currentUserId } = useContext(AuthContext)
-    console.log(currentUserId);
+    const { updatedPosts } = useContext(PostContext);
     const [currentProfile, setCurrentProfile] = useState(null)
     const [followStatus, setFollowStatus] = useState("")
     let username = match.params.profile
@@ -30,7 +31,7 @@ const Profile = ({ match }) => {
                 console.error(err)
             }
         })()
-    }, [username, followStatus])
+    }, [username, followStatus, updatedPosts])
     if (!currentProfile) return null
     // console.log(currentProfile.followers.includes(currentUserId))
     // const [followStatus, setFollowStatus] = useState(currentProfile.followers.includes(currentUserId))

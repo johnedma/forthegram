@@ -5,7 +5,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager, \
     current_user, login_user, logout_user, login_required
 from flask_migrate import Migrate
-from petstagram.models import db, User
+from petstagram.models import db, User, Like
 from petstagram.api.user_routes import user_routes
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
@@ -14,6 +14,7 @@ from petstagram.api.following import following
 from petstagram.config import Config
 from petstagram.api.profile import profile
 from datetime import datetime
+
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
@@ -141,3 +142,11 @@ def restore():
     user = None if not current_user.is_authenticated else current_user.to_dict()
     if current_user:
         return {"current_user_id": id, "current_user": user}
+
+
+# AC & PK have NO idea as to why we need to do this.  This was copied from likes routes
+@app.route('/posts/api/likes/<id>', methods=['DELETE'])
+def del_likes(id):
+    del_like = Like.query.filter(Like.id == id).delete()
+    db.session.commit()
+    return {"Deleted": "Deleted"}

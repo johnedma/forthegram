@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PostContext from '../../PostContext';
 
 
@@ -6,6 +6,10 @@ const CommentSection = () => {
     const post = useContext(PostContext)
     const comments = post.postData.post.comments
     const names = post.postData.post.names
+    const { updatedComments, setUpdatedComments } = useContext(PostContext);
+
+    // useEffect(() => {}, [updatedComments]);
+    // setUpdatedComments(false);
 
     return (
         <div style={{

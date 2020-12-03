@@ -16,7 +16,9 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
         e.preventDefault();
 
         async function removeLike(likes, i) {
-            const response = await fetch(`api/likes/${likes[i].id}`, {
+            let url = `api/likes/${likes[i].id}`;
+            console.log(url);
+            const response = await fetch(url, {
                 method: 'DELETE',
                 headers: {
                     'Content-type': 'application/json'
