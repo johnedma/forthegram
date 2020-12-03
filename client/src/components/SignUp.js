@@ -5,6 +5,7 @@ import AuthContext from '../auth'
 const SignUp = props => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
+    const [canfollow, setCanfollow] = useState(false);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);
@@ -25,6 +26,7 @@ const SignUp = props => {
                 },
                 credentials: 'include',
                 body: JSON.stringify({
+                    canfollow,
                     email,
                     username,
                     fullname,
@@ -84,6 +86,12 @@ const SignUp = props => {
                                 placeholder="Username"
                                 value={username}
                                 onChange={e => setUsername(e.target.value)} name="username" />
+                            <input
+                                // className="input"
+                                type="checkbox"
+                                checked={canfollow}
+                                onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
+                            <label htmlFor="canfollow">Can people follow you?</label>
                             <input
                                 className="input"
                                 type="password"
