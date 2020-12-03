@@ -49,13 +49,12 @@ def user_info(id):
         db.session.delete(user)
         db.session.commit()
         logout_user()
-        # return redirect("/api/users")
         return {"message": "goodbye"}
     if request.method == 'PUT':
-        # print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
+        user.can_follow = request.json.get('canfollow', None)
         user.user_name = request.json.get('username', None) or userd["user_name"]
         user.password = request.json.get('password', None)  # or userd["password"]
         user.password2 = request.json.get('password2', None)  # or userd["password2"]

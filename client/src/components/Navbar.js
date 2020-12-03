@@ -30,7 +30,7 @@ const Navbar = ({ currentUserId, currentUser }) => {
                                 border: `2px solid`,
                                 cursor: `pointer`
                             }}>
-                                <i class="fas fa-cloud-upload-alt"></i>
+                                <i className="fas fa-cloud-upload-alt"></i>
                                 {/* Create Post */}
                             </button>}
                             <div className="navbar-item" >
