@@ -13,6 +13,7 @@ def index():
         response = User.query.filter(User.can_follow).all()
         return {"users": [user.to_dict() for user in response]}
 
+# FWIW, the signup form uses a route in __init__.py
     if request.method == 'POST':
         user_name = request.form['userName']
         first_name = request.form['firstName']

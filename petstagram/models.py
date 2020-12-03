@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
+    can_follow = db.Column(db.Boolean, nullable=False)
     user_name = db.Column(db.String(40), nullable=False, unique=True)
     first_name = db.Column(db.String(40))
     last_name = db.Column(db.String(40))
@@ -70,6 +71,7 @@ class User(db.Model, UserMixin):
 
     def to_dict(self):
         return {
+            "can_follow": self.can_follow,
             "id": self.id,
             "user_name": self.user_name,
             "first_name": self.first_name,
