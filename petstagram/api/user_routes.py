@@ -10,7 +10,7 @@ user_routes = Blueprint('users', __name__)
 @user_routes.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        response = User.query.all()
+        response = User.query.filter(User.can_follow).all()
         return {"users": [user.to_dict() for user in response]}
 
 # FWIW, the signup form uses a route in __init__.py
@@ -49,10 +49,10 @@ def user_info(id):
         db.session.delete(user)
         db.session.commit()
         logout_user()
-        # return redirect("/api/users")
+       
         return {"message": "goodbye"}
     if request.method == 'PUT':
-        # print("GETTING TO PUT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
