@@ -18,11 +18,12 @@ const customStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         width: '610px',
-        height: '90vh',
+        height: '600px',
         borderRadius: "30px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center"
+        // justifyContent: "center",
+        marginTop: "40px"
     }
 };
 
@@ -112,17 +113,22 @@ function AllPosts() {
                 style={customStyles}
                 contentLabel='Modal'
             >
-                <button onClick={handleClose}>x</button>
-                <h2>Suggestions to Follow</h2>
-                {suggestions.map(person => {
-                    return (
-                        <div key={person.id}>
-                            {person.user_name}
-                            <button onClick={handleClick} id={person.id}>Follow</button>
-                        </div>
-                    )
-                })}
-
+                <button className="modal-exit" onClick={handleClose}>x</button>
+                <div className="header-div">
+                    <h2 className="modal-header">Suggestions to Follow</h2>
+                </div>
+                <div className="all-suggestion-div">
+                    {suggestions.map(person => {
+                        return (
+                            <div >
+                                <div className="suggestion-div" key={person.id}>
+                                    {person.user_name}
+                                    <button onClick={handleClick} id={person.id}>Follow</button>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
             </Modal>
         </div>
     )

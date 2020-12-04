@@ -209,7 +209,7 @@ form input{
     transform: scale(0.33);
     box-shadow: 1rem 0 0 rgba(black, 0.2);
   } */
-  @supports (offset-rotate: 0deg) {
+  /* @supports (offset-rotate: 0deg) {
 
     offset-rotate: 0deg;
     offset-path: path("M 250,100 S -300,500 -700,-200");
@@ -219,7 +219,7 @@ form input{
   }
   @media (prefers-reduced-motion) {
     offset-path: none;
-  }
+  } */
 
   .content {
     padding: 1rem;
@@ -252,3 +252,34 @@ form input{
       inline-size: fit-content;
     }
   }
+
+/* modal window for suggested follows */
+.suggestion-div{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.modal-exit{
+    width:20px;
+    align-self: flex-end;
+    
+}
+
+.header-div{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    border-bottom: grey 1px solid;
+}
+
+.all-suggestion-div{
+    margin-top: 50px;
+}
+
+.modal-header{
+    font-weight: bold;
+    font-size: 25px;
+    padding-bottom: 10px;
+}
