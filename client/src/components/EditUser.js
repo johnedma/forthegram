@@ -4,7 +4,7 @@ import AuthContext from '../auth'
 
 
 const EditUser = props => {
-    const { fetchWithCSRF, currentUser } = useContext(AuthContext);
+    const { fetchWithCSRF, currentUser, setCurrentUser, setCurrentUserId } = useContext(AuthContext);
     const [email, setEmail] = useState(currentUser.email);
     const [username, setUsername] = useState(currentUser.user_name);
     const [fullname, setFullname] = useState(currentUser.full_name);
@@ -75,7 +75,8 @@ const EditUser = props => {
             if (!response.ok) {
                 setErrors(responseData.errors);
             } else {
-                // setCurrentUserId(responseData.current_user_id)
+                setCurrentUserId(null);
+                setCurrentUser(null);
                 history.push('/')
             }
         }

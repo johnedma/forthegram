@@ -4,7 +4,7 @@ import AuthContext from '../auth'
 
 function LogOut(props) {
     const [errors, setErrors] = useState("");
-    const { fetchWithCSRF, setCurrentUserId } = useContext(AuthContext);
+    const { fetchWithCSRF, setCurrentUserId, setCurrentUser } = useContext(AuthContext);
     let history = useHistory();
 
     const submitForm = (e) => {
@@ -15,7 +15,10 @@ function LogOut(props) {
                 method: 'POST',
                 credentials: 'include'
             });
-            if (response.ok) setCurrentUserId(null);
+            if (response.ok) {
+                setCurrentUserId(null);
+                setCurrentUser(null);
+            }
         }
         logoutUser();
     }

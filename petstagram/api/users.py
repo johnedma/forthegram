@@ -4,10 +4,10 @@ from datetime import datetime
 from flask_login import login_required, logout_user
 from sqlalchemy import or_
 
-user_routes = Blueprint('users', __name__)
+users = Blueprint('users', __name__)
 
 
-@user_routes.route('/', methods=['GET', 'POST'])
+@users.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
         response = User.query.filter(User.can_follow).all()
@@ -37,7 +37,7 @@ def index():
         return redirect('/api/users')
 
 
-@user_routes.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
+@users.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
     if request.method == "GET":
