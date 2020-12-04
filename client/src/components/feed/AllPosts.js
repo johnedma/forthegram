@@ -6,7 +6,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../auth'
 import FeedPost from './FeedPost'
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
+import FollowsModal from './FollowsModal';
 
 
 const customStyles = {
@@ -30,13 +31,13 @@ const customStyles = {
 function AllPosts() {
     const [followList, setFollowList] = useState([])
     // const [hasFollowers, setHasFollowers] useState(followList.length? true : false)
-    const { currentUserId } = useContext(AuthContext)
+    const { currentUserId, currentUser } = useContext(AuthContext)
     const [show, setShow] = useState(!followList.length)
-    const [suggestions, setSuggestions] = useState([])
+    const [suggestions, setSuggestions] = useState([]);
+    const [currentProfile, setCurrentProfile] = useState(null);
+    const [followStatus, setFollowStatus] = useState("");
 
     console.log(show)
-
-
 
     useEffect(() => {
         (async () => {
@@ -74,8 +75,8 @@ function AllPosts() {
 
     const handleClick = e => {
         console.log(e.target.id);
-        async function addFollow() {
-            const res = await fetch("/api/profile/follow", {
+        async function addFollowing() {
+            let res = await fetch("/api/profile/following", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -90,8 +91,26 @@ function AllPosts() {
             } else {
                 console.log("failure");
             }
+
+            res = await fetch(`/api/profile/${currentUser.user_name}`)
+            try {
+                if (res.ok) {
+                    const data = await res.json()
+                    // postInfo setter
+                    setCurrentProfile(data)
+                    data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
+                    // setFollowStatus(status);
+                    // setFollowStatus(data.followers.includes(currentUserId));
+                    console.log(followStatus);
+                    // console.log(currentProfile.followers.includes(currentUserId))
+                    // setFollowStatus(currentProfile.followers.includes(currentUserId) ? true : false)
+                }
+            } catch (err) {
+                console.error(err)
+            }
+
         }
-        addFollow();
+        addFollowing();
         e.target.setAttribute("disabled", "disabled")
     }
 
@@ -106,24 +125,14 @@ function AllPosts() {
                         <FeedPost key={idx} post={pid} />
                     )}
             </div>
-            <Modal
-                isOpen={show}
-                onRequestClose={handleClose}
-                style={customStyles}
-                contentLabel='Modal'
-            >
-                <button onClick={handleClose}>x</button>
-                <h2>Suggestions to Follow</h2>
-                {suggestions.map(person => {
-                    return (
-                        <div key={person.id}>
-                            {person.user_name}
-                            <button onClick={handleClick} id={person.id}>Follow</button>
-                        </div>
-                    )
-                })}
-
-            </Modal>
+            <FollowsModal
+                show={show}
+                handleClose={handleClose}
+                customStyles={customStyles}
+                handleClick={handleClick}
+                suggestions={suggestions}
+                follows={followList}
+            />
         </div>
     )
 }

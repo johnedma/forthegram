@@ -33,7 +33,7 @@ def profile_page(username):
 # in progress
 
 
-@profile.route('/follow', methods=['POST'])
+@profile.route('/following', methods=['POST'])
 def follow():
     data = request.json
     print(data, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
