@@ -6,6 +6,7 @@ from flask_login import LoginManager, \
     current_user, login_user, logout_user, login_required
 from flask_migrate import Migrate
 from petstagram.models import db, User, Like
+from petstagram.api.sesion import sesion
 from petstagram.api.users import users
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
@@ -20,6 +21,7 @@ app = Flask(__name__)
 login_manager = LoginManager(app)
 migrate = Migrate(app, db)
 app.config.from_object(Config)
+app.register_blueprint(sesion, url_prefix='/api/sesion')
 app.register_blueprint(users, url_prefix='/api/users')
 app.register_blueprint(posts, url_prefix='/api/posts')
 app.register_blueprint(comments, url_prefix='/api/comments')
@@ -57,36 +59,36 @@ def react_root(path):
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
 
+# PK commented out on 12/5
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     if not request.is_json:
+#         return jsonify({"msg": "Missing JSON in request"}), 400
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
+#     username_or_email = request.json.get('usernameoremail', None)
+#     password = request.json.get('password', None)
 
-    username_or_email = request.json.get('usernameoremail', None)
-    password = request.json.get('password', None)
+#     if not username_or_email or not password:
+#         return {"errors": ["Missing required parameters"]}, 400
 
-    if not username_or_email or not password:
-        return {"errors": ["Missing required parameters"]}, 400
+#     authenticated1, user1 = User.authenticate1(username_or_email, password)
+#     authenticated2, user2 = User.authenticate2(username_or_email, password)
 
-    authenticated1, user1 = User.authenticate1(username_or_email, password)
-    authenticated2, user2 = User.authenticate2(username_or_email, password)
+#     if authenticated1:
+#         user = user1
+#         authenticated = authenticated1
+#     elif authenticated2:
+#         user = user2
+#         authenticated = authenticated2
+#     else:
+#         authenticated = False
+#         user = None
 
-    if authenticated1:
-        user = user1
-        authenticated = authenticated1
-    elif authenticated2:
-        user = user2
-        authenticated = authenticated2
-    else:
-        authenticated = False
-        user = None
+#     if authenticated:
+#         login_user(user)
+#         return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
 
-    if authenticated:
-        login_user(user)
-        return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
-
-    return {"errors": ["Invalid username, email, and/or password"]}, 401
+#     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
 # PK commented this out on 12/5, after transferring this route-responsibility
@@ -134,11 +136,12 @@ def login():
 #     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
-@app.route('/logout', methods=['POST'])
-@login_required
-def logout():
-    logout_user()
-    return {'msg': 'You have been logged out'}, 200
+# PK commented out on 12/5
+# @app.route('/logout', methods=['POST'])
+# @login_required
+# def logout():
+#     logout_user()
+#     return {'msg': 'You have been logged out'}, 200
 
 
 @app.route('/restore')

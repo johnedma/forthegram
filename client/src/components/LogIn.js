@@ -14,8 +14,8 @@ function LogIn(props) {
 
         // Make the following an IIFE?
         async function loginUser() {
-            const response = await fetchWithCSRF(`/login`, {
-                method: 'POST',
+            const response = await fetchWithCSRF(`/api/sesion/`, {
+                method: 'PUT',
                 headers: {
                     "Content-Type": "application/json",
                 },
