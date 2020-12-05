@@ -4,10 +4,10 @@ from datetime import datetime
 from flask_login import LoginManager, login_required, logout_user, login_user, current_user
 from sqlalchemy import or_
 
-sesion = Blueprint('sesion', __name__)
+session = Blueprint('session', __name__)
 
 
-@sesion.route('/', methods=['PUT', 'DELETE'])
+@session.route('/', methods=['PUT', 'DELETE'])
 def index():
     if request.method == 'PUT':
         if not request.is_json:

@@ -11,7 +11,7 @@ function LogOut(props) {
         e.preventDefault();
         // Make the following an IIFE?
         const logoutUser = async () => {
-            const response = await fetchWithCSRF('/api/sesion/', {
+            const response = await fetchWithCSRF('/api/session/', {
                 method: 'DELETE',
                 credentials: 'include'
             });

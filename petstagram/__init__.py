@@ -6,7 +6,7 @@ from flask_login import LoginManager, \
     current_user, login_user, logout_user, login_required
 from flask_migrate import Migrate
 from petstagram.models import db, User, Like
-from petstagram.api.sesion import sesion
+from petstagram.api.session import session
 from petstagram.api.users import users
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
@@ -21,7 +21,7 @@ app = Flask(__name__)
 login_manager = LoginManager(app)
 migrate = Migrate(app, db)
 app.config.from_object(Config)
-app.register_blueprint(sesion, url_prefix='/api/sesion')
+app.register_blueprint(session, url_prefix='/api/session')
 app.register_blueprint(users, url_prefix='/api/users')
 app.register_blueprint(posts, url_prefix='/api/posts')
 app.register_blueprint(comments, url_prefix='/api/comments')
