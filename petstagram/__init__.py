@@ -6,7 +6,7 @@ from flask_login import LoginManager, \
     current_user, login_user, logout_user, login_required
 from flask_migrate import Migrate
 from petstagram.models import db, User, Like
-from petstagram.api.user_routes import user_routes
+from petstagram.api.users import users
 from petstagram.api.posts import posts
 from petstagram.api.comments import comments
 from petstagram.api.likes import likes
@@ -20,7 +20,7 @@ app = Flask(__name__)
 login_manager = LoginManager(app)
 migrate = Migrate(app, db)
 app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(users, url_prefix='/api/users')
 app.register_blueprint(posts, url_prefix='/api/posts')
 app.register_blueprint(comments, url_prefix='/api/comments')
 app.register_blueprint(likes, url_prefix='/api/likes')
@@ -89,45 +89,49 @@ def login():
     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
-@app.route('/signup', methods=['POST'])
-def signup():
-    if not request.is_json:
-        return jsonify({"msg": "Missing JSON in request"}), 400
-    canfollow= request.json.get("canfollow", None)
-    username = request.json.get('username', None)
-    password = request.json.get('password', None)
-    password2 = request.json.get('password2', None)
-    fullname = request.json.get("fullname", None)
-    email = request.json.get('email', None)
+# PK commented this out on 12/5, after transferring this route-responsibility
+# to users.py, where it seems to make more sense, from a REST-fullness standpoint.
+# Let's remember to delete it entirely after about a week or so has passed, and
+# we are hence convinced that the other route-handler is working fine.
+# @app.route('/signup', methods=['POST'])
+# def signup():
+#     if not request.is_json:
+#         return jsonify({"msg": "Missing JSON in request"}), 400
+#     canfollow= request.json.get("canfollow", None)
+#     username = request.json.get('username', None)
+#     password = request.json.get('password', None)
+#     password2 = request.json.get('password2', None)
+#     fullname = request.json.get("fullname", None)
+#     email = request.json.get('email', None)
 
-    if not username or not password:
-        return {"errors": ["Missing required parameters"]}, 400
+#     if not username or not password:
+#         return {"errors": ["Missing required parameters"]}, 400
 
-    if not password == password2:
-        return {"errors": ["Passwords must match each other"]}, 400
+#     if not password == password2:
+#         return {"errors": ["Passwords must match each other"]}, 400
 
-    new_user = User(
-        can_follow=canfollow,
-        user_name=username,
-        first_name=fullname,
-        last_name=fullname,
-        full_name=fullname,
-        DOB=datetime.now(),
-        email=email,
-        password=password,
-        created_at=datetime.now(),
-        updated_at=datetime.now()
-    )
-    db.session.add(new_user)
-    db.session.commit()
-    # return redirect('/api/users')
+#     new_user = User(
+#         can_follow=canfollow,
+#         user_name=username,
+#         first_name=fullname,
+#         last_name=fullname,
+#         full_name=fullname,
+#         DOB=datetime.now(),
+#         email=email,
+#         password=password,
+#         created_at=datetime.now(),
+#         updated_at=datetime.now()
+#     )
+#     db.session.add(new_user)
+#     db.session.commit()
+#     # return redirect('/api/users')
 
-    authenticated, user = User.authenticate1(username, password)
-    if authenticated:
-        login_user(user)
-        return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
+#     authenticated, user = User.authenticate1(username, password)
+#     if authenticated:
+#         login_user(user)
+#         return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
 
-    return {"errors": ["Invalid username, email, and/or password"]}, 401
+#     return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
 @app.route('/logout', methods=['POST'])
