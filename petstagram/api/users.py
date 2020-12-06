@@ -1,43 +1,53 @@
 from flask import Blueprint, jsonify, request, redirect
 from petstagram.models import User, db, Follow
 from datetime import datetime
-from flask_login import login_required, logout_user
+from flask_login import login_required, logout_user, login_user, current_user
 from sqlalchemy import or_
 
-user_routes = Blueprint('users', __name__)
+users = Blueprint('users', __name__)
 
 
-@user_routes.route('/', methods=['GET', 'POST'])
+@users.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
         response = User.query.filter(User.can_follow).all()
         return {"users": [user.to_dict() for user in response]}
-
-# FWIW, the signup form uses a route in __init__.py
     if request.method == 'POST':
-        user_name = request.form['userName']
-        first_name = request.form['firstName']
-        last_name = request.form['lastName']
-        DOB = request.form['dob']
-        password = request.form['password']
-        created_at = datetime.now()
-        updated_at = datetime.now()
-
+        if not request.is_json:
+            return jsonify({"msg": "Missing JSON in request"}), 400
+        canfollow= request.json.get("canfollow", None)
+        username = request.json.get('username', None)
+        password = request.json.get('password', None)
+        password2 = request.json.get('password2', None)
+        fullname = request.json.get("fullname", None)
+        email = request.json.get('email', None)
+        if not username or not password:
+            return {"errors": ["Missing required parameters"]}, 400
+        if not password == password2:
+            return {"errors": ["Passwords must match each other"]}, 400
         new_user = User(
-            user_name=user_name,
-            first_name=first_name,
-            last_name=last_name,
-            DOB=DOB,
+            can_follow=canfollow,
+            user_name=username,
+            first_name=fullname,
+            last_name=fullname,
+            full_name=fullname,
+            DOB=datetime.now(),
+            email=email,
             password=password,
-            created_at=created_at,
-            updated_at=updated_at
+            created_at=datetime.now(),
+            updated_at=datetime.now()
         )
         db.session.add(new_user)
         db.session.commit()
-        return redirect('/api/users')
+        # return redirect('/api/users')
+        authenticated, user = User.authenticate1(username, password)
+        if authenticated:
+            login_user(user)
+            return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
+        return {"errors": ["Invalid username, email, and/or password"]}, 401
 
 
-@user_routes.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
+@users.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
 def user_info(id):
     user = User.query.filter(User.id == int(id))[0]
     if request.method == "GET":
@@ -49,8 +59,10 @@ def user_info(id):
         db.session.delete(user)
         db.session.commit()
         logout_user()
+
         return {"message": "goodbye"}
     if request.method == 'PUT':
+
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
