@@ -7,7 +7,7 @@ import RightSide from './RightSide';
 function SinglePost(props) {
     const { postData, setPostData, updatedComments, setUpdatedComments } = useContext(PostContext)
     const [reRender, setRerender] = useState(false)
-
+    console.log(props)
     const showRerender = e => {
         setRerender(!reRender)
     }
@@ -16,7 +16,7 @@ function SinglePost(props) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(`/api${props.location.pathname}`)
+                const response = await fetch(`/api/posts/${props.postDataId}`)
 
                 if (response.ok) {
                     const data = await response.json()
@@ -26,7 +26,7 @@ function SinglePost(props) {
                 console.error(err)
             }
         })()
-    }, [props.location.pathname, setPostData, updatedComments, reRender])
+    }, [props.postDataId, setPostData, updatedComments, reRender])
     setUpdatedComments(false);
     if (!postData) return null
     return (
