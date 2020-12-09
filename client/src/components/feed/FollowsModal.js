@@ -51,6 +51,21 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
                                 </div>
                             )
                         })}
+                        <button onClick={handleClose}
+                            style={{
+                                // top: `-5px`,
+                                // left: `180px`,
+                                // position: `relative`,
+                                position: `absolute`,
+                                right: `25px`,
+                                borderRadius: `1em`,
+                                background: `none`,
+                                border: `solid 2px black`,
+                                bottom: `20px`
+                            }}
+                        >
+                            <span style={{ fontWeight: `700` }}>Show Me The Pets!</span>
+                        </button>
                     </>
                 }
             </>
