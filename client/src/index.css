@@ -128,19 +128,6 @@ form input{
     width: 2em;
 }
 
-.post-form-container{
-    display: flex;
-    margin: 100px;
-    min-height: 250px;
-    min-width: 300px;
-    height: auto;
-    width: auto;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: white;
-}
-
 .create-post-form{
     display: flex;
     justify-content: center;
@@ -184,9 +171,36 @@ form input{
     box-shadow: 0 4px 8px 0 rgba(0, 0,
     0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     top: 15px;
-
-
+/* JETTEDITS */
+top: 710%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    max-width: 610px;
+    /* width: 70%; */
+    width: 100%;
+    top: 590%;
+    height: 80vh;
 }
+
+.post-form-container{
+    display: flex;
+    margin: 100px;
+    min-height: 250px;
+    min-width: 300px;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    /* JETTEDITS */
+    margin: auto;
+}
+
 .button-container{
     display: flex;
     justify-content: flex-end;
