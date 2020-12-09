@@ -12,7 +12,20 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
             suggestions={suggestions}
         >
             <>
-                <button onClick={handleClose}>x</button>
+                <button onClick={handleClose}
+                    style={{
+                        // top: `-5px`,
+                        // left: `180px`,
+                        // position: `relative`,
+                        position: `absolute`,
+                        right: `25px`,
+                        borderRadius: `1em`,
+                        background: `none`,
+                        border: `solid 2px black`
+                    }}
+                >
+                    <span style={{ fontWeight: `700` }}>X</span>
+                </button>
                 {(!follows.length) ? null :
                     <>
                         <h2>People that you are following</h2>
@@ -30,6 +43,7 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
                     <>
                         <h2>Suggestions to Follow</h2>
                         {suggestions.map(person => {
+                            console.log(person);
                             return (
                                 <div key={person.id}>
                                     {person.user_name}

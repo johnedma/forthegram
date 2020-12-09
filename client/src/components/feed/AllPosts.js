@@ -18,12 +18,17 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        width: '610px',
-        height: '90vh',
         borderRadius: "30px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center"
+        maxWidth: '610px',
+        width: '70%',
+        // height: '70vh',
+        // display: "flex",
+        // flexDirection: "column",
+        // justifyContent: "center"
+    },
+
+    overlay: {
+        backgroundColor: `rgb(46 42 42 / 0.66)`
     }
 };
 
