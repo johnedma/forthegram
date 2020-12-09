@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Modal from 'react-modal';
 import ModalWindow from './ModalWindow';
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        width: '610px',
+        height: '75%',
+        borderRadius: "30px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center"
+    }
+};
 
 const Navbar = ({ currentUserId, currentUser }) => {
     const [show, setShow] = useState(false);
 
 
     const showModal = e => {
-        setShow(!show)
+        setShow(true)
+    }
+
+    const handleClose = () => {
+        setShow(false)
     }
 
     return (
@@ -22,7 +44,15 @@ const Navbar = ({ currentUserId, currentUser }) => {
                 <>
                     {currentUserId && currentUser &&
                         <>
-                            <ModalWindow onClose={showModal} show={show} />
+                            {/* <ModalWindow onClose={showModal} show={show} /> */}
+                            <Modal
+                                isOpen={show}
+                                onRequestClose={handleClose}
+                                style={customStyles}
+                                contentLabel='Modal'
+                            >
+                                <ModalWindow handleClose={handleClose} />
+                            </Modal>
                             {show ? "" : <button className="navbar-item" onClick={showModal} style={{
                                 background: `white`,
                                 color: `rgb(50, 115, 220)`,
