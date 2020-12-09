@@ -93,7 +93,7 @@ def login():
 def signup():
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
-    canfollow= request.json.get("canfollow", None)
+    canfollow = request.json.get("canfollow", None)
     username = request.json.get('username', None)
     password = request.json.get('password', None)
     password2 = request.json.get('password2', None)
