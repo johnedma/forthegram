@@ -107,7 +107,6 @@ function AllPosts() {
             } catch (err) {
                 console.error(err)
             }
-
         }
         addFollowing();
         e.target.setAttribute("disabled", "disabled")
