@@ -71,7 +71,7 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
                             <div class="message-body"
                                 style={{
                                     // color: `black`,
-                                    borderBottom: `solid 1px`,
+                                    // borderBottom: `solid 1px`,
                                     backgroundColor: `white`
                                 }}>
                                 <p style={{
@@ -93,6 +93,7 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
                                                 }}
                                             >
                                                 {/* {person.user_name} */}
+
                                                 <Header username={person.user_name} />
                                                 <button className="button is-info" onClick={handleClick} id={person.id}
                                                     style={{
