@@ -11,21 +11,44 @@ import FollowsModal from './FollowsModal';
 
 
 const customStyles = {
+    // content: {
+    //     top: '50%',
+    //     left: '50%',
+    //     right: 'auto',
+    //     bottom: 'auto',
+    //     marginRight: '-50%',
+    //     transform: 'translate(-50%, -50%)',
+    //     // borderRadius: "30px",
+    //     borderRadius: "15px",
+    //     maxWidth: '610px',
+    //     width: '70%',
+    //     // height: '70vh',
+    //     // display: "flex",
+    //     // flexDirection: "column",
+    //     // justifyContent: "center"
+    // },
+
     content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
+        border: '0',
+        // borderRadius: '4px',
+        borderRadius: "15px",
         bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        borderRadius: "30px",
-        maxWidth: '610px',
-        width: '70%',
-        // height: '70vh',
-        // display: "flex",
-        // flexDirection: "column",
-        // justifyContent: "center"
-    },
+        minHeight: '10rem',
+        left: '50%',
+        // padding: '2rem',
+        position: 'fixed',
+        right: 'auto',
+        top: '50%',
+        transform: 'translate(-50%,-50%)',
+        minWidth: '20rem',
+        // width: '80%',
+        width: '60%',
+        // maxWidth: '60rem',
+        maxWidth: '30rem',
+        padding: `0`,
+        // height: `60%`
+    }
+    ,
 
     overlay: {
         backgroundColor: `rgb(46 42 42 / 0.66)`
