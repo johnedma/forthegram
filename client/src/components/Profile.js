@@ -234,25 +234,25 @@ const Profile = ({ match }) => {
                                 marginRight: `40px`
                             }}>
                                 {/* <div> */}
-                                <a href={`${currentProfile.user.user_name}/feed`}>
-                                    <span style={{
-                                        fontWeight: `bold`
-                                    }}>{currentProfile.posts.length} </span>
+                                {/* <a href={`${currentProfile.user.user_name}/feed`}> */}
+                                <span style={{
+                                    fontWeight: `bold`
+                                }}>{currentProfile.posts.length} </span>
                                 posts
                                 {/* </div> */}
-                                </a>
+                                {/* </a> */}
                             </div>
                             <div class="" style={{
                                 fontSize: `16px`,
                                 marginRight: `40px`
                             }}>
                                 {/* <div> */}
-                                <a href={`${currentProfile.user.user_name}/followers`}>
-                                    <span style={{
-                                        fontWeight: `bold`
-                                    }}>{currentProfile.followers.length} </span>
+                                {/* <a href={`${currentProfile.user.user_name}/followers`}> */}
+                                <span style={{
+                                    fontWeight: `bold`
+                                }}>{currentProfile.followers.length} </span>
                                  followers
-                                </a>
+                                {/* </a> */}
                                 {/* </div> */}
                             </div>
                             <div class="" style={{
@@ -260,12 +260,12 @@ const Profile = ({ match }) => {
                                 marginRight: `40px`
                             }}>
                                 {/* <div> */}
-                                <a href={`${currentProfile.user.user_name}/following`}>
-                                    <span style={{
-                                        fontWeight: `bold`
-                                    }}>{currentProfile.following.length} </span>
+                                {/* <a href={`${currentProfile.user.user_name}/following`}> */}
+                                <span style={{
+                                    fontWeight: `bold`
+                                }}>{currentProfile.following.length} </span>
                                  following
-                                </a>
+                                {/* </a> */}
                                 {/* </div> */}
                             </div>
 
