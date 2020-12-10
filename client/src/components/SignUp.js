@@ -95,7 +95,7 @@ const SignUp = props => {
                                 type="checkbox"
                                 checked={canfollow}
                                 onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
-                            <label htmlFor="canfollow">Can people follow you?</label>
+                            <label htmlFor="canfollow">Click to allow others to follow you.</label>
                             <input
                                 className="input"
                                 type="password"

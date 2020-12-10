@@ -6,23 +6,52 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../auth'
 import FeedPost from './FeedPost'
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
+import FollowsModal from './FollowsModal';
 
 
 const customStyles = {
+    // content: {
+    //     top: '50%',
+    //     left: '50%',
+    //     right: 'auto',
+    //     bottom: 'auto',
+    //     marginRight: '-50%',
+    //     transform: 'translate(-50%, -50%)',
+    //     // borderRadius: "30px",
+    //     borderRadius: "15px",
+    //     maxWidth: '610px',
+    //     width: '70%',
+    //     // height: '70vh',
+    //     // display: "flex",
+    //     // flexDirection: "column",
+    //     // justifyContent: "center"
+    // },
+
     content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
+        border: '0',
+        // borderRadius: '4px',
+        borderRadius: "15px",
         bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: '610px',
-        height: '90vh',
-        borderRadius: "30px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center"
+        minHeight: '10rem',
+        left: '50%',
+        // padding: '2rem',
+        position: 'fixed',
+        right: 'auto',
+        top: '50%',
+        transform: 'translate(-50%,-50%)',
+        minWidth: '20rem',
+        // width: '80%',
+        width: '60%',
+        // maxWidth: '60rem',
+        maxWidth: '30rem',
+        padding: `0`,
+        // height: `60%`
+    }
+    ,
+
+    overlay: {
+        backgroundColor: `rgb(46 42 42 / 0.66)`
     }
 };
 
@@ -30,13 +59,13 @@ const customStyles = {
 function AllPosts() {
     const [followList, setFollowList] = useState([])
     // const [hasFollowers, setHasFollowers] useState(followList.length? true : false)
-    const { currentUserId } = useContext(AuthContext)
+    const { currentUserId, currentUser } = useContext(AuthContext)
     const [show, setShow] = useState(!followList.length)
-    const [suggestions, setSuggestions] = useState([])
+    const [suggestions, setSuggestions] = useState([]);
+    const [currentProfile, setCurrentProfile] = useState(null);
+    const [followStatus, setFollowStatus] = useState("");
 
     console.log(show)
-
-
 
     useEffect(() => {
         (async () => {
@@ -74,8 +103,8 @@ function AllPosts() {
 
     const handleClick = e => {
         console.log(e.target.id);
-        async function addFollow() {
-            const res = await fetch("/api/profile/follow", {
+        async function addFollowing() {
+            let res = await fetch("/api/profile/following", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -90,8 +119,26 @@ function AllPosts() {
             } else {
                 console.log("failure");
             }
+
+            res = await fetch(`/api/profile/${currentUser.user_name}`)
+            try {
+                if (res.ok) {
+                    const data = await res.json()
+                    // postInfo setter
+                    setCurrentProfile(data)
+                    data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
+                    // setFollowStatus(status);
+                    // setFollowStatus(data.followers.includes(currentUserId));
+                    console.log(followStatus);
+                    // console.log(currentProfile.followers.includes(currentUserId))
+                    // setFollowStatus(currentProfile.followers.includes(currentUserId) ? true : false)
+                }
+            } catch (err) {
+                console.error(err)
+            }
+
         }
-        addFollow();
+        addFollowing();
         e.target.setAttribute("disabled", "disabled")
     }
 
@@ -106,24 +153,14 @@ function AllPosts() {
                         <FeedPost key={idx} post={pid} />
                     )}
             </div>
-            <Modal
-                isOpen={show}
-                onRequestClose={handleClose}
-                style={customStyles}
-                contentLabel='Modal'
-            >
-                <button onClick={handleClose}>x</button>
-                <h2>Suggestions to Follow</h2>
-                {suggestions.map(person => {
-                    return (
-                        <div key={person.id}>
-                            {person.user_name}
-                            <button onClick={handleClick} id={person.id}>Follow</button>
-                        </div>
-                    )
-                })}
-
-            </Modal>
+            <FollowsModal
+                show={show}
+                handleClose={handleClose}
+                customStyles={customStyles}
+                handleClick={handleClick}
+                suggestions={suggestions}
+                follows={followList}
+            />
         </div>
     )
 }

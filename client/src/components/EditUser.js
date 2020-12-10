@@ -8,6 +8,7 @@ const EditUser = props => {
     const [email, setEmail] = useState(currentUser.email);
     const [username, setUsername] = useState(currentUser.user_name);
     const [fullname, setFullname] = useState(currentUser.full_name);
+    const [canfollow, setCanfollow] = useState(currentUser.can_follow);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('')
     const [website, setWebsite] = useState(currentUser.website);
@@ -35,6 +36,7 @@ const EditUser = props => {
                     email,
                     username,
                     fullname,
+                    canfollow,
                     password,
                     password2,
                     website,
@@ -146,6 +148,12 @@ const EditUser = props => {
                                 value={gender}
                                 onChange={e => setGender(e.target.value)} name="gender" />
                             <input
+                                // className="input"
+                                type="checkbox"
+                                checked={canfollow}
+                                onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
+                            <label htmlFor="canfollow">Click to allow others to follow you.</label>
+                            <input
                                 className="input"
                                 type="password"
                                 placeholder="New password (required)"
@@ -177,13 +185,13 @@ const EditUser = props => {
                     }}>Would you like to delete your account?</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={deleteUser}>
-                            <button type="submit" className="button has-background-link has-text-white"     style={{
-                                    height: `2rem`,
-                                    paddingLeft: `.5em`,
-                                    paddingRight: `.5em`,
-                                    margin: `8px 40px`,
-                                    fontWeight: `600`
-                                }}>Delete account
+                            <button type="submit" className="button has-background-link has-text-white" style={{
+                                height: `2rem`,
+                                paddingLeft: `.5em`,
+                                paddingRight: `.5em`,
+                                margin: `8px 40px`,
+                                fontWeight: `600`
+                            }}>Delete account
                             </button>
                         </form>
                     </div>
