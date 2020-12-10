@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'// import GridFeed from "./GridFeed"
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+// import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import GridFeed from './GridFeed';
 import AuthContext from "../auth"
 import PostContext from "../PostContext";
@@ -21,7 +21,6 @@ const Profile = ({ match }) => {
                     setCurrentProfile(data)
                     data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
                     // console.log(followStatus);
-
                 }
             } catch (err) {
                 console.error(err)
@@ -29,7 +28,6 @@ const Profile = ({ match }) => {
         })()
     }, [username, followStatus, updatedPosts])
     if (!currentProfile) return null
-
 
 
     const followUser = async () => {
@@ -167,7 +165,6 @@ const Profile = ({ match }) => {
                                     {currentProfile.followers.includes(currentUserId) ?
                                         "Following"
                                         : "Follow"}
-
                                 </button>
                             }
                         </div>
@@ -176,7 +173,7 @@ const Profile = ({ match }) => {
                             marginBottom: `20px`,
                             alignItems: `center`
                         }}>
-                            <div class="" style={{
+                            <div className="" style={{
                                 fontSize: `16px`,
                                 marginRight: `40px`
                             }}>
@@ -189,7 +186,7 @@ const Profile = ({ match }) => {
                                 {/* </div> */}
                                 {/* </a> */}
                             </div>
-                            <div class="" style={{
+                            <div className="" style={{
                                 fontSize: `16px`,
                                 marginRight: `40px`
                             }}>
@@ -202,7 +199,7 @@ const Profile = ({ match }) => {
                                 {/* </a> */}
                                 {/* </div> */}
                             </div>
-                            <div class="" style={{
+                            <div className="" style={{
                                 fontSize: `16px`,
                                 marginRight: `40px`
                             }}>
