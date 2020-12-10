@@ -167,7 +167,7 @@ function App() {
         setUpdatedPosts,
         updatedComments,
         setUpdatedComments,
-     };
+    };
 
     useEffect(() => {
         (async () => {
@@ -184,7 +184,13 @@ function App() {
     return (
         <AuthContext.Provider value={authContextValue}>
             <PostContext.Provider value={postContextValue}>
-                {loading && <h1>Loading</h1>}
+                {loading && <h1 style={{
+                    textAlign: `center`,
+                    background: `white`,
+                    fontSize: `3em`,
+                    /* margin: 0em; */
+                    lineHeight: `7em`
+                }}>Loading</h1>}
                 {!loading &&
                     <BrowserRouter>
                         <Navbar currentUserId={currentUserId} currentUser={currentUser} />
