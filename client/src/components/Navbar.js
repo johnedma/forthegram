@@ -56,9 +56,13 @@ const Navbar = ({ currentUserId, currentUser }) => {
                             {show ? "" : <button className="navbar-item" onClick={showModal} style={{
                                 background: `white`,
                                 color: `rgb(50, 115, 220)`,
-                                borderRadius: `50%`,
+                                borderRadius: `2em`,
                                 border: `2px solid`,
-                                cursor: `pointer`
+                                cursor: `pointer`,
+                                fontSize: `1.3em`,
+                                padding: `5px`,
+                                lineHeight: `20px`,
+                                margin: `0`
                             }}>
                                 <i className="fas fa-cloud-upload-alt"></i>
                                 {/* Create Post */}

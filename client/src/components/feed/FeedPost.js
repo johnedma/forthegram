@@ -27,8 +27,51 @@ const customStyles = {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center"
+    },
+
+    content: {
+        border: '0',
+        // borderRadius: '4px',
+        borderRadius: "15px",
+        bottom: 'auto',
+        minHeight: '10rem',
+        left: '50%',
+        // padding: '2rem',
+        position: 'fixed',
+        right: 'auto',
+        top: '50%',
+        transform: 'translate(-50%,-50%)',
+        minWidth: '20rem',
+        // width: '80%',
+        width: '60%',
+        // maxWidth: '60rem',
+        // maxWidth: '30rem',
+        padding: `0`,
+        // height: `60%`
+        //
+        top: `55%`,
+        background: `rgb(255, 255, 255)`,
+        /* overflow: auto; */
+        /* min-height: 10rem; */
+        /* min-width: 20rem; */
+        width: `90%`,
+        /* max-width: 30rem; */
+        height: `85%`,
+        /* margin-bottom: -74px; */
+        /* max-height: 95%; */
+        /* margin: 0 auto; */
+        /* bottom: 69px; */
+        display: `flex`
+    }
+    ,
+
+    overlay: {
+        backgroundColor: `rgb(46 42 42 / 0.66)`
     }
 };
+// };
+
+
 
 function FeedPost(props) {
     const [postInfo, setPostInfo] = useState('')
@@ -79,16 +122,24 @@ function FeedPost(props) {
     const url = `/posts/${postData.id}`
     return (
         <>
-            <div id={postData.id} className="feed-post" style={{
-                backgroundColor: 'white',
-                textAlign: "center",
-                border: "solid 2px #e7e7e7",
-                marginBottom: "20px",
-                marginTop: "15px"
-            }}>
+            <div id={postData.id}
+                className="feed-post" style={{
+                    backgroundColor: 'white',
+                    textAlign: "center",
+                    border: "solid 2px #e7e7e7",
+                    marginBottom: "20px",
+                    marginTop: "15px"
+                }}>
                 <Header username={postData.user} userId={postData.id} />
-                {/* <a href={url}><Photo pic={postData.photo_url} /></a> */}
-                <button id={postData.id} onClick={handleClick}><Photo pic={postData.photo_url} id={postData.id} /></button>
+                <button id={postData.id} onClick={handleClick} className="button"
+                    style={{
+                        border: "none",
+                        height: `fit-content`,
+                        padding: `0`,
+                        lineHeight: `0`
+                    }}>
+                    <Photo pic={postData.photo_url} id={postData.id} />
+                </button>
                 <Icons postId={postData.id} willRerender={showRerender} caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
                 <CommentSection comments={postData.comments} names={postData.names} />
                 <AddComment commentRerender={showRerender} post_id={postData.id} />
@@ -100,10 +151,8 @@ function FeedPost(props) {
                 contentLabel='Modal'
             >
                 <SinglePost postDataId={postDataId} />
-
             </Modal>
         </>
-
     )
 }
 
