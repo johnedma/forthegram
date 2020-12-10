@@ -15,7 +15,7 @@ def index():
     if request.method == 'POST':
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
-        canfollow= request.json.get("canfollow", None)
+        canfollow = request.json.get("canfollow", None)
         username = request.json.get('username', None)
         password = request.json.get('password', None)
         password2 = request.json.get('password2', None)
@@ -53,7 +53,8 @@ def user_info(id):
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
-        follows = Follow.query.filter(or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
+        follows = Follow.query.filter(
+            or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
         for follow in follows:
             db.session.delete(follow)
         db.session.delete(user)
@@ -66,13 +67,20 @@ def user_info(id):
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
-        user.user_name = request.json.get('username', None) or userd["user_name"]
-        user.password = request.json.get('password', None)  # or userd["password"]
-        user.password2 = request.json.get('password2', None)  # or userd["password2"]
-        user.first_name = request.json.get('fullname', None) or userd["first_name"]
-        user.last_name = request.json.get("fullname", None) or userd["last_name"]
+        user.can_follow = request.json.get('canfollow', None)
+        user.user_name = request.json.get(
+            'username', None) or userd["user_name"]
+        user.password = request.json.get(
+            'password', None)  # or userd["password"]
+        user.password2 = request.json.get(
+            'password2', None)  # or userd["password2"]
+        user.first_name = request.json.get(
+            'fullname', None) or userd["first_name"]
+        user.last_name = request.json.get(
+            "fullname", None) or userd["last_name"]
         user.email = request.json.get('email', None) or userd["email"]
-        user.full_name = request.json.get("fullname", None) or userd["full_name"]
+        user.full_name = request.json.get(
+            "fullname", None) or userd["full_name"]
         user.website = request.json.get('website', None) or userd["website"]
         user.bio = request.json.get('bio', None) or userd["bio"]
         user.phone = request.json.get('phone', None) or userd["phone"]

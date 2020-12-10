@@ -75,7 +75,7 @@ const Profile = ({ match }) => {
             follower_id: currentUserId
         }
         try {
-            const res = await fetch(`/api/profile/follow`, {
+            const res = await fetch(`/api/profile/following`, {
                 method: "POST",
                 headers: {
                     'Content-type': 'application/json'

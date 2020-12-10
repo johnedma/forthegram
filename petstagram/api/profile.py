@@ -33,10 +33,9 @@ def profile_page(username):
 # in progress
 
 
-@profile.route('/follow', methods=['POST'])
+@profile.route('/following', methods=['POST'])
 def follow():
     data = request.json
-    print(data, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
     new_follow = Follow(
         follower_id=data['follower_id'],
         followed_id=data['profile_id'],
@@ -56,8 +55,6 @@ def unfollow():
         follower_id=data['follower_id'],
         followed_id=data['profile_id'],
     ).first()
-    print("------------------QUERY---------------")
-    print(query)
     db.session.delete(query)
     db.session.commit()
     return 'deleted'

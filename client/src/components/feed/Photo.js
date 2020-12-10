@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Photo({ pic }) {
+function Photo({ pic, id }) {
     return (
         <div>
 
-            <img alt='NOT FOUND' src={pic} style={{
+            <img alt='NOT FOUND' src={pic} id={id} style={{
                 width: "600px",
-            }}/>
+            }} />
         </div>
     )
 }

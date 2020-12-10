@@ -16,10 +16,10 @@ const ModalWindow = props => {
     const [errors, setErrors] = useState([]);
     const { setUpdatedPosts } = useContext(PostContext);
 
-    const onClose = e => {
-        props.onClose && props.onClose(e);
-        setFileName('')
-    };
+    // const onClose = e => {
+    //     props.onClose && props.onClose(e);
+    //     setFileName('')
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,7 +41,7 @@ const ModalWindow = props => {
             } else {
                 // console.log(responseData)
 
-                onClose()
+                // onClose()
                 setFileName('')
                 setCaption('')
                 setUpdatedPosts(true);
@@ -56,13 +56,13 @@ const ModalWindow = props => {
 
     }
 
-    if (props.show === false) {
-        return null;
-    }
+    // if (props.show === false) {
+    //     return null;
+    // }
     return (
-        <div className="modal-div" >
+        <div  >
             <div className="button-container">
-                <button className="toggle-button" onClick={onClose}>x</button>
+                <button className="toggle-button" onClick={props.handleClose}>x</button>
             </div>
             <div className="post-form-container">
                 {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
