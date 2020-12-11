@@ -30,7 +30,8 @@ const customStyles = {
         background: `rgb(255, 255, 255)`,
         width: `90%`,
         height: `85%`,
-        display: `flex`
+        display: `flex`,
+        // height: `fit-content`
     },
     overlay: {
         backgroundColor: `rgb(46 42 42 / 0.66)`
