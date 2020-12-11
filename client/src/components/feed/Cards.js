@@ -27,7 +27,7 @@ function Card({ desc }) {
     const handleClick = e => {
         e.preventDefault()
         setShow(true)
-        console.log(e.target.id)
+        //console.log(e.target.id)
     }
 
     const handleClose = () => {

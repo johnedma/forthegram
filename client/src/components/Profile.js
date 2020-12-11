@@ -23,7 +23,7 @@ const Profile = ({ match }) => {
                     data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
                     // setFollowStatus(status);
                     // setFollowStatus(data.followers.includes(currentUserId));
-                    console.log(followStatus);
+                    //console.log(followStatus);
                     // console.log(currentProfile.followers.includes(currentUserId))
                     // setFollowStatus(currentProfile.followers.includes(currentUserId) ? true : false)
                 }
@@ -33,7 +33,7 @@ const Profile = ({ match }) => {
         })()
     }, [username, followStatus, updatedPosts])
     if (!currentProfile) return null
-    // console.log(currentProfile.followers.includes(currentUserId))
+    //console.log(currentProfile.followers.includes(currentUserId))
     // const [followStatus, setFollowStatus] = useState(currentProfile.followers.includes(currentUserId))
     // currentProfile.followers.includes(currentUserId) setFollowStatus(true)
 
@@ -69,7 +69,7 @@ const Profile = ({ match }) => {
 
 
     const followUser = async () => {
-        console.log("plugged in to follow");
+        //console.log("plugged in to follow");
         const data = {
             profile_id: currentProfile.user.id,
             follower_id: currentUserId
@@ -83,10 +83,10 @@ const Profile = ({ match }) => {
                 body: JSON.stringify(data)
             })
             if (!res.ok) {
-                console.log(res)
+                //console.log(res)
             }
             setFollowStatus("Following")
-            console.log(res)
+            //console.log(res)
         } catch (e) {
             console.error(e)
         }
@@ -100,7 +100,7 @@ const Profile = ({ match }) => {
     // }
 
     const unfollowUser = async () => {
-        console.log("plugged in to unfollow");
+        //console.log("plugged in to unfollow");
         const data = {
             profile_id: currentProfile.user.id,
             follower_id: currentUserId
@@ -114,16 +114,16 @@ const Profile = ({ match }) => {
                 body: JSON.stringify(data)
             })
             if (!res.ok) {
-                console.log(res)
+                //console.log(res)
             }
-            //    console.log(res.json())
+            //console.log(res.json())
             setFollowStatus("Follow")
         } catch (e) {
             console.error(e)
         }
     }
 
-    console.log(currentProfile);
+    //console.log(currentProfile);
     return (
         <main style={{
             backgroundColor: `#fafafa`,

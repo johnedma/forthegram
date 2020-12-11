@@ -65,7 +65,7 @@ function AllPosts() {
     const [currentProfile, setCurrentProfile] = useState(null);
     const [followStatus, setFollowStatus] = useState("");
 
-    console.log(show)
+    //console.log(show)
 
     useEffect(() => {
         (async () => {
@@ -76,7 +76,7 @@ function AllPosts() {
                     const data = await res.json()
                     // shuffle(data.followerPosts[0])
                     setFollowList(data.followerPosts[0].sort(() => Math.random() - 0.5))
-                    console.log(data);
+                    //console.log(data);
                     if (data.following.length) {
                         setShow(false)
                     } else {
@@ -84,7 +84,7 @@ function AllPosts() {
                         if (getSuggestions.ok) {
                             const response = await getSuggestions.json()
                             setSuggestions(response.users)
-                            console.log(response.users)
+                            //console.log(response.users)
                         }
                     }
 
@@ -102,7 +102,7 @@ function AllPosts() {
     }
 
     const handleClick = e => {
-        console.log(e.target.id);
+        //console.log(e.target.id);
         async function addFollowing() {
             let res = await fetch("/api/profile/following", {
                 method: "POST",
@@ -115,9 +115,9 @@ function AllPosts() {
                 })
             })
             if (res.ok) {
-                console.log("Success!");
+                //console.log("Success!");
             } else {
-                console.log("failure");
+                //console.log("failure");
             }
 
             res = await fetch(`/api/profile/${currentUser.user_name}`)
@@ -129,7 +129,7 @@ function AllPosts() {
                     data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
                     // setFollowStatus(status);
                     // setFollowStatus(data.followers.includes(currentUserId));
-                    console.log(followStatus);
+                    //console.log(followStatus);
                     // console.log(currentProfile.followers.includes(currentUserId))
                     // setFollowStatus(currentProfile.followers.includes(currentUserId) ? true : false)
                 }

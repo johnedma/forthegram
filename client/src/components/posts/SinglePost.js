@@ -7,7 +7,7 @@ import RightSide from './RightSide';
 function SinglePost(props) {
     const { postData, setPostData, updatedComments, setUpdatedComments } = useContext(PostContext)
     const [reRender, setRerender] = useState(false)
-    console.log(props)
+    //console.log(props)
     const showRerender = e => {
         setRerender(!reRender)
     }

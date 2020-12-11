@@ -82,7 +82,7 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
                                 >Suggestions to Follow</p>
                                 <div>
                                     {suggestions.map(person => {
-                                        console.log(person);
+                                        //console.log(person);
                                         return (
                                             <div key={person.id}
                                                 style={{

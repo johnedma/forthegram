@@ -92,7 +92,7 @@ function FeedPost(props) {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log(e.target.id)
+        //console.log(e.target.id)
         setPostDataId(e.target.id)
         setShow(true)
     }
