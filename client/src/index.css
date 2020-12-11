@@ -12,12 +12,10 @@ h1{
 }
 
 body {
-    /* padding: 3rem; */
     /* font-family: 'Oswald', sans-serif; */
     font-size: 14px;
     background-color: #fafafa;
     line-height: 18px;
-    /* inline-size: fit-content; */
     margin: 0 auto;
 
  }
@@ -100,11 +98,11 @@ form input{
     padding: 8px;
 }
 .fontawe{
-    /* shadow */
     border-radius: 50px;
     /* background: #55b9f3; */
     box-shadow: 1px 2px 5px #489dcf, -1px -1px 4px #62d5ff;
     margin: 10px;
+    transition: all ease 0.3s;
 }
 
 .fontawe svg{
@@ -113,12 +111,24 @@ form input{
     /* fill: #262626; */
 }
 .fontawe svg{
-    /* shadow */
     border-radius: 50px;
-    /* background: #55b9f3; */
-    /* box-shadow: 20px 20px 60px #489dcf, -20px -20px 60px #62d5ff; */
     padding: 4px;
 }
+
+button.fontawe:hover{
+    transform: scale(1.1);
+    box-shadow: inset 0px 2px 3px 2px #489dcf, -1px -1px 4px 0px #62d5ff;
+}
+
+button.fontawe:focus{
+    outline: none;
+}
+button.fontawe.disabled:disabled{
+    /* outline: none; */
+    transform: none;
+    cursor: not-allowed;
+}
+
 
 .svg-inline--fa.fa-w-16 {
     width: 2em;
@@ -137,11 +147,12 @@ form input{
 .create-post-headline{
     font-weight: bold;
     font-size: 25px;
-     text-shadow: 4px 4px 4px #aaa;
-     font-family: 'HennyPenny', Courier, monospace;
+     /* text-shadow: 4px 4px 4px #aaa; */
+     /* font-family: 'HennyPenny', Courier, monospace; */
       border-bottom: 1px solid #ccc;
     padding: 1rem;
     margin: 0;
+    color: #3273dd;
 }
 
 #create-post-button{
@@ -152,6 +163,7 @@ form input{
 #caption-field{
     line-height: 1.5;
     border-radius: 5px;
+    margin: 20px 0;
 }
 
 #img-post{
@@ -171,7 +183,6 @@ form input{
     box-shadow: 0 4px 8px 0 rgba(0, 0,
     0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     top: 15px;
-/* JETTEDITS */
 top: 710%;
     left: 50%;
     right: auto;
@@ -197,8 +208,7 @@ top: 710%;
     align-items: center;
     flex-direction: column;
     background-color: white;
-    /* JETTEDITS */
-    margin: auto;
+    margin: 50px;
 }
 
 .button-container{
