@@ -85,7 +85,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
 
 
     return (
-        <>
+        <div>
             <div className="after-photo" style={{ padding: `0 16px` }} >
                 <div className="level" style={{ marginBottom: `0` }}>
                     {/* <!-- Left side --> */}
@@ -132,22 +132,27 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
             </div> :
                 <div style={{
                     textAlign: "left",
-                    marginLeft: "20px"
+                    marginLeft: "20px",
+                    width: '100%'
                 }}>
                     <div style={{
                         backgroundColor: `#fff`,
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`,
+                        padding: `8px 0`,
+                        width: '342px'
+
                     }}>{caption}</div>
                     <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`,
-                        color: "#489dcf"
+                        padding: `8px 0`,
+                        color: "#489dcf",
+                        width: "342px",
+                        textAlign: "left"
 
                     }}>
                         {/* replace with likes from post  and latest like*/}
@@ -156,7 +161,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                     </button>
                 </div>
             }
-        </>
+        </div>
     )
 }
 
