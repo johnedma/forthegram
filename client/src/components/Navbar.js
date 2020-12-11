@@ -3,22 +3,33 @@ import { NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
 import ModalWindow from './ModalWindow';
 
+
 const customStyles = {
     content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
+        border: '0',
+        borderRadius: "15px",
         bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: '610px',
-        height: '75%',
-        borderRadius: "30px",
-        display: "flex",
+        minHeight: '10rem',
+        left: '50%',
+        position: 'fixed',
+        right: 'auto',
+        transform: 'translate(-50%,-50%)',
+        minWidth: '20rem',
+        width: '60%',
+        padding: `0`,
+        top: `55%`,
+        background: `rgb(255, 255, 255)`,
+        width: `85%`,
+        height: `85%`,
+        display: `flex`,
         flexDirection: "column",
-        justifyContent: "center"
+        maxWidth: `500px`
+    },
+    overlay: {
+        backgroundColor: `rgb(46 42 42 / 0.66)`
     }
 };
+
 
 const Navbar = ({ currentUserId, currentUser }) => {
     const [show, setShow] = useState(false);
@@ -53,17 +64,7 @@ const Navbar = ({ currentUserId, currentUser }) => {
                             >
                                 <ModalWindow handleClose={handleClose} />
                             </Modal>
-                            {show ? "" : <button className="navbar-item" onClick={showModal} style={{
-                                background: `white`,
-                                color: `rgb(50, 115, 220)`,
-                                borderRadius: `2em`,
-                                border: `2px solid`,
-                                cursor: `pointer`,
-                                fontSize: `1.3em`,
-                                padding: `5px`,
-                                lineHeight: `20px`,
-                                margin: `0`
-                            }}>
+                            {show ? "" : <button className="navbar-item" id="upload" onClick={showModal} >
                                 <i className="fas fa-cloud-upload-alt"></i>
                                 {/* Create Post */}
                             </button>}

@@ -84,11 +84,8 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
     // }, [])
 
 
-
-
-
     return (
-        <>
+        <div>
             <div className="after-photo" style={{ padding: `0 16px` }} >
                 <div className="level" style={{ marginBottom: `0` }}>
                     {/* <!-- Left side --> */}
@@ -99,12 +96,12 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                             </button>
                         </div>
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button disabled className="fontawe disabled">
                                 <i className="far fa-comment"></i>
                             </button>
                         </div>
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button disabled className="fontawe disabled">
                                 <i className="fas fa-feather-alt"></i>
                                 {/* <i className="far fa-paper-plane"></i> */}
                             </button>
@@ -114,7 +111,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                     {/* <!-- Right side --> */}
                     <div className="level-right" style={{ marginTop: `0` }}>
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button disabled className="fontawe disabled">
                                 <i className="far fa-bookmark"></i>
                             </button>
                         </div>
@@ -135,22 +132,27 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
             </div> :
                 <div style={{
                     textAlign: "left",
-                    marginLeft: "20px"
+                    marginLeft: "20px",
+                    width: '100%'
                 }}>
                     <div style={{
                         backgroundColor: `#fff`,
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`,
+                        padding: `8px 0`,
+                        width: '342px'
+
                     }}>{caption}</div>
                     <button style={{
                         backgroundColor: `#fff`,
                         border: `none`,
                         fontWeight: `800`,
                         fontSize: `1em`,
-                        padding: `16px 0`,
-                        color: "#489dcf"
+                        padding: `8px 0`,
+                        color: "#489dcf",
+                        width: "342px",
+                        textAlign: "left"
 
                     }}>
                         {/* replace with likes from post  and latest like*/}
@@ -159,7 +161,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                     </button>
                 </div>
             }
-        </>
+        </div>
     )
 }
 

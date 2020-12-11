@@ -1,8 +1,3 @@
-//Auth context
-//api fetch followers/currentUserId
-//get "follower-posts" from fetch call
-//for each post, call a feed-post component
-
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../../auth'
 import FeedPost from './FeedPost'
@@ -11,45 +6,22 @@ import FollowsModal from './FollowsModal';
 
 
 const customStyles = {
-    // content: {
-    //     top: '50%',
-    //     left: '50%',
-    //     right: 'auto',
-    //     bottom: 'auto',
-    //     marginRight: '-50%',
-    //     transform: 'translate(-50%, -50%)',
-    //     // borderRadius: "30px",
-    //     borderRadius: "15px",
-    //     maxWidth: '610px',
-    //     width: '70%',
-    //     // height: '70vh',
-    //     // display: "flex",
-    //     // flexDirection: "column",
-    //     // justifyContent: "center"
-    // },
 
     content: {
         border: '0',
-        // borderRadius: '4px',
         borderRadius: "15px",
         bottom: 'auto',
         minHeight: '10rem',
         left: '50%',
-        // padding: '2rem',
         position: 'fixed',
         right: 'auto',
         top: '50%',
         transform: 'translate(-50%,-50%)',
         minWidth: '20rem',
-        // width: '80%',
         width: '60%',
-        // maxWidth: '60rem',
         maxWidth: '30rem',
         padding: `0`,
-        // height: `60%`
-    }
-    ,
-
+    },
     overlay: {
         backgroundColor: `rgb(46 42 42 / 0.66)`
     }
@@ -60,23 +32,23 @@ function AllPosts() {
     const [followList, setFollowList] = useState([])
     // const [hasFollowers, setHasFollowers] useState(followList.length? true : false)
     const { currentUserId, currentUser } = useContext(AuthContext)
-    const [show, setShow] = useState(!followList.length)
+    // const [show, setShow] = useState(!followList.length)
+    const [show, setShow] = useState(false)
     const [suggestions, setSuggestions] = useState([]);
     const [currentProfile, setCurrentProfile] = useState(null);
     const [followStatus, setFollowStatus] = useState("");
 
-    console.log(show)
+    // console.log(show)
 
     useEffect(() => {
         (async () => {
             try {
                 const res = await fetch(`/api/following/${currentUserId}`)
-
                 if (res.ok) {
                     const data = await res.json()
                     // shuffle(data.followerPosts[0])
                     setFollowList(data.followerPosts[0].sort(() => Math.random() - 0.5))
-                    console.log(data);
+                    // console.log(data);
                     if (data.following.length) {
                         setShow(false)
                     } else {
@@ -84,16 +56,15 @@ function AllPosts() {
                         if (getSuggestions.ok) {
                             const response = await getSuggestions.json()
                             setSuggestions(response.users)
-                            console.log(response.users)
+                            setShow(true)
+                            // console.log(response.users)
                         }
                     }
-
                 }
             } catch (err) {
                 console.error(err)
             }
         })()
-
     }, [setFollowList, show])
 
     const handleClose = () => {
@@ -115,9 +86,9 @@ function AllPosts() {
                 })
             })
             if (res.ok) {
-                console.log("Success!");
+                // console.log("Success!");
             } else {
-                console.log("failure");
+                // console.log("failure");
             }
 
             res = await fetch(`/api/profile/${currentUser.user_name}`)
@@ -129,14 +100,13 @@ function AllPosts() {
                     data.followers.includes(currentUserId) ? setFollowStatus("Following") : setFollowStatus("Not Following")
                     // setFollowStatus(status);
                     // setFollowStatus(data.followers.includes(currentUserId));
-                    console.log(followStatus);
+                    // console.log(followStatus);
                     // console.log(currentProfile.followers.includes(currentUserId))
                     // setFollowStatus(currentProfile.followers.includes(currentUserId) ? true : false)
                 }
             } catch (err) {
                 console.error(err)
             }
-
         }
         addFollowing();
         e.target.setAttribute("disabled", "disabled")

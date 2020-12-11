@@ -148,12 +148,6 @@ const EditUser = props => {
                                 value={gender}
                                 onChange={e => setGender(e.target.value)} name="gender" />
                             <input
-                                // className="input"
-                                type="checkbox"
-                                checked={canfollow}
-                                onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
-                            <label htmlFor="canfollow">Click to allow others to follow you.</label>
-                            <input
                                 className="input"
                                 type="password"
                                 placeholder="New password (required)"
@@ -166,13 +160,28 @@ const EditUser = props => {
                                 value={password2}
                                 onChange={e => setPassword2(e.target.value)} name="password2" />
 
+                            <label className="checkbox" htmlFor="canfollow" style={{
+                                color: `rgb(142, 142, 142)`,
+                                fontSize: `16px`,
+                                fontWeight: `600`
+                            }}>
+                                <input
+                                    type="checkbox"
+                                    style={{
+                                        margin: `10px 5px`,
+                                        width: `auto`
+                                    }}
+                                    checked={canfollow}
+                                    onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
+                                {/* Click to allow others to follow you. */}Make profile private?
+                                </label>
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
                                 paddingRight: `.5em`,
                                 margin: `8px 40px`,
                                 fontWeight: `600`
-                            }}>Submit changes</button>
+                            }}>Submit Changes</button>
                         </form>
                     </div>
                     <h2 style={{
@@ -184,14 +193,14 @@ const EditUser = props => {
                         textAlign: `center`
                     }}>Would you like to delete your account?</h2>
                     <div className="authFormInnerWrap">
-                        <form onSubmit={deleteUser}>
+                        <form onSubmit={deleteUser} style={{ marginTop: `0` }}>
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
                                 paddingRight: `.5em`,
                                 margin: `8px 40px`,
                                 fontWeight: `600`
-                            }}>Delete account
+                            }}>Delete Account
                             </button>
                         </form>
                     </div>
