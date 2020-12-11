@@ -84,9 +84,6 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
     // }, [])
 
 
-
-
-
     return (
         <>
             <div className="after-photo" style={{ padding: `0 16px` }} >
@@ -99,12 +96,12 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                             </button>
                         </div>
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button disabled className="fontawe disabled">
                                 <i className="far fa-comment"></i>
                             </button>
                         </div>
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button disabled className="fontawe disabled">
                                 <i className="fas fa-feather-alt"></i>
                                 {/* <i className="far fa-paper-plane"></i> */}
                             </button>
@@ -114,7 +111,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                     {/* <!-- Right side --> */}
                     <div className="level-right" style={{ marginTop: `0` }}>
                         <div className="level-item">
-                            <button className="fontawe">
+                            <button disabled className="fontawe disabled">
                                 <i className="far fa-bookmark"></i>
                             </button>
                         </div>
