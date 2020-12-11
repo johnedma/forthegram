@@ -129,6 +129,22 @@ button.fontawe.disabled:disabled{
     cursor: not-allowed;
 }
 
+#upload{
+    background: white;
+    color: rgb(50, 115, 220);
+    border-radius: 2em;
+    border: 2px solid;
+    cursor: pointer;
+    font-size: 1.3em;
+    padding: 5px;
+    line-height: 20px;
+    margin: 0;
+}
+
+#upload:hover{
+    background: rgb(50, 115, 220);
+    color: white;
+}
 
 .svg-inline--fa.fa-w-16 {
     width: 2em;
@@ -270,6 +286,55 @@ top: 710%;
 .add-comment_button:hover{
     transform: scale(1.1);
 }
+
+/* layout */
+#ratio-square img {
+    display: block;
+  }
+
+  .container {
+    /* max-width: 1020px; */
+    margin: 0 auto;
+    /* padding-left: 15px;
+    padding-right: 15px; */
+  }
+
+  .ratio-square {
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+  }
+
+  .ratio-square img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+  }
+
+  /* Flexbox */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16.5px;
+  }
+
+  .col {
+    max-width: 100%;
+    width: 33.33%;
+    flex-basis: 33.33%;
+    padding: 0 1.5px 3px;
+  }
+
+  @media (min-width: 768px) {
+    .row {
+      margin: 0 -15px;
+    }
+
+    .col {
+      padding: 0 15px 30px;
+    }
+  }
 
 @media only screen and (max-width: 620px) {
     body {

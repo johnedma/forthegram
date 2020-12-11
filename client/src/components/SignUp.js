@@ -57,7 +57,7 @@ const SignUp = props => {
                     <h1 style={{
                         margin: `22px auto 12px`,
                         fontSize: `3em`,
-                          height: `20px`,
+                        height: `20px`,
                         marginBlockStart: `1em`,
                         marginBlockEnd: `1em`
                     }}>Petstagram</h1>
@@ -90,12 +90,12 @@ const SignUp = props => {
                                 placeholder="Username"
                                 value={username}
                                 onChange={e => setUsername(e.target.value)} name="username" />
-                            <input
+                            {/* <input
                                 // className="input"
                                 type="checkbox"
                                 checked={canfollow}
                                 onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
-                            <label htmlFor="canfollow">Click to allow others to follow you.</label>
+                            <label htmlFor="canfollow">Click to allow others to follow you.</label> */}
                             <input
                                 className="input"
                                 type="password"
