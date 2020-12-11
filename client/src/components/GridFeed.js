@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import '../grid.css'
 import PostContext from "../PostContext";
 import Modal from "react-modal"
 import SinglePost from "./posts/SinglePost"
