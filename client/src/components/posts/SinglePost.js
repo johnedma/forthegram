@@ -42,6 +42,16 @@ function SinglePost(props) {
             display: `flex`
 
         }} className='post-wrapper'>
+            <button
+                // className="toggle-button"
+                onClick={props.handleClose}
+                className="delete" aria-label="delete"
+                style={{
+                    position: `absolute`,
+                    top: `15px`,
+                    right: `15px`
+                }}
+            ></button>
             <Photo pic={postData.post.photo_url} />
             <RightSide postData={postData} showRerender={showRerender} />
         </div>
