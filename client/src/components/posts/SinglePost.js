@@ -35,7 +35,7 @@ function SinglePost(props) {
             // margin: "0 auto",
             left: "20%",
             top: "15%",
-            position: "absolute",
+            // position: "absolute",
             display: "grid",
             gridTemplateColumns: "500px 100px",
             backgroundColor: "white"

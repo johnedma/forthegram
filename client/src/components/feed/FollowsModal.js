@@ -11,6 +11,7 @@ const FollowsModal = ({ show, handleClose, customStyles, handleClick, suggestion
             contentLabel='Modal'
             handleClose={handleClose}
             suggestions={suggestions}
+            ariaHideApp={false}
         >
             <>
                 {(!follows.length) ? null :

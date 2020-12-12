@@ -5,7 +5,8 @@ function Photo({ pic, id }) {
         <div>
 
             <img alt='NOT FOUND' src={pic} id={id} style={{
-                width: "600px",
+                // width: "600px",
+                maxWidth: "600px",
             }} />
         </div>
     )

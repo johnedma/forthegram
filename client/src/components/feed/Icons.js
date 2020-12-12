@@ -133,7 +133,8 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                 <div style={{
                     textAlign: "left",
                     marginLeft: "20px",
-                    width: '100%'
+                    width: 'auto'
+                    // width: '100%'
                 }}>
                     <div style={{
                         backgroundColor: `#fff`,

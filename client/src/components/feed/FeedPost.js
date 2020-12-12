@@ -109,6 +109,7 @@ function FeedPost(props) {
                 isOpen={show}
                 onRequestClose={handleClose}
                 style={customStyles}
+                ariaHideApp={false}
                 contentLabel='Modal'>
                 <SinglePost postDataId={postDataId} />
             </Modal>
