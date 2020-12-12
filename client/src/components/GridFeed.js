@@ -41,7 +41,7 @@ const GridFeed = ({ currentProfile }) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-        console.log(e.target.id)
+        // console.log(e.target.id)
         setPostDataId(e.target.id)
         setShow(true)
     }
@@ -71,7 +71,7 @@ const GridFeed = ({ currentProfile }) => {
                 style={customStyles}
                 contentLabel='Modal'
             >
-                <SinglePost postDataId={postDataId} />
+                <SinglePost handleClose={handleClose} postDataId={postDataId} />
             </Modal>
         </div>
     );
