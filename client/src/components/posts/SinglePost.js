@@ -36,9 +36,11 @@ function SinglePost(props) {
             left: "20%",
             top: "15%",
             // position: "absolute",
-            display: "grid",
+            // display: "grid",
             gridTemplateColumns: "500px 100px",
-            backgroundColor: "white"
+            backgroundColor: "white",
+            display: `flex`
+
         }} className='post-wrapper'>
             <Photo pic={postData.post.photo_url} />
             <RightSide postData={postData} showRerender={showRerender} />

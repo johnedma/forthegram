@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Photo = ({pic}) => {
+const Photo = ({ pic }) => {
     //get url back from post data
     // const [ photo, setPhoto ] = useState(pic)
 
@@ -8,8 +8,9 @@ const Photo = ({pic}) => {
     return (
         <div>
             <img style={{
-                paddingRight: "5px"
-            }} alt='Not Found' src={pic}/>
+                paddingRight: "5px",
+                height: `-webkit-fill-available`
+            }} alt='Not Found' src={pic} />
         </div>
     )
 }
