@@ -116,7 +116,8 @@ function AllPosts() {
         <div>
             <div className="feed" style={{
                 margin: "0 auto",
-                width: "750px",
+                // width: "750px",
+                maxWidth: "750px",
             }}>
                 {
                     followList.map((pid, idx) =>

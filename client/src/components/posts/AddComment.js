@@ -74,17 +74,18 @@ function AddComment({ showRerender: rerender }) {
     return (
         <div className="add-comment-wrapper">
             <form style={{
-                display: "grid",
-                gridTemplateColumns: "350px 10px",
-                justifyItems: "center"
+                // display: "grid",
+                // gridTemplateColumns: "350px 10px",
+                // justifyItems: "center",
+                flexDirection: `row`,
+                margin: `15px`
             }} onSubmit={onSubmit}>
                 <input style={{
                     border: "0px",
                     height: "45px",
                     right: "100px",
-                    backgroundColor: "#ffff"
-
-
+                    backgroundColor: "#ffff",
+                    margin: `0`
                 }} className="add-name_input" type="text" placeholder="Add comment..." value={content} onChange={sayHello} />
                 <button style={{
                     border: "0px",

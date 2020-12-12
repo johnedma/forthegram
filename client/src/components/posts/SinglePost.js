@@ -7,7 +7,7 @@ import RightSide from './RightSide';
 function SinglePost(props) {
     const { postData, setPostData, updatedComments, setUpdatedComments } = useContext(PostContext)
     const [reRender, setRerender] = useState(false)
-    console.log(props)
+    // console.log(props)
     const showRerender = e => {
         setRerender(!reRender)
     }
@@ -35,11 +35,23 @@ function SinglePost(props) {
             // margin: "0 auto",
             left: "20%",
             top: "15%",
-            position: "absolute",
-            display: "grid",
+            // position: "absolute",
+            // display: "grid",
             gridTemplateColumns: "500px 100px",
-            backgroundColor: "white"
+            backgroundColor: "white",
+            display: `flex`
+
         }} className='post-wrapper'>
+            <button
+                // className="toggle-button"
+                onClick={props.handleClose}
+                className="delete" aria-label="delete"
+                style={{
+                    position: `absolute`,
+                    top: `15px`,
+                    right: `15px`
+                }}
+            ></button>
             <Photo pic={postData.post.photo_url} />
             <RightSide postData={postData} showRerender={showRerender} />
         </div>

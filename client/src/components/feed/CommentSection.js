@@ -4,10 +4,12 @@ function CommentSection({ comments, names }) {
 
     return (
         <div className="feed-post-comments" style={{
-            width: "700px",
+            // width: "700px",
+            maxWidth: "700px",
             textAlign: "left",
-            margin: "0 auto",
-            marginBottom: "10px",
+            // margin: "0 auto",
+            margin: "10px 20px",
+            // marginBottom: "10px",
         }}>
             {comments.map((comment, idx) =>
                 <div style={{

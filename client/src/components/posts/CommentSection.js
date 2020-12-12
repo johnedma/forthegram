@@ -13,7 +13,8 @@ const CommentSection = () => {
 
     return (
         <div style={{
-            width: "400px",
+            // width: "400px",
+            maxWidth: "400px",
             height: "240px",
             padding: `0 16px`
         }}>

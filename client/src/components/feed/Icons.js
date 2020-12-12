@@ -133,7 +133,8 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                 <div style={{
                     textAlign: "left",
                     marginLeft: "20px",
-                    width: '100%'
+                    width: 'auto'
+                    // width: '100%'
                 }}>
                     <div style={{
                         backgroundColor: `#fff`,
@@ -141,7 +142,8 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                         fontWeight: `800`,
                         fontSize: `1em`,
                         padding: `8px 0`,
-                        width: '342px'
+                        // width: '342px'
+                        maxWidth: '342px'
 
                     }}>{caption}</div>
                     <button style={{
@@ -151,7 +153,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                         fontSize: `1em`,
                         padding: `8px 0`,
                         color: "#489dcf",
-                        width: "342px",
+                        maxWidth: "342px",
                         textAlign: "left"
 
                     }}>
