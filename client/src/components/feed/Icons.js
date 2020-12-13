@@ -17,7 +17,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
 
         async function removeLike(likes, i) {
             let url = `api/likes/${likes[i].id}`;
-            console.log(url);
+            // console.log(url);
             const response = await fetch(url, {
                 method: 'DELETE',
                 headers: {
@@ -28,9 +28,9 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
             if (!response.ok) {
                 setErrors(responseData.errors);
             } else {
-                console.log(responseData)
+                // console.log(responseData)
                 likes.splice(i, 1)
-                console.log(likes)
+                // console.log(likes)
                 like_count--
                 willRerender()
             }
@@ -49,7 +49,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                 setErrors(responseData.errors);
             } else {
                 let { data } = responseData
-                console.log(data)
+                // console.log(data)
                 likes.push(data)
                 like_count++
                 willRerender()
