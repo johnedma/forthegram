@@ -73,7 +73,7 @@ function AllPosts() {
     }
 
     const handleClick = e => {
-        console.log(e.target.id);
+        // console.log(e.target.id);
         async function addFollowing() {
             let res = await fetch("/api/profile/following", {
                 method: "POST",
