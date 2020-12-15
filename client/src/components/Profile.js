@@ -31,7 +31,7 @@ const Profile = ({ match }) => {
 
 
     const followUser = async () => {
-        console.log("plugged in to follow");
+        // console.log("plugged in to follow");
         const data = {
             profile_id: currentProfile.user.id,
             follower_id: currentUserId
@@ -56,7 +56,7 @@ const Profile = ({ match }) => {
 
 
     const unfollowUser = async () => {
-        console.log("plugged in to unfollow");
+        // console.log("plugged in to unfollow");
         const data = {
             profile_id: currentProfile.user.id,
             follower_id: currentUserId

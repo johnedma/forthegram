@@ -28,7 +28,7 @@ const ModalWindow = props => {
             let formData = new FormData();
             formData.append('file', file);
             let captionURI = encodeURIComponent(caption)
-            console.log(captionURI)
+            //console.log(captionURI)
             const response = await fetch(`/api/posts/${currentUserId}/${captionURI}`, {
                 method: 'POST',
 

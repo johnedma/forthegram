@@ -15,7 +15,7 @@ def index():
     if request.method == 'POST':
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
-        canfollow = request.json.get("canfollow", None)
+        # canfollow = request.json.get("canfollow", None)
         username = request.json.get('username', None)
         password = request.json.get('password', None)
         password2 = request.json.get('password2', None)
@@ -26,7 +26,7 @@ def index():
         if not password == password2:
             return {"errors": ["Passwords must match each other"]}, 400
         new_user = User(
-            can_follow=canfollow,
+            can_follow=True,
             user_name=username,
             first_name=fullname,
             last_name=fullname,

@@ -182,8 +182,8 @@ const EditUser = props => {
                                         margin: `10px 5px`,
                                         width: `auto`
                                     }}
-                                    checked={canfollow}
-                                    onChange={e => setCanfollow(e.target.checked)} name="canfollow" />
+                                    checked={!canfollow}
+                                    onChange={e => setCanfollow(!e.target.checked)} name="canfollow" />
                                 {/* Click to allow others to follow you. */}Make profile private?
                                 </label>
                             <button type="submit" className="button has-background-link has-text-white" style={{
