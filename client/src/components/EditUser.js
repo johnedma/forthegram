@@ -19,6 +19,7 @@ const EditUser = props => {
     // const dispatch = useDispatch();
 
     const [errors, setErrors] = useState([]);
+    const [messages, setMessages] = useState([]);
     let history = useHistory();
 
     const submitForm = e => {
@@ -71,13 +72,18 @@ const EditUser = props => {
                 body: JSON.stringify({})
             });
 
+            console.log(response);
             const responseData = await response.json();
             if (!response.ok) {
                 setErrors(responseData.errors);
-            } else {
+            } else if (responseData.messages) {
+                setMessages(responseData.messages)
+            }
+            else {
                 // setCurrentUserId(responseData.current_user_id)
                 setCurrentUserId(null);
                 // history.push('/')
+
             }
         }
         deleteUser();
@@ -104,7 +110,12 @@ const EditUser = props => {
                     }}>Edit profile.</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
-                            {errors.length ? errors.map(err => <li key={err} >{err}</li>) : ''}
+                            {errors.length ? errors.map(err => <li key={err}
+                                style={{
+                                    color: `red`,
+                                    padding: `0 1em 1em`,
+                                    fontWeight: `700`
+                                }} >{err}</li>) : ''}
                             <input
                                 className="input"
                                 type="text"
@@ -194,6 +205,13 @@ const EditUser = props => {
                     }}>Would you like to delete your account?</h2>
                     <div className="authFormInnerWrap">
                         <form onSubmit={deleteUser} style={{ marginTop: `0` }}>
+                            {messages.length ? messages.map(err => <li key={err}
+                                style={{
+                                    color: `red`,
+                                    padding: `1em`,
+                                    fontWeight: `700`,
+                                    textAlign: `center`
+                                }} >{err}</li>) : ''}
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,

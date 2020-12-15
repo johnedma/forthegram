@@ -53,6 +53,8 @@ def user_info(id):
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
+        if user.user_name == "dougthepug":
+            return {"messages": ["Don't take Doug, we love Doug - he's our demo! Create an account to test Delete route."]}, 200
         follows = Follow.query.filter(
             or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
         for follow in follows:

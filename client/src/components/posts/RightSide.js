@@ -10,6 +10,7 @@ function rightSide({ postData, showRerender }) {
     return (
         <div>
             <Header />
+            {/* caption={postData.post.caption} vvvvv */}
             <CommentSection />
             <AddComment />
             <Icons postId={postData.post.id} willRerender={showRerender} caption={postData.post.caption} likes={postData.post.likes} like_count={postData.post.like_count} lat_like={postData.post.latest_like} />
