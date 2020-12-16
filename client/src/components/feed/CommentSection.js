@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function CommentSection({ comments, names }) {
-
+function CommentSection({ comments, names, caption, likes, like_count, lat_like }) {
     return (
         <div className="feed-post-comments" style={{
             // width: "700px",

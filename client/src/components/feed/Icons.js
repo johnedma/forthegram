@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import FeedPost from './FeedPost'
 import AuthContext from '../../auth'
 
-function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat_like }) {
+function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat_like, showMe }) {
 
     const { currentUserId } = useContext(AuthContext)
     const [errors, setErrors] = useState([]);
@@ -118,8 +118,8 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                     </div>
                 </div>
             </div>
-            {/* replace with like count from post */}
-            {like_count === 0 ? <div>
+            {/* showMe flag causes caption & likes to render at bottom of feedpost, but not single post */}
+            {!showMe ? null : (like_count === 0 ? <div>
                 <button style={{
                     backgroundColor: `#fff`,
                     border: `none`,
@@ -162,7 +162,7 @@ function Icons({ willRerender: rerender, postId, caption, likes, like_count, lat
                         {lat_like} and {like_count} others liked this
                     </button>
                 </div>
-            }
+            )}
         </div>
     )
 }

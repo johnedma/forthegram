@@ -101,7 +101,7 @@ function FeedPost(props) {
                     }}>
                     <Photo pic={postData.photo_url} id={postData.id} />
                 </button>
-                <Icons postId={postData.id} willRerender={showRerender} caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} />
+                <Icons postId={postData.id} willRerender={showRerender} caption={postData.caption} likes={postData.likes} like_count={postData.like_count} lat_like={postData.latest_like} showMe={true} />
                 <CommentSection comments={postData.comments} names={postData.names} />
                 <AddComment commentRerender={showRerender} post_id={postData.id} />
             </div>
