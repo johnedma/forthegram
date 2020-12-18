@@ -51,7 +51,7 @@ function LogIn(props) {
 
                     <div className="authFormInnerWrap">
                         <form onSubmit={submitForm}>
-                            {errors.length ? errors.map((err) => <li key={err} >{err}</li>) : ''}
+                            {errors.length ? errors.map((err) => <li key={err} color="red">{err}</li>) : ''}
                             Username or email
                             <input
                                 type="text"

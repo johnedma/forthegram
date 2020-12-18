@@ -50,6 +50,8 @@ const EditUser = props => {
             const responseData = await response.json();
             if (!response.ok) {
                 setErrors(responseData.errors);
+            } else if (responseData.messages) {
+                setMessages(responseData.messages)
             } else {
                 // setCurrentUserId(responseData.current_user_id)
                 history.push('/')
@@ -195,14 +197,7 @@ const EditUser = props => {
                             }}>Submit Changes</button>
                         </form>
                     </div>
-                    <h2 style={{
-                        color: `#8e8e8e`,
-                        fontSize: `17px`,
-                        fontWeight: `600`,
-                        lineHeight: `20px`,
-                        margin: `0 40px 10px`,
-                        textAlign: `center`
-                    }}>Would you like to delete your account?</h2>
+
                     <div className="authFormInnerWrap">
                         <form onSubmit={deleteUser} style={{ marginTop: `0` }}>
                             {messages.length ? messages.map(err => <li key={err}
@@ -212,6 +207,14 @@ const EditUser = props => {
                                     fontWeight: `700`,
                                     textAlign: `center`
                                 }} >{err}</li>) : ''}
+                            <h2 style={{
+                                color: `#8e8e8e`,
+                                fontSize: `17px`,
+                                fontWeight: `600`,
+                                lineHeight: `20px`,
+                                margin: `0 40px 10px`,
+                                textAlign: `center`
+                            }}>Would you like to delete your account?</h2>
                             <button type="submit" className="button has-background-link has-text-white" style={{
                                 height: `2rem`,
                                 paddingLeft: `.5em`,
