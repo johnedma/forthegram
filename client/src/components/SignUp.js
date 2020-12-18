@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import AuthContext from '../auth';
 // let history = useHistory();
 
@@ -7,7 +7,8 @@ import AuthContext from '../auth';
 const SignUp = props => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
-    const [canfollow, setCanfollow] = useState(false);
+    // const [canfollow, setCanfollow] = useState(false);
+    const [canfollow] = useState(false);
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('')
     // const token = useSelector(state => state.authentication.token);

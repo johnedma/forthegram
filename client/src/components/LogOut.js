@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import AuthContext from '../auth'
 
 function LogOut(props) {
-    const [errors, setErrors] = useState("");
+    // const [errors, setErrors] = useState("");
+    const [errors] = useState("");
     const { fetchWithCSRF, setCurrentUserId, setCurrentUser } = useContext(AuthContext);
-    let history = useHistory();
+    // let history = useHistory();
 
     const submitForm = (e) => {
         e.preventDefault();
