@@ -17,6 +17,9 @@ def index():
             return jsonify({"msg": "Missing JSON in request"}), 400
         # canfollow = request.json.get("canfollow", None)
         username = request.json.get('username', None)
+        user = User.query.filter(User.user_name == username).one_or_none()
+        if user:
+            return {"errors": ["That username has already been taken."]}, 500
         password = request.json.get('password', None)
         password2 = request.json.get('password2', None)
         fullname = request.json.get("fullname", None)
@@ -44,7 +47,7 @@ def index():
         if authenticated:
             login_user(user)
             return {"current_user_id": current_user.id, "current_user": current_user.to_dict()}
-        return {"errors": ["Invalid username, email, and/or password"]}, 401
+        return {"errors": ["Invalid credentials"]}, 401
 
 
 @users.route('/<id>', methods=['GET', 'PUT', 'DELETE'])
@@ -53,8 +56,8 @@ def user_info(id):
     if request.method == "GET":
         return user.to_dict()
     if request.method == 'DELETE':
-        if user.user_name == "dougthepug":
-            return {"messages": ["Don't take Doug, we love Doug - he's our demo! Create an account to test Delete route."]}, 200
+        if user.id == 1:
+            return {"errors": ["Don't take Doug. We love Doug! (He's our 'demo'.) Create a new account if you would like to test the 'Delete' route."]}, 401
         follows = Follow.query.filter(
             or_(Follow.follower_id == int(id), Follow.followed_id == int(id))).all()
         for follow in follows:
@@ -65,13 +68,25 @@ def user_info(id):
 
         return {"message": "goodbye"}
     if request.method == 'PUT':
+        if user.id == 1:
+            return {"errors": ["Don't edit Doug's details. We love him just as he is! (He's our 'demo'.) Create a new account if you would like to test the 'Update User' route."]}, 401
+
+        username = request.json.get('username', None)
+        user_former = User.query.filter(User.user_name == username).one_or_none()
+        if user_former:
+            return {"errors": ["That username has already been taken."]}, 500
 
         userd = user.to_dict()
         if not request.is_json:
             return jsonify({"msg": "Missing JSON in request"}), 400
         user.can_follow = request.json.get('canfollow', None)
-        user.user_name = request.json.get(
-            'username', None) or userd["user_name"]
+
+        # username = request.json.get('username', None)
+        # user = User.query.filter(User.user_name == username).one_or_none()
+        # if user:
+        #     return {"errors": ["That username has already been taken."]}, 500
+        # user.user_name = username or userd["user_name"]
+
         user.password = request.json.get(
             'password', None)  # or userd["password"]
         user.password2 = request.json.get(
