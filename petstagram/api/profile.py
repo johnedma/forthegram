@@ -13,6 +13,12 @@ BUCKET = "petstagram"
 
 @profile.route('/<username>')
 def profile_page(username):
+    print("****************************************************************&&&&&&&&&&&&&  username = ", username)
+    # users = User.query.filter(User.user_name == username)
+    users = User.query.filter(True).all()
+    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
+    print(users)
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     user = User.query.filter(User.user_name == username)[0]
     posts = Post.query.filter(Post.user_id == user.id).all()
     get_following = Follow.query.filter(Follow.follower_id == user.id).all()

@@ -68,7 +68,7 @@ def user_info(id):
 
         return {"message": "goodbye"}
     if request.method == 'PUT':
-        if user.id == 1:
+        if user.id == 1 or user.user_name == 'dougthepug':
             return {"errors": ["Don't edit Doug's details. We love him just as he is! (He's our 'demo'.) Create a new account if you would like to test the 'Update User' route."]}, 401
 
         username = request.json.get('username', None)

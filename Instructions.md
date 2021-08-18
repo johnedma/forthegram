@@ -82,6 +82,8 @@ pipenv install --dev -r dev-requirements.txt --python=python3 && pipenv install 
 5. Login to the heroku container registry
    ```bash
    heroku container:login
+
+   <!-- PK did not find a place in Dockerfile to update the following: -->
    ```
 6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
    This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
