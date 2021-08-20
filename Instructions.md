@@ -3,7 +3,7 @@
 # Flask React Project
 
 ## DreamTeam Required Features
-- 1 Images
+- 1 Images.
 - 2 Likes
 - 3 Commenting on images
 - 4 Following & Photo feed
